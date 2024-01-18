@@ -1,8 +1,11 @@
 package chess;
 
+import chess.pieces.*;
+
 import javax.swing.text.Position;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Objects;
 
 /**
  * Represents a single chess piece
@@ -12,7 +15,7 @@ import java.util.Collection;
  */
 public class ChessPiece {
 
-    private final ChessGame.TeamColor pieceColor;
+    public final ChessGame.TeamColor pieceColor;
     private final PieceType type;
 
     public ChessPiece(ChessGame.TeamColor pieceColor, ChessPiece.PieceType type) {
@@ -56,57 +59,55 @@ public class ChessPiece {
     public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition myPosition) {
         ArrayList<ChessPosition> endPositions = new ArrayList<ChessPosition>();
         if(this.type == PieceType.KING) {
-
+            KingMovesCalculator calc = new KingMovesCalculator(board, myPosition, this.pieceColor);
+            endPositions = calc.pieceMoves();
         } else if(this.type == PieceType.QUEEN) {
-
+            QueenMovesCalculator calc = new QueenMovesCalculator(board, myPosition, this.pieceColor);
+            endPositions = calc.pieceMoves();
         } else if(this.type == PieceType.BISHOP) {
-            ChessPosition coordinate = myPosition;
-            while((1 <= coordinate.getRow() && coordinate.getRow()<= 8) && (1 <= coordinate.getColumn() && coordinate.getColumn()<= 8)) {
-                if (board.getPiece(coordinate) == null) {
-                    endPositions.add(coordinate);
-                    coordinate = new ChessPosition(coordinate.getRow() + 1, coordinate.getColumn() + 1);
-                } else if(board.getPiece(coordinate).pieceColor != this.pieceColor) {
-                    endPositions.add(coordinate);
-                    break;
-                } else {break;}
-            }
-            while((1 <= coordinate.getRow() && coordinate.getRow()<= 8) && (1 <= coordinate.getColumn() && coordinate.getColumn()<= 8)) {
-                if (board.getPiece(coordinate) == null) {
-                    endPositions.add(coordinate);
-                    coordinate = new ChessPosition(coordinate.getRow() + 1, coordinate.getColumn() - 1);
-                } else if(board.getPiece(coordinate).pieceColor != this.pieceColor) {
-                    endPositions.add(coordinate);
-                    break;
-                } else {break;}
-            }
-            while((1 <= coordinate.getRow() && coordinate.getRow()<= 8) && (1 <= coordinate.getColumn() && coordinate.getColumn()<= 8)) {
-                if (board.getPiece(coordinate) == null) {
-                    endPositions.add(coordinate);
-                    coordinate = new ChessPosition(coordinate.getRow() - 1, coordinate.getColumn() + 1);
-                } else if(board.getPiece(coordinate).pieceColor != this.pieceColor) {
-                    endPositions.add(coordinate);
-                    break;
-                } else {break;}
-            }
-            while((1 <= coordinate.getRow() && coordinate.getRow()<= 8) && (1 <= coordinate.getColumn() && coordinate.getColumn()<= 8)) {
-                if (board.getPiece(coordinate) == null) {
-                    endPositions.add(coordinate);
-                    coordinate = new ChessPosition(coordinate.getRow() - 1, coordinate.getColumn() - 1);
-                } else if(board.getPiece(coordinate).pieceColor != this.pieceColor) {
-                    endPositions.add(coordinate);
-                    break;
-                } else {break;}
-            }
-
-
+            BishopMovesCalculator calc = new BishopMovesCalculator(board, myPosition, this.pieceColor);
+            endPositions = calc.pieceMoves();
         } else if(this.type == PieceType.KNIGHT) {
-
+            KnightMovesCalculator calc = new KnightMovesCalculator(board, myPosition, this.pieceColor);
+            endPositions = calc.pieceMoves();
         } else if(this.type == PieceType.ROOK) {
-
+            RookMovesCalculator calc = new RookMovesCalculator(board, myPosition, this.pieceColor);
+            endPositions = calc.pieceMoves();
         } else if(this.type == PieceType.PAWN) {
-
+            PawnMovesCalculator calc = new PawnMovesCalculator(board, myPosition, this.pieceColor);
+            endPositions = calc.pieceMoves();
         }
-        Collection<ChessMove> validMoves = new Collection<ChessMove>();
+        ArrayList<ChessMove> validMoves = new ArrayList<ChessMove>();
+        ChessMove move;
+        for(int i = 0; i < endPositions.size(); i++) {
+            move = new ChessMove(myPosition, endPositions.get(i), null);
+            validMoves.add(move);
+        }
+
+        return validMoves;
+    }
+    private ArrayList<ChessPosition> KingMoves(ChessBoard board, ChessPosition myPosition) {
+        ArrayList<ChessPosition> endPositions = new ArrayList<ChessPosition>();
+        ChessPosition coordinate = myPosition;
         return endPositions;
+    }
+
+    private ArrayList<ChessPosition> QueenMoves(ChessBoard board, ChessPosition myPosition) {
+        ArrayList<ChessPosition> endPositions = new ArrayList<ChessPosition>();
+        ChessPosition coordinate = myPosition;
+        return endPositions;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ChessPiece that=(ChessPiece) o;
+        return pieceColor == that.pieceColor && type == that.type;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(pieceColor, type);
     }
 }

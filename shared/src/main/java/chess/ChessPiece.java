@@ -58,6 +58,8 @@ public class ChessPiece {
      */
     public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition myPosition) {
         ArrayList<ChessPosition> endPositions = new ArrayList<ChessPosition>();
+        ArrayList<ChessMove> validMoves = new ArrayList<ChessMove>();
+        ChessMove move;
         if(this.type == PieceType.KING) {
             KingMovesCalculator calc = new KingMovesCalculator(board, myPosition, this.pieceColor);
             endPositions = calc.pieceMoves();
@@ -77,25 +79,12 @@ public class ChessPiece {
             PawnMovesCalculator calc = new PawnMovesCalculator(board, myPosition, this.pieceColor);
             endPositions = calc.pieceMoves();
         }
-        ArrayList<ChessMove> validMoves = new ArrayList<ChessMove>();
-        ChessMove move;
         for(int i = 0; i < endPositions.size(); i++) {
             move = new ChessMove(myPosition, endPositions.get(i), null);
             validMoves.add(move);
         }
 
         return validMoves;
-    }
-    private ArrayList<ChessPosition> KingMoves(ChessBoard board, ChessPosition myPosition) {
-        ArrayList<ChessPosition> endPositions = new ArrayList<ChessPosition>();
-        ChessPosition coordinate = myPosition;
-        return endPositions;
-    }
-
-    private ArrayList<ChessPosition> QueenMoves(ChessBoard board, ChessPosition myPosition) {
-        ArrayList<ChessPosition> endPositions = new ArrayList<ChessPosition>();
-        ChessPosition coordinate = myPosition;
-        return endPositions;
     }
 
     @Override

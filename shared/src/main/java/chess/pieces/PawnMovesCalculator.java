@@ -28,23 +28,27 @@ public class PawnMovesCalculator {
 
   private ArrayList<ChessPosition> whiteMoves() {
     ArrayList<ChessPosition> endPositions=new ArrayList<ChessPosition>();
+    ArrayList<ChessPosition> promoteEndPositions=new ArrayList<ChessPosition>();
     ChessPosition coordinate=myPosition;
-
-    if (coordinate.getRow() == 2) {
-      coordinate=new ChessPosition(myPosition.getRow() + 2, myPosition.getColumn());
-      if ((1 <= coordinate.getRow() && coordinate.getRow() <= 8) && (1 <= coordinate.getColumn() && coordinate.getColumn() <= 8)) {
-        if (board.getPiece(coordinate) == null) {
-          endPositions.add(coordinate);
-        }
-      }
-    }
-
+    Boolean emptySpace = Boolean.TRUE;
     coordinate=new ChessPosition(myPosition.getRow() + 1, myPosition.getColumn());
     if ((1 <= coordinate.getRow() && coordinate.getRow() <= 8) && (1 <= coordinate.getColumn() && coordinate.getColumn() <= 8)) {
       if (board.getPiece(coordinate) == null) {
         endPositions.add(coordinate);
+      } else {
+        emptySpace = Boolean.FALSE;
       }
     }
+    coordinate = myPosition;
+    if (coordinate.getRow() == 2) {
+      coordinate=new ChessPosition(myPosition.getRow() + 2, myPosition.getColumn());
+      if ((1 <= coordinate.getRow() && coordinate.getRow() <= 8) && (1 <= coordinate.getColumn() && coordinate.getColumn() <= 8)) {
+        if (board.getPiece(coordinate) == null && emptySpace == Boolean.TRUE) {
+          endPositions.add(coordinate);
+        }
+      }
+    }
+    emptySpace = Boolean.FALSE;
     coordinate=new ChessPosition(myPosition.getRow() + 1, myPosition.getColumn() - 1);
     if ((1 <= coordinate.getRow() && coordinate.getRow() <= 8) && (1 <= coordinate.getColumn() && coordinate.getColumn() <= 8)) {
       if (board.getPiece(coordinate) != null && board.getPiece(coordinate).pieceColor != thisColor) {
@@ -63,22 +67,27 @@ public class PawnMovesCalculator {
 
   private ArrayList<ChessPosition> blackMoves() {
     ArrayList<ChessPosition> endPositions=new ArrayList<ChessPosition>();
+    ArrayList<ChessPosition> promoteEndPositions=new ArrayList<ChessPosition>();
     ChessPosition coordinate=myPosition;
-
-    if (coordinate.getRow() == 7) {
-      coordinate=new ChessPosition(myPosition.getRow() - 2, myPosition.getColumn());
-      if ((1 <= coordinate.getRow() && coordinate.getRow() <= 8) && (1 <= coordinate.getColumn() && coordinate.getColumn() <= 8)) {
-        if (board.getPiece(coordinate) == null) {
-          endPositions.add(coordinate);
-        }
-      }
-    }
+    Boolean emptySpace = Boolean.TRUE;
     coordinate=new ChessPosition(myPosition.getRow() - 1, myPosition.getColumn());
     if ((1 <= coordinate.getRow() && coordinate.getRow() <= 8) && (1 <= coordinate.getColumn() && coordinate.getColumn() <= 8)) {
       if (board.getPiece(coordinate) == null) {
         endPositions.add(coordinate);
+      } else {
+        emptySpace = Boolean.FALSE;
       }
     }
+    coordinate = myPosition;
+    if (coordinate.getRow() == 7) {
+      coordinate=new ChessPosition(myPosition.getRow() - 2, myPosition.getColumn());
+      if ((1 <= coordinate.getRow() && coordinate.getRow() <= 8) && (1 <= coordinate.getColumn() && coordinate.getColumn() <= 8)) {
+        if (board.getPiece(coordinate) == null && emptySpace == Boolean.TRUE) {
+          endPositions.add(coordinate);
+        }
+      }
+    }
+    emptySpace = Boolean.FALSE;
     coordinate=new ChessPosition(myPosition.getRow() - 1, myPosition.getColumn() - 1);
     if ((1 <= coordinate.getRow() && coordinate.getRow() <= 8) && (1 <= coordinate.getColumn() && coordinate.getColumn() <= 8)) {
       if (board.getPiece(coordinate) != null && board.getPiece(coordinate).pieceColor != thisColor) {
@@ -92,6 +101,19 @@ public class PawnMovesCalculator {
         endPositions.add(coordinate);
       }
     }
+    return endPositions;
+  }
+
+  public Boolean promoteStatus() {
+    if((thisColor == ChessGame.TeamColor.WHITE && myPosition.getRow() == 7)
+            || (thisColor == ChessGame.TeamColor.BLACK && myPosition.getRow() == 2)) {
+      return Boolean.TRUE;
+    } else {
+      return Boolean.FALSE;
+    }
+  }
+
+  public ArrayList<ChessPosition> promoteEndPosition(ArrayList<ChessPosition> endPositions) {
     return endPositions;
   }
 

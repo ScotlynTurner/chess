@@ -60,6 +60,8 @@ public class ChessPiece {
         ArrayList<ChessPosition> endPositions = new ArrayList<ChessPosition>();
         ArrayList<ChessMove> validMoves = new ArrayList<ChessMove>();
         ChessMove move;
+        ChessPosition promotePosition;
+        Boolean promote = Boolean.FALSE;
         if(this.type == PieceType.KING) {
             KingMovesCalculator calc = new KingMovesCalculator(board, myPosition, this.pieceColor);
             endPositions = calc.pieceMoves();
@@ -77,11 +79,23 @@ public class ChessPiece {
             endPositions = calc.pieceMoves();
         } else if(this.type == PieceType.PAWN) {
             PawnMovesCalculator calc = new PawnMovesCalculator(board, myPosition, this.pieceColor);
+            promote = calc.promoteStatus();
             endPositions = calc.pieceMoves();
         }
         for(int i = 0; i < endPositions.size(); i++) {
-            move = new ChessMove(myPosition, endPositions.get(i), null);
-            validMoves.add(move);
+            if (promote) {
+                move=new ChessMove(myPosition, endPositions.get(i), PieceType.QUEEN);
+                validMoves.add(move);
+                move=new ChessMove(myPosition, endPositions.get(i), PieceType.KNIGHT);
+                validMoves.add(move);
+                move=new ChessMove(myPosition, endPositions.get(i), PieceType.BISHOP);
+                validMoves.add(move);
+                move=new ChessMove(myPosition, endPositions.get(i), PieceType.ROOK);
+                validMoves.add(move);
+            } else {
+                move=new ChessMove(myPosition, endPositions.get(i), null);
+                validMoves.add(move);
+            }
         }
 
         return validMoves;
@@ -98,5 +112,13 @@ public class ChessPiece {
     @Override
     public int hashCode() {
         return Objects.hash(pieceColor, type);
+    }
+
+    @Override
+    public String toString() {
+        return "ChessPiece{" +
+                "pieceColor=" + pieceColor +
+                ", type=" + type +
+                '}';
     }
 }

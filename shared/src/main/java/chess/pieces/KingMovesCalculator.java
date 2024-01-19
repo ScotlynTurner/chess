@@ -4,7 +4,7 @@ import chess.ChessBoard;
 import chess.ChessGame;
 import chess.ChessPosition;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 
 public class KingMovesCalculator {
   private ChessBoard board;
@@ -16,8 +16,8 @@ public class KingMovesCalculator {
     this.myPosition=myPosition;
     this.thisColor=thisColor;
   }
-  public ArrayList<ChessPosition> pieceMoves(){
-    ArrayList<ChessPosition> endPositions = new ArrayList<ChessPosition>();
+  public HashSet<ChessPosition> pieceMoves(){
+    HashSet<ChessPosition> endPositions = new HashSet<ChessPosition>();
     ChessPosition coordinate = myPosition;
     coordinate = new ChessPosition(coordinate.getRow() + 1, coordinate.getColumn() - 1);
     if((1 <= coordinate.getRow() && coordinate.getRow()<= 8) && (1 <= coordinate.getColumn() && coordinate.getColumn()<= 8)) {

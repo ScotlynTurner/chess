@@ -4,7 +4,7 @@ import chess.ChessBoard;
 import chess.ChessGame;
 import chess.ChessPosition;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 
 public class PawnMovesCalculator {
   private ChessBoard board;
@@ -16,8 +16,8 @@ public class PawnMovesCalculator {
     this.myPosition=myPosition;
     this.thisColor=thisColor;
   }
-  public ArrayList<ChessPosition> pieceMoves() {
-    ArrayList<ChessPosition> endPositions=new ArrayList<ChessPosition>();
+  public HashSet<ChessPosition> pieceMoves() {
+    HashSet<ChessPosition> endPositions=new HashSet<ChessPosition>();
     ChessPosition coordinate=myPosition;
     if(thisColor.equals(ChessGame.TeamColor.WHITE)) {
       return whiteMoves();
@@ -26,9 +26,9 @@ public class PawnMovesCalculator {
     }
   }
 
-  private ArrayList<ChessPosition> whiteMoves() {
-    ArrayList<ChessPosition> endPositions=new ArrayList<ChessPosition>();
-    ArrayList<ChessPosition> promoteEndPositions=new ArrayList<ChessPosition>();
+  private HashSet<ChessPosition> whiteMoves() {
+    HashSet<ChessPosition> endPositions=new HashSet<ChessPosition>();
+    HashSet<ChessPosition> promoteEndPositions=new HashSet<ChessPosition>();
     ChessPosition coordinate=myPosition;
     Boolean emptySpace = Boolean.TRUE;
     coordinate=new ChessPosition(myPosition.getRow() + 1, myPosition.getColumn());
@@ -65,9 +65,9 @@ public class PawnMovesCalculator {
     return endPositions;
   }
 
-  private ArrayList<ChessPosition> blackMoves() {
-    ArrayList<ChessPosition> endPositions=new ArrayList<ChessPosition>();
-    ArrayList<ChessPosition> promoteEndPositions=new ArrayList<ChessPosition>();
+  private HashSet<ChessPosition> blackMoves() {
+    HashSet<ChessPosition> endPositions=new HashSet<ChessPosition>();
+    HashSet<ChessPosition> promoteEndPositions=new HashSet<ChessPosition>();
     ChessPosition coordinate=myPosition;
     Boolean emptySpace = Boolean.TRUE;
     coordinate=new ChessPosition(myPosition.getRow() - 1, myPosition.getColumn());
@@ -113,7 +113,7 @@ public class PawnMovesCalculator {
     }
   }
 
-  public ArrayList<ChessPosition> promoteEndPosition(ArrayList<ChessPosition> endPositions) {
+  public HashSet<ChessPosition> promoteEndPosition(HashSet<ChessPosition> endPositions) {
     return endPositions;
   }
 

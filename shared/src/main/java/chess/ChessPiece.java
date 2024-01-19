@@ -3,7 +3,7 @@ package chess;
 import chess.pieces.*;
 
 import javax.swing.text.Position;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Collection;
 import java.util.Objects;
 
@@ -57,8 +57,8 @@ public class ChessPiece {
      * @return Collection of valid moves
      */
     public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition myPosition) {
-        ArrayList<ChessPosition> endPositions = new ArrayList<ChessPosition>();
-        ArrayList<ChessMove> validMoves = new ArrayList<ChessMove>();
+        HashSet<ChessPosition> endPositions = new HashSet<ChessPosition>();
+        HashSet<ChessMove> validMoves = new HashSet<ChessMove>();
         ChessMove move;
         ChessPosition promotePosition;
         Boolean promote = Boolean.FALSE;
@@ -82,18 +82,18 @@ public class ChessPiece {
             promote = calc.promoteStatus();
             endPositions = calc.pieceMoves();
         }
-        for(int i = 0; i < endPositions.size(); i++) {
+        for(ChessPosition i: endPositions) {
             if (promote) {
-                move=new ChessMove(myPosition, endPositions.get(i), PieceType.QUEEN);
+                move=new ChessMove(myPosition, i, PieceType.QUEEN);
                 validMoves.add(move);
-                move=new ChessMove(myPosition, endPositions.get(i), PieceType.KNIGHT);
+                move=new ChessMove(myPosition, i, PieceType.KNIGHT);
                 validMoves.add(move);
-                move=new ChessMove(myPosition, endPositions.get(i), PieceType.BISHOP);
+                move=new ChessMove(myPosition, i, PieceType.BISHOP);
                 validMoves.add(move);
-                move=new ChessMove(myPosition, endPositions.get(i), PieceType.ROOK);
+                move=new ChessMove(myPosition, i, PieceType.ROOK);
                 validMoves.add(move);
             } else {
-                move=new ChessMove(myPosition, endPositions.get(i), null);
+                move=new ChessMove(myPosition, i, null);
                 validMoves.add(move);
             }
         }

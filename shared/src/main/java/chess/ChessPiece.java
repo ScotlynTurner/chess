@@ -60,7 +60,6 @@ public class ChessPiece {
         HashSet<ChessPosition> endPositions = new HashSet<ChessPosition>();
         HashSet<ChessMove> validMoves = new HashSet<ChessMove>();
         ChessMove move;
-        ChessPosition promotePosition;
         Boolean promote = Boolean.FALSE;
         if(this.type == PieceType.KING) {
             KingMovesCalculator calc = new KingMovesCalculator(board, myPosition, this.pieceColor);
@@ -116,9 +115,35 @@ public class ChessPiece {
 
     @Override
     public String toString() {
-        return "ChessPiece{" +
-                "pieceColor=" + pieceColor +
-                ", type=" + type +
-                '}';
+        if (this.pieceColor == ChessGame.TeamColor.WHITE) {
+            if (this.type == PieceType.KING) {
+                return "K";
+            } else if (this.type == PieceType.QUEEN) {
+                return "Q";
+            } else if (this.type == PieceType.BISHOP) {
+                return "B";
+            } else if (this.type == PieceType.KNIGHT) {
+                return "N";
+            } else if (this.type == PieceType.ROOK) {
+                return "R";
+            } else if (this.type == PieceType.PAWN) {
+                return "P";
+            }
+        } else {
+            if (this.type == PieceType.KING) {
+                return "k";
+            } else if (this.type == PieceType.QUEEN) {
+                return "q";
+            } else if (this.type == PieceType.BISHOP) {
+                return "b";
+            } else if (this.type == PieceType.KNIGHT) {
+                return "n";
+            } else if (this.type == PieceType.ROOK) {
+                return "r";
+            } else if (this.type == PieceType.PAWN) {
+                return "p";
+            }
+        }
+      return " ";
     }
 }

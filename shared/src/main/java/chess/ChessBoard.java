@@ -52,6 +52,11 @@ public class ChessBoard {
         for(int i = 0; i < 8; i++) {
             squares[1][i] = new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.PAWN);
         }
+        for(int i = 2; i < 5; i++) {
+            for(int j = 0; j < 8; j++) {
+                squares[i][j] = null;
+            }
+        }
         squares[7][0] = new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.ROOK);
         squares[7][1] = new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.KNIGHT);
         squares[7][2] = new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.BISHOP);

@@ -82,14 +82,20 @@ public class ChessGame {
      */
     public boolean isInCheck(TeamColor teamColor) {
         ChessPosition position;
+        ChessPosition teamKing;
+        HashSet<ChessMove> oppositionMoves = new HashSet<>();
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 position = new ChessPosition(i, j);
                 if (currentBoard.getPiece(position).pieceColor != teamColor && currentBoard.getPiece(position) != null){
                     for (ChessMove chessMove : currentBoard.getPiece(position).pieceMoves(currentBoard, position)) {
-
+                        oppositionMoves.add(chessMove);
                     }
 
+                } else if (currentBoard.getPiece(position).pieceColor == teamColor && currentBoard.getPiece(position) != null){
+                    if (currentBoard.getPiece(position).getPieceType() == ChessPiece.PieceType.KING) {
+                        teamKing = position;
+                    }
                 }
             }
         }

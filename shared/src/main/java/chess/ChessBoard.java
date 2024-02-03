@@ -33,6 +33,9 @@ public class ChessBoard {
      * position
      */
     public ChessPiece getPiece(ChessPosition position) {
+        if (squares[position.getRow() - 1][position.getColumn() - 1] == null) {
+            return null;
+        }
         return squares[position.getRow() - 1][position.getColumn() - 1];
     }
 
@@ -84,15 +87,21 @@ public class ChessBoard {
         return Arrays.deepHashCode(squares);
     }
 
-    @Override
-    public String toString() {
-        String board = new String();
-        for (ChessPiece[] i: squares) {
-            for (ChessPiece j: i) {
-                board += "|" + j.toString();
-            }
-            board += "|\n";
-        }
-        return board;
-    }
+//    @Override
+//    public String toString() {
+//        String backwardsBoard = new String();
+//        String board = new String();
+//
+//        for (ChessPiece[] i: squares) {
+//            for (ChessPiece j: i) {
+//                backwardsBoard += "|" + j.toString();
+//            }
+//            backwardsBoard += "|\n";
+//        }
+//        int x = 0;
+//        for (int i = backwardsBoard.length() - 1; i > 0; i--) {
+//            board += backwardsBoard[x];
+//        }
+//        return board;
+//    }
 }

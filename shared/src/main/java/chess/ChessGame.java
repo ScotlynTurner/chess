@@ -2,6 +2,7 @@ package chess;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Objects;
 
 /**
  * For a class that can manage a chess game, making moves on a board
@@ -11,7 +12,7 @@ import java.util.HashSet;
  */
 public class ChessGame {
     private TeamColor currentTeam;
-    private ChessBoard currentBoard;
+    private ChessBoard currentBoard = new ChessBoard();
 
     public ChessGame() {
 
@@ -81,26 +82,34 @@ public class ChessGame {
      * @return True if the specified team is in check
      */
     public boolean isInCheck(TeamColor teamColor) {
+        if (currentBoard == null) {
+            return true;
+        }
         ChessPosition position;
-        ChessPosition teamKing;
+        ChessPosition teamKing = new ChessPosition(0,0);
         HashSet<ChessMove> oppositionMoves = new HashSet<>();
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
+        for (int i = 1; i < 8; i++) {
+            for (int j = 1; j < 8; j++) {
                 position = new ChessPosition(i, j);
-                if (currentBoard.getPiece(position).pieceColor != teamColor && currentBoard.getPiece(position) != null){
+                if (currentBoard.getPiece(position) != null && currentBoard.getPiece(position).pieceColor != teamColor){
                     for (ChessMove chessMove : currentBoard.getPiece(position).pieceMoves(currentBoard, position)) {
                         oppositionMoves.add(chessMove);
                     }
 
-                } else if (currentBoard.getPiece(position).pieceColor == teamColor && currentBoard.getPiece(position) != null){
+                } else if (currentBoard.getPiece(position) != null && currentBoard.getPiece(position).pieceColor == teamColor){
                     if (currentBoard.getPiece(position).getPieceType() == ChessPiece.PieceType.KING) {
                         teamKing = position;
                     }
                 }
             }
         }
+        for (ChessMove moves : oppositionMoves) {
+            if (moves.getEndPosition().getRow() == teamKing.getRow() && moves.getEndPosition().getColumn() == teamKing.getColumn()) {
+                return true;
+            }
+        }
 
-        return true;
+        return false;
     }
 
     /**
@@ -140,5 +149,18 @@ public class ChessGame {
      */
     public ChessBoard getBoard() {
         return currentBoard;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ChessGame chessGame=(ChessGame) o;
+        return currentTeam == chessGame.currentTeam && Objects.equals(currentBoard, chessGame.currentBoard);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(currentTeam, currentBoard);
     }
 }

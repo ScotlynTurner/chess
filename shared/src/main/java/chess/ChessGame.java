@@ -82,9 +82,6 @@ public class ChessGame {
      * @return True if the specified team is in check
      */
     public boolean isInCheck(TeamColor teamColor) {
-        if (currentBoard == null) {
-            return true;
-        }
         ChessPosition position;
         ChessPosition teamKing = new ChessPosition(0,0);
         HashSet<ChessMove> oppositionMoves = new HashSet<>();
@@ -119,7 +116,39 @@ public class ChessGame {
      * @return True if the specified team is in checkmate
      */
     public boolean isInCheckmate(TeamColor teamColor) {
-        throw new RuntimeException("Not implemented");
+        ChessPosition position;
+        ChessPosition teamKing = new ChessPosition(0,0);
+        HashSet<ChessMove> oppositionMoves = new HashSet<>();
+        for (int i = 1; i < 9; i++) {
+            for (int j = 1; j < 9; j++) {
+                position = new ChessPosition(i, j);
+                if (currentBoard.getPiece(position) != null && currentBoard.getPiece(position).pieceColor != teamColor){
+                    for (ChessMove chessMove : currentBoard.getPiece(position).pieceMoves(currentBoard, position)) {
+                        oppositionMoves.add(chessMove);
+                    }
+
+                } else if (currentBoard.getPiece(position) != null && currentBoard.getPiece(position).pieceColor == teamColor){
+                    if (currentBoard.getPiece(position).getPieceType() == ChessPiece.PieceType.KING) {
+                        teamKing = position;
+                    }
+                }
+            }
+        }
+
+        Collection<ChessMove> kingMoves = currentBoard.getPiece(teamKing).pieceMoves(currentBoard, teamKing);
+        Boolean safeSpace = true;
+        for (ChessMove king : kingMoves) {
+            for (ChessMove moves : oppositionMoves) {
+                if (moves.getEndPosition().getRow() == king.getEndPosition().getRow() && moves.getEndPosition().getColumn() == king.getEndPosition().getColumn()) {
+                    safeSpace = false;
+                }
+            }
+            if (safeSpace) {
+                return false;
+            }
+
+        }
+        return true;
     }
 
     /**

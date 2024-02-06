@@ -75,12 +75,18 @@ public class ChessGame {
         if (!isMoveValid || isInCheck(currentTeam)) {
             throw new InvalidMoveException("Invalid Move");
         } else {
-            if (currentBoard.getPiece(move.getStartPosition()).getPieceType() == ChessPiece.PieceType.PAWN) {
+            if (move.getPromotionPiece() != null) {
                 currentBoard.addPiece(move.getEndPosition(), new ChessPiece(currentTeam, move.getPromotionPiece()));
             } else {
                 currentBoard.addPiece(move.getEndPosition(), currentBoard.getPiece(move.getStartPosition()));
             }
             currentBoard.addPiece(move.getStartPosition(), null);
+        }
+
+        if (currentTeam == TeamColor.BLACK) {
+            setTeamTurn(TeamColor.WHITE);
+        } else {
+            setTeamTurn(TeamColor.BLACK);
         }
     }
 

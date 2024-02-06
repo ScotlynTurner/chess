@@ -87,21 +87,20 @@ public class ChessBoard {
         return Arrays.deepHashCode(squares);
     }
 
-//    @Override
-//    public String toString() {
-//        String backwardsBoard = new String();
-//        String board = new String();
-//
-//        for (ChessPiece[] i: squares) {
-//            for (ChessPiece j: i) {
-//                backwardsBoard += "|" + j.toString();
-//            }
-//            backwardsBoard += "|\n";
-//        }
-//        int x = 0;
-//        for (int i = backwardsBoard.length() - 1; i > 0; i--) {
-//            board += backwardsBoard[x];
-//        }
-//        return board;
-//    }
+    @Override
+    public String toString() {
+        String board = "";
+
+        for (int i = 7; i >= 0; i--) {
+            for (int j = 1; j < 8; j++) {
+                if (squares[i][j] == null) {
+                    board += "| ";
+                } else {
+                    board += "|" + squares[i][j].toString();
+                }
+            }
+            board += "|\n";
+        }
+        return board;
+    }
 }

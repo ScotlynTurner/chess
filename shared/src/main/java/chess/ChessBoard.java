@@ -92,7 +92,7 @@ public class ChessBoard {
         String board = "";
 
         for (int i = 7; i >= 0; i--) {
-            for (int j = 1; j < 8; j++) {
+            for (int j = 0; j < 8; j++) {
                 if (squares[i][j] == null) {
                     board += "| ";
                 } else {

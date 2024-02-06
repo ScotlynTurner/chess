@@ -66,21 +66,27 @@ public class ChessGame {
         HashSet<ChessMove> possibleMoves = (HashSet<ChessMove>) validMoves(move.getStartPosition());
         Boolean isMoveValid = false;
         for (ChessMove validMove : possibleMoves) {
-            if (validMove.getStartPosition().getRow() == move.getStartPosition().getRow() &&
-                    validMove.getStartPosition().getColumn() == move.getStartPosition().getColumn()) {
+            if (areSameMoves(validMove, move)) {
                 isMoveValid = true;
                 break;
             }
         }
-        if (!isMoveValid || isInCheck(currentTeam)) {
+
+        ChessPiece tempPiece = currentBoard.getPiece(move.getStartPosition());
+        if (!isMoveValid) {
             throw new InvalidMoveException("Invalid Move");
         } else {
             if (move.getPromotionPiece() != null) {
                 currentBoard.addPiece(move.getEndPosition(), new ChessPiece(currentTeam, move.getPromotionPiece()));
             } else {
-                currentBoard.addPiece(move.getEndPosition(), currentBoard.getPiece(move.getStartPosition()));
+                currentBoard.addPiece(move.getEndPosition(), tempPiece);
             }
             currentBoard.addPiece(move.getStartPosition(), null);
+            if (isInCheck(currentTeam)) {
+                currentBoard.addPiece(move.getStartPosition(), tempPiece);
+                currentBoard.addPiece(move.getEndPosition(), null);
+                throw new InvalidMoveException("Invalid Move, would be put in check");
+            }
         }
 
         if (currentTeam == TeamColor.BLACK) {
@@ -88,6 +94,17 @@ public class ChessGame {
         } else {
             setTeamTurn(TeamColor.BLACK);
         }
+    }
+
+    private boolean areSameMoves(ChessMove move1, ChessMove move2) {
+        if (move1.getStartPosition().getRow() == move2.getStartPosition().getRow() &&
+                move1.getStartPosition().getColumn() == move2.getStartPosition().getColumn() &&
+                move1.getEndPosition().getRow() == move2.getEndPosition().getRow() &&
+                move1.getEndPosition().getColumn() == move2.getEndPosition().getColumn()) {
+
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -162,6 +179,7 @@ public class ChessGame {
 
         return true;
     }
+
 
     private boolean isMoveLegal(ChessMove potentialMove, TeamColor teamColor){
         ChessGame potentialGame = this;

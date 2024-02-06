@@ -50,9 +50,9 @@ public class ChessGame {
      * startPosition
      */
     public Collection<ChessMove> validMoves(ChessPosition startPosition) {
-        Collection<ChessMove> validMoves;
+        HashSet<ChessMove> validMoves;
         ChessPiece startPiece = new ChessPiece(currentTeam, currentBoard.getPiece(startPosition).getPieceType());
-        validMoves = startPiece.pieceMoves(currentBoard, startPosition);
+        validMoves = (HashSet<ChessMove>) startPiece.pieceMoves(currentBoard, startPosition);
         return validMoves;
     }
 
@@ -63,7 +63,16 @@ public class ChessGame {
      * @throws InvalidMoveException if move is invalid
      */
     public void makeMove(ChessMove move) throws InvalidMoveException {
-        if (!(validMoves(move.getStartPosition()).contains(move) && !isInCheck(currentTeam))) {
+        HashSet<ChessMove> possibleMoves = (HashSet<ChessMove>) validMoves(move.getStartPosition());
+        Boolean isMoveValid = false;
+        for (ChessMove validMove : possibleMoves) {
+            if (validMove.getStartPosition().getRow() == move.getStartPosition().getRow() &&
+                    validMove.getStartPosition().getColumn() == move.getStartPosition().getColumn()) {
+                isMoveValid = true;
+                break;
+            }
+        }
+        if (!isMoveValid || isInCheck(currentTeam)) {
             throw new InvalidMoveException("Invalid Move");
         } else {
             if (currentBoard.getPiece(move.getStartPosition()).getPieceType() == ChessPiece.PieceType.PAWN) {

@@ -1,8 +1,6 @@
 package chess.pieces;
 
-import chess.ChessBoard;
-import chess.ChessGame;
-import chess.ChessPosition;
+import chess.*;
 
 import java.util.HashSet;
 
@@ -99,5 +97,32 @@ public class KingMovesCalculator {
       }
     }
     return endPositions;
+  }
+  public boolean isInCheck(ChessGame.TeamColor teamColor) {
+    ChessPosition position;
+    ChessPosition teamKing = new ChessPosition(0,0);
+    HashSet<ChessMove> oppositionMoves = new HashSet<>();
+    for (int i = 1; i < 9; i++) {
+      for (int j = 1; j < 9; j++) {
+        position = new ChessPosition(i, j);
+        if (board.getPiece(position) != null && board.getPiece(position).pieceColor != teamColor){
+          for (ChessMove chessMove : board.getPiece(position).pieceMoves(board, position)) {
+            oppositionMoves.add(chessMove);
+          }
+
+        } else if (board.getPiece(position) != null && board.getPiece(position).pieceColor == teamColor){
+          if (board.getPiece(position).getPieceType() == ChessPiece.PieceType.KING) {
+            teamKing = position;
+          }
+        }
+      }
+    }
+    for (ChessMove moves : oppositionMoves) {
+      if (moves.getEndPosition().getRow() == teamKing.getRow() && moves.getEndPosition().getColumn() == teamKing.getColumn()) {
+        return true;
+      }
+    }
+
+    return false;
   }
 }

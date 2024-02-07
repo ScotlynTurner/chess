@@ -203,26 +203,34 @@ public class ChessGame {
      * @return True if the specified team is in stalemate, otherwise false
      */
     public boolean isInStalemate(TeamColor teamColor) {
+        ChessPosition position;
+        HashSet<ChessMove> kingMoves = new HashSet<>();
+        HashSet<ChessPosition> oppositionEndPositions = new HashSet<>();
         if (isInCheck(teamColor)) {
             return false;
         }
-        ChessPosition position;
-        ChessPosition teamKing = new ChessPosition(0,0);
-        HashSet<ChessMove> possibleMoves = new HashSet<>();
         for (int i = 1; i < 9; i++) {
             for (int j = 1; j < 9; j++) {
                 position = new ChessPosition(i, j);
-                if (currentBoard.getPiece(position) != null && currentBoard.getPiece(position).pieceColor == teamColor){
+                ChessPiece currentPiece = currentBoard.getPiece(position);
+                if (currentPiece != null && currentPiece.getPieceType() == ChessPiece.PieceType.KING && currentPiece.pieceColor == teamColor){
+                    for (ChessMove chessMove : currentPiece.pieceMoves(currentBoard, position)) {
+                        kingMoves.add(chessMove);
+                    }
+
+                } else if (currentPiece != null && currentPiece.pieceColor != teamColor){
                     for (ChessMove chessMove : currentBoard.getPiece(position).pieceMoves(currentBoard, position)) {
-                        possibleMoves.add(chessMove);
-                        if (!possibleMoves.isEmpty()) {
-                            return false;
-                        }
+                        oppositionEndPositions.add(chessMove.getEndPosition());
                     }
                 }
             }
         }
 
+        for (ChessMove kingMove : kingMoves) {
+            if (isMoveLegal(kingMove, teamColor)) {
+                return false;
+            }
+        }
 
         return true;
     }

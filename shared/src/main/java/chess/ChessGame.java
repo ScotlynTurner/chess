@@ -50,20 +50,29 @@ public class ChessGame {
      * startPosition
      */
     public Collection<ChessMove> validMoves(ChessPosition startPosition) {
-        HashSet<ChessMove> validMoves;
-        ChessPiece startPiece = new ChessPiece(currentTeam, currentBoard.getPiece(startPosition).getPieceType());
-        validMoves = (HashSet<ChessMove>) startPiece.pieceMoves(currentBoard, startPosition);
+        HashSet<ChessMove> validMoves = new HashSet<>();
+        HashSet<ChessMove> potentialMoves = validMovesHelper(startPosition);
+        for (ChessMove move : potentialMoves) {
+            if (checkMove(move)) {
+                validMoves.add(move);
+            }
+        }
         return validMoves;
     }
 
-    /**
-     * Makes a move in a chess game
-     *
-     * @param move chess move to preform
-     * @throws InvalidMoveException if move is invalid
-     */
-    public void makeMove(ChessMove move) throws InvalidMoveException {
-        HashSet<ChessMove> possibleMoves = (HashSet<ChessMove>) validMoves(move.getStartPosition());
+
+    private HashSet<ChessMove> validMovesHelper(ChessPosition startPosition) {
+        HashSet<ChessMove> validMoves = new HashSet<>();
+        if (currentBoard.getPiece(startPosition) != null) {
+            ChessPiece startPiece = new ChessPiece(currentBoard.getPiece(startPosition).pieceColor,
+                    currentBoard.getPiece(startPosition).getPieceType());
+            validMoves=(HashSet<ChessMove>) startPiece.pieceMoves(currentBoard, startPosition);
+        }
+        return validMoves;
+    }
+
+    private boolean checkMove(ChessMove move) {
+        HashSet<ChessMove> possibleMoves = validMovesHelper(move.getStartPosition());
         Boolean isMoveValid = false;
         for (ChessMove validMove : possibleMoves) {
             if (areSameMoves(validMove, move)) {
@@ -73,6 +82,47 @@ public class ChessGame {
         }
 
         ChessPiece tempPiece = currentBoard.getPiece(move.getStartPosition());
+        ChessPiece stolenPiece;
+        if (!isMoveValid) {
+            return false;
+        } else {
+            stolenPiece = currentBoard.getPiece(move.getEndPosition());
+            currentBoard.addPiece(move.getEndPosition(), tempPiece);
+            currentBoard.addPiece(move.getStartPosition(), null);
+            TeamColor teamColor = currentBoard.getPiece(move.getEndPosition()).pieceColor;
+          if (isInCheck(currentBoard.getPiece(move.getEndPosition()).pieceColor)) {
+                currentBoard.addPiece(move.getStartPosition(), tempPiece);
+                currentBoard.addPiece(move.getEndPosition(), stolenPiece);
+                return false;
+            }
+            currentBoard.addPiece(move.getStartPosition(), tempPiece);
+            currentBoard.addPiece(move.getEndPosition(), stolenPiece);
+        }
+        return true;
+    }
+
+
+    /**
+     * Makes a move in a chess game
+     *
+     * @param move chess move to preform
+     * @throws InvalidMoveException if move is invalid
+     */
+    public void makeMove(ChessMove move) throws InvalidMoveException {
+        HashSet<ChessMove> possibleMoves = validMovesHelper(move.getStartPosition());
+        ChessPiece tempPiece = currentBoard.getPiece(move.getStartPosition());
+        if (tempPiece.pieceColor != currentTeam) {
+            throw new InvalidMoveException("Not your turn");
+        }
+
+        Boolean isMoveValid = false;
+        for (ChessMove validMove : possibleMoves) {
+            if (areSameMoves(validMove, move)) {
+                isMoveValid = true;
+                break;
+            }
+        }
+
         if (!isMoveValid) {
             throw new InvalidMoveException("Invalid Move");
         } else {
@@ -172,24 +222,9 @@ public class ChessGame {
         }
 
         for (ChessMove kingMove : kingMoves) {
-            if (isMoveLegal(kingMove, teamColor)) {
+            if (checkMove(kingMove)) {
                 return false;
             }
-        }
-
-        return true;
-    }
-
-
-    private boolean isMoveLegal(ChessMove potentialMove, TeamColor teamColor){
-        ChessGame potentialGame = this;
-        try {
-            potentialGame.makeMove(potentialMove);
-        } catch (InvalidMoveException e) {
-            return false;
-        }
-        if (potentialGame.isInCheck(teamColor)) {
-            return false;
         }
 
         return true;
@@ -227,7 +262,7 @@ public class ChessGame {
         }
 
         for (ChessMove kingMove : kingMoves) {
-            if (isMoveLegal(kingMove, teamColor)) {
+            if (checkMove(kingMove)) {
                 return false;
             }
         }

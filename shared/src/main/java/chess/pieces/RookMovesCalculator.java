@@ -2,6 +2,7 @@ package chess.pieces;
 
 import chess.ChessBoard;
 import chess.ChessGame;
+import chess.ChessPiece;
 import chess.ChessPosition;
 
 import java.util.HashSet;

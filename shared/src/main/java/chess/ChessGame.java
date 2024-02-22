@@ -1,5 +1,7 @@
 package chess;
 
+import chess.specialMoves.Castling;
+
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
@@ -49,6 +51,8 @@ public class ChessGame {
      * @return Set of valid moves for requested piece, or null if no piece at
      * startPosition
      */
+
+
     public Collection<ChessMove> validMoves(ChessPosition startPosition) {
         HashSet<ChessMove> validMoves = new HashSet<>();
         HashSet<ChessMove> potentialMoves = validMovesHelper(startPosition);
@@ -59,7 +63,6 @@ public class ChessGame {
         }
         return validMoves;
     }
-
 
     private HashSet<ChessMove> validMovesHelper(ChessPosition startPosition) {
         HashSet<ChessMove> validMoves = new HashSet<>();
@@ -89,7 +92,6 @@ public class ChessGame {
             stolenPiece = currentBoard.getPiece(move.getEndPosition());
             currentBoard.addPiece(move.getEndPosition(), tempPiece);
             currentBoard.addPiece(move.getStartPosition(), null);
-            TeamColor teamColor = currentBoard.getPiece(move.getEndPosition()).pieceColor;
           if (isInCheck(currentBoard.getPiece(move.getEndPosition()).pieceColor)) {
                 currentBoard.addPiece(move.getStartPosition(), tempPiece);
                 currentBoard.addPiece(move.getEndPosition(), stolenPiece);

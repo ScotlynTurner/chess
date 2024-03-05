@@ -1,4 +1,4 @@
 package dataAccess;
 
-public class SQLAuthDAO implements AuthDAO{
+public class SQLAuthDAO{
 }

@@ -1,17 +1,11 @@
 package server;
 
-import chess.ChessGame;
-import com.google.gson.Gson;
 import dataAccess.DataAccessException;
-import handlers.ClearService;
-import handlers.CreateGameService;
-import service.Service;
 import spark.*;
 
-import java.util.Map;
-
 public class Server {
-  private Service service;
+  private Handler handler = new Handler();
+
   public Server() {
   }
 
@@ -34,7 +28,7 @@ public class Server {
   }
 
   private void exceptionHandler(DataAccessException ex, Request req, Response res) {
-
+    res.status(500);
   }
 
   public void stop() {
@@ -43,37 +37,36 @@ public class Server {
   }
 
   private Object registration(Request req, Response res) throws DataAccessException {
-    return "";
+    res.status(200);
+    return handler.registration(req, res);
   }
 
   private Object login(Request req, Response res) throws DataAccessException {
-    return "";
+    res.status(200);
+    return handler.login(req, res);
   }
 
   private Object logout(Request req, Response res) throws DataAccessException {
-    return "";
+    res.status(200);
+    return handler.logout(req, res);
   }
 
   private Object listGames(Request req, Response res) throws DataAccessException {
-    res.type("application/json");
-    var list = service.listGames().toArray();
-    return new Gson().toJson(Map.of("pet", list));
+    res.status(200);
+    return handler.listGames(req, res);
   }
 
   private Object createGame(Request req, Response res) throws DataAccessException {
-    var game = new Gson().fromJson(req.body(), ChessGame.class);
-    game = service.addGame(game);
-    return new Gson().toJson(game);
+    res.status(200);
+    return handler.createGame(req, res);
   }
 
   private Object joinGame(Request req, Response res) throws DataAccessException {
-    return "";
+    res.status(200);
+    return handler.joinGame(req, res);
   }
 
   private Object clear(Request req, Response res) throws DataAccessException {
-    service.clear();
-    res.status(200);
-    return "";
+    return handler.clear(req, res);
   }
-
 }

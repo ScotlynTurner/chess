@@ -3,8 +3,8 @@ package dataAccess;
 import chess.ChessGame;
 import model.GameData;
 
-import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class MemoryGameDAO implements GameDAO{
   private int id = 1;
@@ -16,8 +16,8 @@ public class MemoryGameDAO implements GameDAO{
     return id - 1;
   }
 
-  public Collection<GameData> listGames() throws DataAccessException {
-    return games.values();
+  public HashSet<GameData> listGames() throws DataAccessException {
+    return new HashSet<>(games.values());
   }
 
   public GameData getGame(int id) throws DataAccessException {
@@ -30,5 +30,13 @@ public class MemoryGameDAO implements GameDAO{
 
   public void clear() throws DataAccessException {
     games.clear();
+  }
+
+  public void updateGameData(GameData game, String clientColorChange, String username) throws DataAccessException {
+    if (clientColorChange.equals("WHITE")) {
+      games.put(game.gameID(), new GameData(game.gameID(), username, game.blackUsername(), game.gameName(), game.game()));
+    } else {
+      games.put(game.gameID(), new GameData(game.gameID(), game.whiteUsername(), username, game.gameName(), game.game()));
+    }
   }
 }

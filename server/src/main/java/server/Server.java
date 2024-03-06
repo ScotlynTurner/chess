@@ -36,6 +36,10 @@ public class Server {
     Spark.awaitStop();
   }
 
+  public static void main(String[] args) {
+    new Server().run(8080);
+  }
+
   private Object registration(Request req, Response res) throws DataAccessException {
     res.status(200);
     return handler.registration(req, res);

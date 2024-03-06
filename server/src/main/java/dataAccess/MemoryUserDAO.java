@@ -8,17 +8,17 @@ import java.util.HashMap;
 public class MemoryUserDAO implements UserDAO{
   final private HashMap<String, UserData> user = new HashMap<>();
 
-  public String getUser(String username) throws DataAccessException {
+  public UserData getUser(String username) throws DataAccessException {
     if (user.get(username) != null) {
-      return user.get(username).username();
+      return user.get(username);
     } else {
-      throw new DataAccessException("Error: bad request");
+      return null;
     }
   }
 
-  public String verifyPassword(String userName, String password) {
+  public UserData verifyPassword(String userName, String password) {
     if (user.get(userName).password().equals(password)) {
-      return password;
+      return user.get(userName);
     }
     return null;
   }

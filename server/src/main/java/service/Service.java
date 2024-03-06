@@ -1,28 +1,30 @@
 package service;
 
-import dataAccess.AuthDAO;
-import dataAccess.DataAccessException;
-import dataAccess.GameDAO;
-import dataAccess.UserDAO;
+import ResponseTypes.LoginResponse;
+import dataAccess.*;
+import model.AuthData;
 import model.GameData;
 
-import java.util.Collection;
+import java.util.HashSet;
 
 public class Service {
-  AuthDAO authDAO;
-  UserDAO userDAO;
-  GameDAO gameDAO;
+  AuthDAO authDAO = new MemoryAuthDAO();
+  UserDAO userDAO = new MemoryUserDAO();
+  GameDAO gameDAO = new MemoryGameDAO();
 
   public Service() {
   }
 
   public void clear() throws DataAccessException {
+    if (authDAO == null || userDAO == null || gameDAO == null) {
+      throw new DataAccessException("Error: DAO is null");
+    }
     authDAO.clear();
     userDAO.clear();
     gameDAO.clear();
   }
 
-  public Object addGame(String gameName, String authToken) throws DataAccessException {
+  public Integer addGame(String gameName, String authToken) throws DataAccessException {
     if (authDAO.getAuth(authToken) == null) {
       throw new DataAccessException("Error: unauthorized");
     }
@@ -30,7 +32,7 @@ public class Service {
     return gameID;
   }
 
-  public Collection<GameData> listGames(String authToken) throws DataAccessException {
+  public HashSet<GameData> listGames(String authToken) throws DataAccessException {
     if (authDAO.getAuth(authToken) == null) {
       throw new DataAccessException("Error: unauthorized");
     }
@@ -46,23 +48,22 @@ public class Service {
     if (gameData == null) {
       throw new DataAccessException("Error: bad request");
     }
-    if (clientColor == "BLACK") {
-      if (gameData.blackUser() != null) {
+    if (clientColor == null) {
+      return;
+    }
+    if (clientColor.equals("BLACK")) {
+      if (gameData.blackUsername() != null) {
         throw new DataAccessException("Error: already taken");
       }
-      gameData = new GameData(gameData.gameID(), gameData.whiteUser(), username, gameData.gameName(), gameData
-              .game());
-    }
-    if (clientColor == "WHITE") {
-      if (gameData.whiteUser() != null) {
+    } else if (clientColor.equals("WHITE")) {
+      if (gameData.whiteUsername() != null) {
         throw new DataAccessException("Error: already taken");
       }
-      gameData = new GameData(gameData.gameID(), username, gameData.blackUser(), gameData.gameName(), gameData
-              .game());
     }
+    gameDAO.updateGameData(gameData, clientColor, username);
   }
 
-  public String register(String userName, String password, String email) throws DataAccessException {
+  public AuthData register(String userName, String password, String email) throws DataAccessException {
     if (userDAO.getUser(userName) != null) {
       throw new DataAccessException("Error: already taken");
     }
@@ -70,11 +71,11 @@ public class Service {
     return authDAO.createAuth(userName);
   }
 
-  public String login(String userName, String password) throws DataAccessException {
+  public LoginResponse login(String userName, String password) throws DataAccessException {
     if (userDAO.getUser(userName) == null || userDAO.verifyPassword(userName, password) == null) {
       throw new DataAccessException("Error: unauthorized");
     }
-    return authDAO.createAuth(userName);
+    return new LoginResponse(userName, authDAO.createAuth(userName).authToken());
   }
 
   public void logout(String authToken) throws DataAccessException {

@@ -1,7 +1,5 @@
 package chess;
 
-import chess.specialMoves.Castling;
-
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
@@ -206,30 +204,7 @@ public class ChessGame {
         if (!isInCheck(teamColor)) {
             return false;
         }
-        for (int i = 1; i < 9; i++) {
-            for (int j = 1; j < 9; j++) {
-                position = new ChessPosition(i, j);
-                ChessPiece currentPiece = currentBoard.getPiece(position);
-                if (currentPiece != null && currentPiece.getPieceType() == ChessPiece.PieceType.KING && currentPiece.pieceColor == teamColor){
-                    for (ChessMove chessMove : currentPiece.pieceMoves(currentBoard, position)) {
-                        kingMoves.add(chessMove);
-                    }
-
-                } else if (currentPiece != null && currentPiece.pieceColor != teamColor){
-                    for (ChessMove chessMove : currentBoard.getPiece(position).pieceMoves(currentBoard, position)) {
-                        oppositionEndPositions.add(chessMove.getEndPosition());
-                    }
-                }
-            }
-        }
-
-        for (ChessMove kingMove : kingMoves) {
-            if (checkMove(kingMove)) {
-                return false;
-            }
-        }
-
-        return true;
+        return checkmateHelper(teamColor, kingMoves, oppositionEndPositions);
     }
 
     /**
@@ -246,7 +221,12 @@ public class ChessGame {
         if (isInCheck(teamColor)) {
             return false;
         }
-        for (int i = 1; i < 9; i++) {
+        return checkmateHelper(teamColor, kingMoves, oppositionEndPositions);
+    }
+
+    private boolean checkmateHelper(TeamColor teamColor, HashSet<ChessMove> kingMoves, HashSet<ChessPosition> oppositionEndPositions) {
+        ChessPosition position;
+        for (int i=1; i < 9; i++) {
             for (int j = 1; j < 9; j++) {
                 position = new ChessPosition(i, j);
                 ChessPiece currentPiece = currentBoard.getPiece(position);

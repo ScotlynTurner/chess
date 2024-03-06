@@ -18,86 +18,38 @@ public class KingMovesCalculator {
     HashSet<ChessPosition> endPositions = new HashSet<ChessPosition>();
     ChessPosition coordinate = myPosition;
     coordinate = new ChessPosition(coordinate.getRow() + 1, coordinate.getColumn() - 1);
-    if((1 <= coordinate.getRow() && coordinate.getRow()<= 8) && (1 <= coordinate.getColumn() && coordinate.getColumn()<= 8)) {
-      if (board.getPiece(coordinate) == null || board.getPiece(coordinate).pieceColor != thisColor) {
-        endPositions.add(coordinate);
-        coordinate = new ChessPosition(coordinate.getRow() + 1, coordinate.getColumn() + 1);
-      } else if(board.getPiece(coordinate).pieceColor != thisColor) {
-        endPositions.add(coordinate);
-      }
-    }
-    coordinate = myPosition;
+    coordinate=getChessPosition(endPositions, coordinate);
     coordinate = new ChessPosition(coordinate.getRow() + 1, coordinate.getColumn());
-    if((1 <= coordinate.getRow() && coordinate.getRow()<= 8) && (1 <= coordinate.getColumn() && coordinate.getColumn()<= 8)) {
-      if (board.getPiece(coordinate) == null || board.getPiece(coordinate).pieceColor != thisColor) {
-        endPositions.add(coordinate);
-        coordinate = new ChessPosition(coordinate.getRow() + 1, coordinate.getColumn() + 1);
-      } else if(board.getPiece(coordinate).pieceColor != thisColor) {
-        endPositions.add(coordinate);
-      }
-    }
-    coordinate = myPosition;
+    coordinate=getChessPosition(endPositions, coordinate);
     coordinate = new ChessPosition(coordinate.getRow() + 1, coordinate.getColumn() + 1);
-    if((1 <= coordinate.getRow() && coordinate.getRow()<= 8) && (1 <= coordinate.getColumn() && coordinate.getColumn()<= 8)) {
-      if (board.getPiece(coordinate) == null || board.getPiece(coordinate).pieceColor != thisColor) {
-        endPositions.add(coordinate);
-        coordinate = new ChessPosition(coordinate.getRow() + 1, coordinate.getColumn() + 1);
-      } else if(board.getPiece(coordinate).pieceColor != thisColor) {
-        endPositions.add(coordinate);
-      }
-    }
-    coordinate = myPosition;
+    coordinate=getChessPosition(endPositions, coordinate);
     coordinate = new ChessPosition(coordinate.getRow(), coordinate.getColumn() + 1);
-    if((1 <= coordinate.getRow() && coordinate.getRow()<= 8) && (1 <= coordinate.getColumn() && coordinate.getColumn()<= 8)) {
-      if (board.getPiece(coordinate) == null || board.getPiece(coordinate).pieceColor != thisColor) {
-        endPositions.add(coordinate);
-        coordinate = new ChessPosition(coordinate.getRow() + 1, coordinate.getColumn() + 1);
-      } else if(board.getPiece(coordinate).pieceColor != thisColor) {
-        endPositions.add(coordinate);
-      }
-    }
-    coordinate = myPosition;
+    coordinate=getChessPosition(endPositions, coordinate);
     coordinate = new ChessPosition(coordinate.getRow() - 1, coordinate.getColumn() + 1);
-    if((1 <= coordinate.getRow() && coordinate.getRow()<= 8) && (1 <= coordinate.getColumn() && coordinate.getColumn()<= 8)) {
-      if (board.getPiece(coordinate) == null || board.getPiece(coordinate).pieceColor != thisColor) {
-        endPositions.add(coordinate);
-        coordinate = new ChessPosition(coordinate.getRow() + 1, coordinate.getColumn() + 1);
-      } else if(board.getPiece(coordinate).pieceColor != thisColor) {
-        endPositions.add(coordinate);
-      }
-    }
-    coordinate = myPosition;
+    coordinate=getChessPosition(endPositions, coordinate);
     coordinate = new ChessPosition(coordinate.getRow() - 1, coordinate.getColumn());
-    if((1 <= coordinate.getRow() && coordinate.getRow()<= 8) && (1 <= coordinate.getColumn() && coordinate.getColumn()<= 8)) {
-      if (board.getPiece(coordinate) == null || board.getPiece(coordinate).pieceColor != thisColor) {
-        endPositions.add(coordinate);
-        coordinate = new ChessPosition(coordinate.getRow() + 1, coordinate.getColumn() + 1);
-      } else if(board.getPiece(coordinate).pieceColor != thisColor) {
-        endPositions.add(coordinate);
-      }
-    }
-    coordinate = myPosition;
+    coordinate=getChessPosition(endPositions, coordinate);
     coordinate = new ChessPosition(coordinate.getRow() - 1, coordinate.getColumn() - 1);
-    if((1 <= coordinate.getRow() && coordinate.getRow()<= 8) && (1 <= coordinate.getColumn() && coordinate.getColumn()<= 8)) {
-      if (board.getPiece(coordinate) == null || board.getPiece(coordinate).pieceColor != thisColor) {
-        endPositions.add(coordinate);
-        coordinate = new ChessPosition(coordinate.getRow() + 1, coordinate.getColumn() + 1);
-      } else if(board.getPiece(coordinate).pieceColor != thisColor) {
-        endPositions.add(coordinate);
-      }
-    }
-    coordinate = myPosition;
+    coordinate=getChessPosition(endPositions, coordinate);
     coordinate = new ChessPosition(coordinate.getRow(), coordinate.getColumn() - 1);
-    if((1 <= coordinate.getRow() && coordinate.getRow()<= 8) && (1 <= coordinate.getColumn() && coordinate.getColumn()<= 8)) {
-      if (board.getPiece(coordinate) == null || board.getPiece(coordinate).pieceColor != thisColor) {
-        endPositions.add(coordinate);
-        coordinate = new ChessPosition(coordinate.getRow() + 1, coordinate.getColumn() + 1);
-      } else if(board.getPiece(coordinate).pieceColor != thisColor) {
-        endPositions.add(coordinate);
-      }
-    }
+    getChessPosition(endPositions, coordinate);
+
     return endPositions;
   }
+
+  private ChessPosition getChessPosition(HashSet<ChessPosition> endPositions, ChessPosition coordinate) {
+    if((1 <= coordinate.getRow() && coordinate.getRow()<= 8) && (1 <= coordinate.getColumn() && coordinate.getColumn()<= 8)) {
+      if (board.getPiece(coordinate) == null || board.getPiece(coordinate).pieceColor != thisColor) {
+        endPositions.add(coordinate);
+        coordinate = new ChessPosition(coordinate.getRow() + 1, coordinate.getColumn() + 1);
+      } else if(board.getPiece(coordinate).pieceColor != thisColor) {
+        endPositions.add(coordinate);
+      }
+    }
+    coordinate = myPosition;
+    return coordinate;
+  }
+
   public boolean isInCheck(ChessGame.TeamColor teamColor) {
     ChessPosition position;
     ChessPosition teamKing = new ChessPosition(0,0);

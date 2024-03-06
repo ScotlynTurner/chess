@@ -113,8 +113,4 @@ public class PawnMovesCalculator {
     }
   }
 
-  public HashSet<ChessPosition> promoteEndPosition(HashSet<ChessPosition> endPositions) {
-    return endPositions;
-  }
-
 }

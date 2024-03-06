@@ -24,10 +24,6 @@ public class MemoryGameDAO implements GameDAO{
     return games.get(id);
   }
 
-  public void deleteGame(Integer id) throws DataAccessException {
-    games.remove(id);
-  }
-
   public void clear() throws DataAccessException {
     games.clear();
   }

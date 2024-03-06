@@ -10,7 +10,6 @@ public interface GameDAO {
   Integer addGame(String gameName) throws DataAccessException;
   HashSet<GameData> listGames() throws DataAccessException;
   GameData getGame(int id) throws DataAccessException;
-  void deleteGame(Integer id) throws DataAccessException;
   void clear() throws DataAccessException;
   void updateGameData(GameData game, String clientColorChange, String username) throws DataAccessException;
 }

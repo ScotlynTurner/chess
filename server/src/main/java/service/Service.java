@@ -25,30 +25,30 @@ public class Service {
   }
 
   public Integer addGame(String gameName, String authToken) throws DataAccessException {
-    if (authDAO.getAuth(authToken) == null) {
-      throw new DataAccessException("Error: unauthorized");
-    }
+    authorize(authToken);
     int gameID = gameDAO.addGame(gameName);
     return gameID;
   }
 
   public HashSet<GameData> listGames(String authToken) throws DataAccessException {
-    if (authDAO.getAuth(authToken) == null) {
-      throw new DataAccessException("Error: unauthorized");
-    }
+    authorize(authToken);
     return gameDAO.listGames();
   }
 
   public void joinGame(String clientColor, int gameID, String authToken) throws DataAccessException {
     String username = authDAO.getAuth(authToken);
     GameData gameData = gameDAO.getGame(gameID);
+    authorize(authToken);
     if (username == null) {
       throw new DataAccessException("Error: unauthorized");
     }
     if (gameData == null) {
       throw new DataAccessException("Error: bad request");
     }
-    if (clientColor == null) {
+
+    // If clientColor is null or is the string "empty", the user is joined as an observer.
+    // Otherwise, they are joined as the color chosen.
+    if (clientColor == null || clientColor.equals("empty")) {
       return;
     }
     if (clientColor.equals("BLACK")) {
@@ -60,6 +60,8 @@ public class Service {
         throw new DataAccessException("Error: already taken");
       }
     }
+
+    // Creates a new game with updated users based on clientColor
     gameDAO.updateGameData(gameData, clientColor, username);
   }
 
@@ -79,9 +81,13 @@ public class Service {
   }
 
   public void logout(String authToken) throws DataAccessException {
+    authorize(authToken);
+    authDAO.deleteAuth(authToken);
+  }
+
+  private void authorize(String authToken) throws DataAccessException{
     if (authDAO.getAuth(authToken) == null) {
       throw new DataAccessException("Error: unauthorized");
     }
-    authDAO.deleteAuth(authToken);
   }
 }

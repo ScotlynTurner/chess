@@ -20,24 +20,6 @@ public class Handler {
   public Handler() {
   }
 
-  private void exceptionHandler(DataAccessException ex, Request req, Response res) throws DataAccessException{
-    switch (ex.getMessage()) {
-      case "Error: bad request":
-        res.status(400);
-        break;
-      case "Error: already taken":
-        res.status(403);
-        break;
-      case "Error: unauthorized":
-        res.status(401);
-        break;
-      default:
-        res.status(500);
-    }
-
-    res.body(new Gson().toJson(Map.of("message",ex.getMessage())));
-  }
-
   public Object registration(Request req, Response res) throws DataAccessException {
     try {
       JsonObject requestBody = new Gson().fromJson(req.body(), JsonObject.class);
@@ -47,8 +29,10 @@ public class Handler {
       if (username == null || password == null || email == null) {
         throw new DataAccessException("Error: bad request");
       }
+
       AuthData authToken = service.register(username.getAsString(), password.getAsString(), email.getAsString());
       return new Gson().toJson(authToken);
+
     } catch (DataAccessException e) {
       exceptionHandler(e, req, res);
     }
@@ -97,9 +81,11 @@ public class Handler {
       if (gameName == null || gameName.isJsonNull()) {
         throw new DataAccessException("Error: bad request");
       }
+
       String authToken = req.headers("authorization");
       int gameID = service.addGame(gameName.getAsString(), authToken);
       return new Gson().toJson(new CreateGameResponse(gameID));
+
     } catch(DataAccessException e) {
       exceptionHandler(e, req, res);
     }
@@ -115,12 +101,14 @@ public class Handler {
       if (gameID == null) {
         throw new DataAccessException("Error: bad request");
       }
+
       if (clientColor != null) {
         service.joinGame(clientColor.getAsString(), gameID.getAsInt(), authToken);
       } else {
         service.joinGame(null, gameID.getAsInt(), authToken);
       }
       return "{}";
+
     } catch(DataAccessException e) {
       exceptionHandler(e, req, res);
     }
@@ -138,5 +126,22 @@ public class Handler {
       exceptionHandler(e, req, res);
     }
     return res.body();
+  }
+
+  private void exceptionHandler(DataAccessException ex, Request req, Response res) throws DataAccessException{
+    switch (ex.getMessage()) {
+      case "Error: bad request":
+        res.status(400);
+        break;
+      case "Error: already taken":
+        res.status(403);
+        break;
+      case "Error: unauthorized":
+        res.status(401);
+        break;
+      default:
+        res.status(500);
+    }
+    res.body(new Gson().toJson(Map.of("message",ex.getMessage())));
   }
 }

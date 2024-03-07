@@ -37,7 +37,7 @@ public class Server {
   }
 
   public static void main(String[] args) {
-    new Server().run(8080);
+    new Server().run(3306);
   }
 
   private Object registration(Request req, Response res) throws DataAccessException {

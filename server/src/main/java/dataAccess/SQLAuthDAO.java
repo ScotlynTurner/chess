@@ -1,12 +1,15 @@
 package dataAccess;
 
 import model.AuthData;
-import model.UserData;
 
 import java.sql.SQLException;
 import java.util.UUID;
 
 public class SQLAuthDAO implements AuthDAO {
+
+  public SQLAuthDAO() throws DataAccessException {
+    configureDatabase();
+  }
 
   public String getAuth(String authToken) throws DataAccessException {
     AuthData authData = null;
@@ -60,6 +63,31 @@ public class SQLAuthDAO implements AuthDAO {
       }
     } catch (SQLException e) {
       throw new DataAccessException("Error clearing table: " + e.getMessage());
+    }
+  }
+
+  private final String[] createStatements = {
+          """
+            CREATE TABLE IF NOT EXISTS  auth (
+              `authToken` varchar(256) NOT NULL,
+              `username` varchar(256) NOT NULL,
+              INDEX(authToken),
+              INDEX(username)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+            """
+  };
+
+
+  private void configureDatabase() throws DataAccessException {
+    DatabaseManager.createDatabase();
+    try (var conn=DatabaseManager.getConnection()) {
+      for (var statement : createStatements) {
+        try (var preparedStatement=conn.prepareStatement(statement)) {
+          preparedStatement.executeUpdate();
+        }
+      }
+    } catch (SQLException ex) {
+      throw new DataAccessException("Error: " + ex.getMessage());
     }
   }
 }

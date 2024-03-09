@@ -17,14 +17,14 @@ public class SQLUserDAO implements UserDAO {
 
   public UserData getUser(String username) throws DataAccessException {
     UserData userData = null;
+    if (username == null) {
+      throw new DataAccessException("Error: Username cannot be null");
+    }
     try (var conn = DatabaseManager.getConnection()) {
       try (var preparedStatement = conn.prepareStatement("SELECT * FROM user WHERE username = ?")) {
         preparedStatement.setString(1, username);
         try (var resultSet = preparedStatement.executeQuery()) {
           if (resultSet.next()) {
-            if (resultSet.getString("username") == null) {
-              return null;
-            }
             userData = new UserData(
                     resultSet.getString("username"),
                     resultSet.getString("password"),
@@ -33,7 +33,7 @@ public class SQLUserDAO implements UserDAO {
           }
         }
       }
-    } catch (SQLException e) {
+    } catch (Exception e) {
       throw new DataAccessException("Error getting user: " + e.getMessage());
     }
     return userData;
@@ -46,11 +46,14 @@ public class SQLUserDAO implements UserDAO {
     if (passwordMatch) {
       return getUser(userName);
     } else {
-      return null; // Password does not match
+      throw new DataAccessException("Error: passwords do not match.");
     }
   }
 
   public void createUser(String username, String password, String email) throws DataAccessException {
+    if (username == null || password == null) {
+      throw new DataAccessException("Error: Username cannot be null");
+    }
     String hashedPassword = hashPassword(password);
     try (var conn = DatabaseManager.getConnection()) {
       try (var preparedStatement = conn.prepareStatement("INSERT INTO user (username, password, email) VALUES (?, ?, ?)")) {
@@ -59,7 +62,7 @@ public class SQLUserDAO implements UserDAO {
         preparedStatement.setString(3, email);
         preparedStatement.executeUpdate();
       }
-    } catch (SQLException e) {
+    } catch (Exception e) {
       throw new DataAccessException("Error creating user: " + e.getMessage());
     }
   }
@@ -95,15 +98,6 @@ public class SQLUserDAO implements UserDAO {
 
 
   private void configureDatabase() throws DataAccessException {
-    DatabaseManager.createDatabase();
-    try (var conn = DatabaseManager.getConnection()) {
-      for (var statement : createStatements) {
-        try (var preparedStatement = conn.prepareStatement(statement)) {
-          preparedStatement.executeUpdate();
-        }
-      }
-    } catch (SQLException ex) {
-      throw new DataAccessException("Error: " + ex.getMessage());
-    }
+    SQLGameDAO.createDatabaseIfNone(createStatements);
   }
 }

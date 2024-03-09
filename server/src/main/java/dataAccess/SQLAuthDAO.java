@@ -16,6 +16,9 @@ public class SQLAuthDAO implements AuthDAO {
   }
 
   public String getAuth(String authToken) throws DataAccessException {
+    if (authToken == null) {
+      throw new DataAccessException("Error: AuthToken cannot be null.");
+    }
     AuthData authData = null;
     try (var conn = DatabaseManager.getConnection()) {
       try (var preparedStatement = conn.prepareStatement("SELECT * FROM auth WHERE authToken = ?")) {
@@ -29,13 +32,16 @@ public class SQLAuthDAO implements AuthDAO {
           }
         }
       }
-    } catch (SQLException e) {
-      throw new DataAccessException("Error getting auth: " + e.getMessage());
+      return authData.username();
+    } catch (Exception e) {
+      throw new DataAccessException("Error: unauthorized");
     }
-    return authData.username();
   }
 
   public AuthData createAuth(String username) throws DataAccessException{
+    if (username == null) {
+      throw new DataAccessException("Error: username cannot be null");
+    }
     String authToken = UUID.randomUUID().toString();
     try (var conn = DatabaseManager.getConnection()) {
       try (var preparedStatement = conn.prepareStatement("INSERT INTO auth (authToken, username) VALUES (?, ?)")) {
@@ -43,19 +49,22 @@ public class SQLAuthDAO implements AuthDAO {
         preparedStatement.setString(2, username);
         preparedStatement.executeUpdate();
       }
-    } catch (SQLException e) {
+    } catch (Exception e) {
       throw new DataAccessException("Error creating auth: " + e.getMessage());
     }
     return new AuthData(authToken, username);
   }
 
   public void deleteAuth(String authToken) throws DataAccessException {
+    if (authToken == null) {
+      throw new DataAccessException("Error: username cannot be null");
+    }
     try (var conn = DatabaseManager.getConnection()) {
       try (var preparedStatement = conn.prepareStatement("DELETE FROM auth WHERE authToken = ?")) {
         preparedStatement.setString(1, authToken);
         preparedStatement.executeUpdate();
       }
-    } catch (SQLException e) {
+    } catch (Exception e) {
       throw new DataAccessException("Error deleting auth: " + e.getMessage());
     }
   }
@@ -65,7 +74,7 @@ public class SQLAuthDAO implements AuthDAO {
       try (var preparedStatement = conn.prepareStatement("DELETE FROM auth")) {
         preparedStatement.executeUpdate();
       }
-    } catch (SQLException e) {
+    } catch (Exception e) {
       throw new DataAccessException("Error clearing table: " + e.getMessage());
     }
   }
@@ -83,15 +92,6 @@ public class SQLAuthDAO implements AuthDAO {
 
 
   private void configureDatabase() throws DataAccessException {
-    DatabaseManager.createDatabase();
-    try (var conn=DatabaseManager.getConnection()) {
-      for (var statement : createStatements) {
-        try (var preparedStatement=conn.prepareStatement(statement)) {
-          preparedStatement.executeUpdate();
-        }
-      }
-    } catch (SQLException ex) {
-      throw new DataAccessException("Error: " + ex.getMessage());
-    }
+    SQLGameDAO.createDatabaseIfNone(createStatements);
   }
 }

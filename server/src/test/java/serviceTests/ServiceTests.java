@@ -7,6 +7,7 @@ import dataAccess.GameDAO;
 import model.AuthData;
 import model.GameData;
 import org.junit.jupiter.api.*;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import service.Service;
 
 import java.util.HashSet;
@@ -19,6 +20,10 @@ public class ServiceTests {
   private String existingEmail = "myEmail@gmail.com";
 
   public ServiceTests() throws DataAccessException {
+  }
+  @AfterEach
+  public void clear() throws DataAccessException {
+    service.clear();
   }
 
   @Test
@@ -39,7 +44,6 @@ public class ServiceTests {
   @DisplayName("Register Fail")
   public void badRegister() throws DataAccessException {
     existingUsername = null;
-    service.register(existingUsername, existingPassword, existingEmail);
     Assertions.assertThrows(DataAccessException.class, () -> {
       service.register(existingUsername, existingPassword, existingEmail);
     });
@@ -154,7 +158,7 @@ public class ServiceTests {
 
     // join to watch
     Assertions.assertDoesNotThrow(() -> {
-      service.joinGame("empty", 1, watchUserLogin.authToken());
+      service.joinGame(null, 1, watchUserLogin.authToken());
     });
 
   }

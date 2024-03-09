@@ -23,19 +23,17 @@ public class SQLGameDAO implements GameDAO{
   }
 
   public Integer addGame(String gameName) throws DataAccessException {
-    int test = 0;
     try (var conn = DatabaseManager.getConnection()) {
       try (var preparedStatement = conn.prepareStatement("INSERT INTO games (gameID, whiteUsername, blackUsername, gameName, game) VALUES (?, ?, ?, ?, ?)")) {
         preparedStatement.setInt(1, id);
-        preparedStatement.setString(2, "empty"); // whiteUsername initialized later
-        preparedStatement.setString(3, "empty"); // blackUsername initialized later
+        preparedStatement.setNull(2, Types.VARCHAR); // whiteUsername initialized later
+        preparedStatement.setNull(3, Types.VARCHAR); // blackUsername initialized later
         preparedStatement.setString(4, gameName);
 
         // Serialize ChessGame object to JSON string
         String game = new Gson().toJson(new ChessGame());
         preparedStatement.setString(5, game);
-
-        test = preparedStatement.executeUpdate();
+        preparedStatement.executeUpdate();
       }
     } catch (SQLException e) {
       throw new DataAccessException("Error creating game: " + e.getMessage());
@@ -86,10 +84,12 @@ public class SQLGameDAO implements GameDAO{
                     resultSet.getString("gameName"),
                     game
             );
+          } else {
+            return null;
           }
         }
       }
-    } catch (SQLException e) {
+    } catch (Exception e) {
       throw new DataAccessException("Error getting game: " + e.getMessage());
     }
     return gameData;
@@ -127,23 +127,33 @@ public class SQLGameDAO implements GameDAO{
 
   private final String[] createStatements = {
           """
-            CREATE TABLE IF NOT EXISTS  games (
-              `gameID` int NOT NULL AUTO_INCREMENT,
-              `whiteUsername` varchar(256) NOT NULL,
-              `blackUsername` varchar(256) NOT NULL,
-              `gameName` varchar(256) NOT NULL,
-              game TEXT(65535) NOT NULL,
-              PRIMARY KEY (`gameID`),
-              INDEX(whiteUsername),
-              INDEX(blackUsername),
-              INDEX(gameName),
-              INDEX(game)
-            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
-            """
+    CREATE TABLE IF NOT EXISTS games (
+        gameID int NOT NULL,
+        whiteUsername varchar(256),
+        blackUsername varchar(256),
+        gameName varchar(256) NOT NULL,
+        game TEXT(65535) NOT NULL,
+        PRIMARY KEY (gameID),
+        INDEX(whiteUsername),
+        INDEX(blackUsername),
+        INDEX(gameName),
+        INDEX(game)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+    """,
+          """
+    ALTER TABLE games MODIFY whiteUsername VARCHAR(256) DEFAULT NULL;
+    """,
+          """
+    ALTER TABLE games MODIFY blackUsername VARCHAR(256) DEFAULT NULL;
+    """
   };
 
 
   private void configureDatabase() throws DataAccessException {
+    createDatabaseIfNone(createStatements);
+  }
+
+  static void createDatabaseIfNone(String[] createStatements) throws DataAccessException {
     DatabaseManager.createDatabase();
     try (var conn=DatabaseManager.getConnection()) {
       for (var statement : createStatements) {

@@ -46,7 +46,7 @@ public class SQLUserDAO implements UserDAO {
     if (passwordMatch) {
       return getUser(userName);
     } else {
-      throw new DataAccessException("Error: passwords do not match.");
+      throw new DataAccessException("Error: unauthorized");
     }
   }
 

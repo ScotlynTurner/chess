@@ -34,13 +34,13 @@ public class AuthDAOTests {
 
   @Test
   @DisplayName("Create Auth Success")
-  void goodCreateAuth() throws DataAccessException {
+  void goodCreateAuth() {
     Assertions.assertDoesNotThrow(() -> authDAO.createAuth(existingUsername));
   }
 
   @Test
   @DisplayName("Create Auth Fail")
-  void badCreateAuth() throws DataAccessException {
+  void badCreateAuth() {
     Assertions.assertThrows(DataAccessException.class, () -> {
       authDAO.createAuth(null);
     });
@@ -64,7 +64,7 @@ public class AuthDAOTests {
 
   @Test
   @DisplayName("Clear Auth")
-  void clearAuth() throws DataAccessException {
+  void clearAuth() {
     Assertions.assertDoesNotThrow(() -> authDAO.clear());
   }
 

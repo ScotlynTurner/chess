@@ -23,6 +23,9 @@ public class SQLGameDAO implements GameDAO{
   }
 
   public Integer addGame(String gameName) throws DataAccessException {
+    if (gameName == null) {
+      throw new DataAccessException("Error: gameName cannot be null");
+    }
     try (var conn = DatabaseManager.getConnection()) {
       try (var preparedStatement = conn.prepareStatement("INSERT INTO games (gameID, whiteUsername, blackUsername, gameName, game) VALUES (?, ?, ?, ?, ?)")) {
         preparedStatement.setInt(1, id);
@@ -69,6 +72,9 @@ public class SQLGameDAO implements GameDAO{
   }
 
   public GameData getGame(int id) throws DataAccessException {
+    if (id >= this.id || id < 0) {
+      throw new DataAccessException("Error: Invalid ID.");
+    }
     GameData gameData = null;
     try (var conn = DatabaseManager.getConnection()) {
       try (var preparedStatement = conn.prepareStatement("SELECT * FROM games WHERE gameID = ?")) {
@@ -106,6 +112,9 @@ public class SQLGameDAO implements GameDAO{
   }
 
   public void updateGameData(GameData game, String clientColorChange, String username) throws DataAccessException {
+    if (game == null) {
+      throw new DataAccessException("Error: Game cannot be null.");
+    }
     try (var conn = DatabaseManager.getConnection()) {
       if (clientColorChange.equals("WHITE")) {
         try (var preparedStatement=conn.prepareStatement("UPDATE games SET whiteUsername = ? WHERE gameID = ?")) {

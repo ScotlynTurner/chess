@@ -7,8 +7,12 @@ import java.util.UUID;
 
 public class SQLAuthDAO implements AuthDAO {
 
-  public SQLAuthDAO() throws DataAccessException {
-    configureDatabase();
+  public SQLAuthDAO() {
+    try {
+      configureDatabase();
+    } catch (DataAccessException e) {
+      throw new RuntimeException(e);
+    }
   }
 
   public String getAuth(String authToken) throws DataAccessException {

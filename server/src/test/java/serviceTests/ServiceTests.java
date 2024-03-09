@@ -18,6 +18,9 @@ public class ServiceTests {
   private String existingPassword = "existingPass";
   private String existingEmail = "myEmail@gmail.com";
 
+  public ServiceTests() throws DataAccessException {
+  }
+
   @Test
   @DisplayName("Clear")
   public void goodClear() throws DataAccessException {

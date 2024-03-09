@@ -8,9 +8,9 @@ import model.GameData;
 import java.util.HashSet;
 
 public class Service {
-  AuthDAO authDAO = new MemoryAuthDAO();
-  UserDAO userDAO = new MemoryUserDAO();
-  GameDAO gameDAO = new MemoryGameDAO();
+  SQLAuthDAO authDAO = new SQLAuthDAO();
+  SQLUserDAO userDAO = new SQLUserDAO();
+  SQLGameDAO gameDAO = new SQLGameDAO();
 
   public Service() {
   }
@@ -52,12 +52,12 @@ public class Service {
       return;
     }
     if (clientColor.equals("BLACK")) {
-      if (gameData.blackUsername() != null) {
+      if (gameData.blackUsername() != "empty" || gameData.blackUsername() == null) {
         throw new DataAccessException("Error: already taken");
       }
     } else if (clientColor.equals("WHITE")) {
-      if (gameData.whiteUsername() != null) {
-        throw new DataAccessException("Error: already taken");
+      if (gameData.whiteUsername() != "empty" || gameData.whiteUsername() == null) {
+        //throw new DataAccessException("Error: already taken");
       }
     }
 

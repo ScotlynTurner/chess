@@ -7,8 +7,12 @@ import java.sql.SQLException;
 
 public class SQLUserDAO implements UserDAO {
 
-  public SQLUserDAO() throws DataAccessException {
-    configureDatabase();
+  public SQLUserDAO() {
+    try {
+      configureDatabase();
+    } catch (DataAccessException e) {
+      throw new RuntimeException(e);
+    }
   }
 
   public UserData getUser(String username) throws DataAccessException {
@@ -18,6 +22,9 @@ public class SQLUserDAO implements UserDAO {
         preparedStatement.setString(1, username);
         try (var resultSet = preparedStatement.executeQuery()) {
           if (resultSet.next()) {
+            if (resultSet.getString("username") == null) {
+              return null;
+            }
             userData = new UserData(
                     resultSet.getString("username"),
                     resultSet.getString("password"),

@@ -16,6 +16,7 @@ public class SQLGameDAO implements GameDAO{
 
   public SQLGameDAO() {
     try {
+      //DatabaseInitialization.initializeDatabase();
       configureDatabase();
     } catch (DataAccessException e) {
       throw new RuntimeException(e);
@@ -145,8 +146,7 @@ public class SQLGameDAO implements GameDAO{
         PRIMARY KEY (gameID),
         INDEX(whiteUsername),
         INDEX(blackUsername),
-        INDEX(gameName),
-        INDEX(game)
+        INDEX(gameName)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
     """,
           """

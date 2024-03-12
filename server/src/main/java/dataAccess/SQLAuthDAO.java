@@ -1,14 +1,13 @@
 package dataAccess;
 
 import model.AuthData;
-
-import java.sql.SQLException;
 import java.util.UUID;
 
 public class SQLAuthDAO implements AuthDAO {
 
   public SQLAuthDAO() {
     try {
+      //DatabaseInitialization.initializeDatabase();
       configureDatabase();
     } catch (DataAccessException e) {
       throw new RuntimeException(e);
@@ -32,7 +31,11 @@ public class SQLAuthDAO implements AuthDAO {
           }
         }
       }
-      return authData.username();
+      if (authData != null) {
+        return authData.username();
+      } else {
+        throw new DataAccessException("Error: unauthorized");
+      }
     } catch (Exception e) {
       throw new DataAccessException("Error: unauthorized");
     }
@@ -47,7 +50,11 @@ public class SQLAuthDAO implements AuthDAO {
       try (var preparedStatement = conn.prepareStatement("INSERT INTO auth (authToken, username) VALUES (?, ?)")) {
         preparedStatement.setString(1, authToken);
         preparedStatement.setString(2, username);
-        preparedStatement.executeUpdate();
+        try {
+          preparedStatement.executeUpdate();
+        } catch (Exception e) {
+          throw new DataAccessException("Error creating auth: " + e.getMessage());
+        }
       }
     } catch (Exception e) {
       throw new DataAccessException("Error creating auth: " + e.getMessage());

@@ -5,7 +5,6 @@ import com.google.gson.Gson;
 import model.GameData;
 
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.Types;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -16,7 +15,6 @@ public class SQLGameDAO implements GameDAO{
 
   public SQLGameDAO() {
     try {
-      //DatabaseInitialization.initializeDatabase();
       configureDatabase();
     } catch (DataAccessException e) {
       throw new RuntimeException(e);

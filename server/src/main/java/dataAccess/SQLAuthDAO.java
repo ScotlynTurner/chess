@@ -7,7 +7,6 @@ public class SQLAuthDAO implements AuthDAO {
 
   public SQLAuthDAO() {
     try {
-      //DatabaseInitialization.initializeDatabase();
       configureDatabase();
     } catch (DataAccessException e) {
       throw new RuntimeException(e);

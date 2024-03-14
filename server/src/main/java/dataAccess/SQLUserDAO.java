@@ -9,7 +9,6 @@ public class SQLUserDAO implements UserDAO {
 
   public SQLUserDAO() {
     try {
-      //DatabaseInitialization.initializeDatabase();
       configureDatabase();
     } catch (DataAccessException e) {
       throw new RuntimeException(e);

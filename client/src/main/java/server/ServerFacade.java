@@ -1,10 +1,9 @@
-package chess.server;
+package server;
 
-import chess.ChessGame;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import dataAccess.GameDAO;
-import org.eclipse.jetty.http.MetaData;
+import model.AuthData;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,56 +22,84 @@ public class ServerFacade {
     serverUrl = url;
   }
 
-  public Object register(String username, String password, String email) throws ResponseException {
-    var path = "/user";
-    var requestBody = Map.of(
-            "username", username,
-            "password", password,
-            "email", email
-    );
+  public AuthData register(String username, String password, String email) throws ResponseException {
+    try {
+      var path="/user";
+      var requestBody=Map.of(
+              "username", username,
+              "password", password,
+              "email", email
+      );
 
-    return this.makeRequest("POST", path, requestBody, JsonObject.class);
+      return this.makeRequest("POST", path, requestBody, AuthData.class);
+    } catch (Exception e) {
+      throw new ResponseException(500, e.getMessage());
+    }
   }
 
   public Object login(String username, String password) throws ResponseException {
-    var path = "/session";
-    var requestBody = Map.of(
-            "username", username,
-            "password", password
-    );
-    return this.makeRequest("POST", path, requestBody, JsonObject.class);
+    try {
+      var path = "/session";
+      var requestBody = Map.of(
+              "username", username,
+              "password", password
+      );
+      return this.makeRequest("POST", path, requestBody, JsonObject.class);
+    } catch (Exception e) {
+      throw new ResponseException(500, e.getMessage());
+    }
   }
 
   public void logout() throws ResponseException {
-    var path = "/session";
-    this.makeRequest("DELETE", path, null, null);
+    try {
+      var path = "/session";
+      this.makeRequest("DELETE", path, null, null);
+    } catch (Exception e) {
+      throw new ResponseException(500, e.getMessage());
+    }
   }
 
   public Object addGame(String gameName) throws ResponseException {
-    var path = "/game";
-    return this.makeRequest("POST", path, gameName, JsonObject.class);
+    try {
+      var path = "/game";
+      return this.makeRequest("POST", path, gameName, JsonObject.class);
+    } catch (Exception e) {
+      throw new ResponseException(500, e.getMessage());
+    }
   }
 
   public void clear() throws ResponseException {
-    var path = "/db";
-    this.makeRequest("DELETE", path, null, null);
+    try {
+      var path = "/db";
+      this.makeRequest("DELETE", path, null, null);
+    } catch (Exception e) {
+      throw new ResponseException(500, e.getMessage());
+    }
   }
 
-  public Object listGames() throws ResponseException {
-    var path = "/game";
-    record listGamesResponse(GameDAO[] games) {
+  public GameDAO[] listGames() throws ResponseException {
+    try {
+      var path = "/game";
+      record listGamesResponse(GameDAO[] games) {
+      }
+      var response = this.makeRequest("GET", path, null, listGamesResponse.class);
+      return response.games();
+    } catch (Exception e) {
+      throw new ResponseException(500, e.getMessage());
     }
-    var response = this.makeRequest("GET", path, null, listGamesResponse.class);
-    return response.games();
   }
 
   public void joinGame(String playerColor, int gameID) throws ResponseException {
-    var path = "/game";
-    var requestBody = Map.of(
-            "playerColor", playerColor,
-            "gameID", gameID
-    );
-    this.makeRequest("PUT", path, requestBody, null);
+    try {
+      var path = "/game";
+      var requestBody = Map.of(
+              "playerColor", playerColor,
+              "gameID", gameID
+      );
+      this.makeRequest("PUT", path, requestBody, null);
+    } catch (Exception e) {
+      throw new ResponseException(500, e.getMessage());
+    }
   }
 
   private <T> T makeRequest(String method, String path, Object request, Class<T> responseClass) throws ResponseException {

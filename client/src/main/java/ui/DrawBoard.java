@@ -16,27 +16,27 @@ public class DrawBoard {
   }
 
   private String drawNormal() {
-    drawBoard += SET_BG_COLOR_LIGHT_GREY + SET_TEXT_COLOR_WHITE + "    a  b  c  d  e  f  g  h    " + SET_BG_COLOR_WHITE + "\n";
+    drawBoard += SET_BG_CUSTOM_MINT + SET_TEXT_CUSTOM_WHITE + "    a  b  c  d  e  f  g  h    " + SET_BG_CUSTOM_WHITE + "\n";
     for (int i = 8; i > 0; i--) {
-      drawBoard += SET_BG_COLOR_LIGHT_GREY + " " + i + " ";
+      drawBoard += SET_BG_CUSTOM_MINT + " " + i + " ";
       checkerBoard(i);
-      drawBoard += SET_TEXT_COLOR_WHITE + SET_BG_COLOR_LIGHT_GREY + " " + i + " ";
-      drawBoard += SET_BG_COLOR_WHITE + "\n";
+      drawBoard += SET_TEXT_CUSTOM_WHITE + SET_BG_CUSTOM_MINT + " " + i + " ";
+      drawBoard += SET_BG_CUSTOM_WHITE + "\n";
     }
-    drawBoard += SET_BG_COLOR_LIGHT_GREY + SET_TEXT_COLOR_WHITE + "    a  b  c  d  e  f  g  h    " + SET_BG_COLOR_WHITE + "\n";
+    drawBoard += SET_BG_CUSTOM_MINT + SET_TEXT_CUSTOM_WHITE + "    a  b  c  d  e  f  g  h    " + SET_BG_CUSTOM_WHITE + "\n";
 
     return drawBoard;
   }
 
   private String drawUpsideDown() {
-    drawBoard += SET_BG_COLOR_LIGHT_GREY + SET_TEXT_COLOR_WHITE + "    h  g  f  e  d  c  b  a    " + SET_BG_COLOR_WHITE + "\n";
+    drawBoard += SET_BG_CUSTOM_MINT + SET_TEXT_CUSTOM_WHITE + "    h  g  f  e  d  c  b  a    " + SET_BG_CUSTOM_WHITE + "\n";
     for (int i = 1; i < 9; i++) {
-      drawBoard += SET_BG_COLOR_LIGHT_GREY + " " + i + " ";
+      drawBoard += SET_BG_CUSTOM_MINT + " " + i + " ";
       checkerBoard(i);
-      drawBoard += SET_TEXT_COLOR_WHITE + SET_BG_COLOR_LIGHT_GREY + " " + i + " ";
-      drawBoard += SET_BG_COLOR_WHITE + "\n";
+      drawBoard += SET_TEXT_CUSTOM_WHITE + SET_BG_CUSTOM_MINT + " " + i + " ";
+      drawBoard += SET_BG_CUSTOM_WHITE + "\n";
     }
-    drawBoard += SET_BG_COLOR_LIGHT_GREY + SET_TEXT_COLOR_WHITE + "    h  g  f  e  d  c  b  a    " + SET_BG_COLOR_WHITE + "\n";
+    drawBoard += SET_BG_CUSTOM_MINT + SET_TEXT_CUSTOM_WHITE + "    h  g  f  e  d  c  b  a    " + SET_BG_CUSTOM_WHITE + "\n";
 
     return drawBoard;
   }
@@ -61,9 +61,9 @@ public class DrawBoard {
     ChessPosition position;
     for (int j = 1; j < 9; j++) {
       if ((isEven(row) && isEven(j)) || (!isEven(row) && !isEven(j))) {
-        drawBoard += SET_BG_COLOR_MAGENTA + " ";
+        drawBoard += SET_BG_CUSTOM_MAROON + " ";
       } else {
-        drawBoard += SET_BG_COLOR_WHITE + " ";
+        drawBoard += SET_BG_CUSTOM_PINK + " ";
       }
       position = new ChessPosition(row, j);
       if (board.getPiece(position) != null) {

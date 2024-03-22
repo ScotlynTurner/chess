@@ -62,4 +62,16 @@ public class EscapeSequences {
   public static final String EMPTY = " \u2003 ";
 
   public static String moveCursorToLocation(int x, int y) { return UNICODE_ESCAPE + "[" + y + ";" + x + "H"; }
+
+  public static final String SET_BG_BRIGHT_WHITE = "\u001B[48;2;255;255;255m";
+
+  public static final String SET_BG_CUSTOM_MAROON = "\u001B[48;2;155;68;68m";
+  public static final String SET_BG_CUSTOM_PINK = "\u001B[48;2;198;132;132m";
+  public static final String SET_BG_CUSTOM_MINT = "\u001B[48;2;163;201;170m";
+  public static final String SET_BG_CUSTOM_WHITE = "\u001B[48;2;238;238;238m";
+
+  public static final String SET_TEXT_CUSTOM_MAROON = "\u001B[38;2;155;68;68m";
+  public static final String SET_TEXT_CUSTOM_PINK = "\u001B[38;2;198;132;132m";
+  public static final String SET_TEXT_CUSTOM_MINT = "\u001B[38;2;163;201;170m";
+  public static final String SET_TEXT_CUSTOM_WHITE = "\u001B[38;2;238;238;238m";
 }

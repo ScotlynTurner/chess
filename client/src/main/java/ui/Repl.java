@@ -18,7 +18,7 @@ public class Repl {
   }
 
   public void run() {
-    System.out.println("\uD83D\uDC36 Welcome to the Scotlyn's chess. Type Help to get started.");
+    System.out.println(SET_BG_CUSTOM_WHITE + "\uD83D\uDC36 Welcome to the Scotlyn's chess. Type Help to get started.");
     System.out.println("Running on port " + serverURL);
     System.out.print(client.help());
 
@@ -30,7 +30,7 @@ public class Repl {
 
       try {
         result = client.eval(line);
-        System.out.print(SET_TEXT_COLOR_BLUE + result);
+        System.out.print(SET_TEXT_CUSTOM_MINT + result);
       } catch (Throwable e) {
         var msg = e.toString();
         System.out.print(msg);
@@ -41,6 +41,6 @@ public class Repl {
   }
 
   private void printPrompt() {
-    System.out.print("\n" + SET_TEXT_COLOR_BLACK + ">>> " + SET_TEXT_COLOR_GREEN);
+    System.out.print(SET_BG_BRIGHT_WHITE + "\n" + SET_TEXT_CUSTOM_MAROON + ">>> " + SET_TEXT_CUSTOM_PINK);
   }
 }

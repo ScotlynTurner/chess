@@ -81,13 +81,13 @@ public class ChessClient {
     assertSignedIn();
     if (params.length >= 1) {
       var id = Integer.parseInt(params[0]);
-      if (params.length >= 2) {
+      if (params.length >= 2 && !params[1].equals("empty")) {
         var playerColor = params[1];
         server.joinGame(playerColor, id);
         drawBoards(playerColor, getBoard(id));
         return String.format("%s has joined the game as %s", username, playerColor);
       }
-      server.joinGame(null, id);
+      server.joinGame("empty", id);
       drawBoards(null, getBoard(id));
       return String.format("%s has joined the game as an observer", username);
     }
@@ -98,7 +98,7 @@ public class ChessClient {
     assertSignedIn();
     if (params.length == 1) {
       var id = Integer.parseInt(params[0]);
-      server.joinGame(null, id);
+      server.joinGame("empty", id);
       drawBoards(null, getBoard(id));
       return String.format("%s has joined the game as an observer", username);
     }
@@ -152,7 +152,7 @@ public class ChessClient {
   private void drawBoards(String playerColor, ChessBoard board) {
     DrawBoard boards = new DrawBoard(board);
     String boardLayout = "";
-    if (playerColor == "WHITE" || playerColor == null) {
+    if (playerColor == "WHITE" || playerColor == "empty") {
       boardLayout = boards.getWhiteDrawings();
     } else {
       boardLayout = boards.getBlackDrawings();

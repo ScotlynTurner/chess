@@ -42,11 +42,11 @@ public class DrawBoard {
   }
 
   public String getWhiteDrawings() {
-    return drawNormal();
+    return drawUpsideDown() + "\n" + drawNormal();
   }
 
   public String getBlackDrawings() {
-    return drawUpsideDown();
+    return drawNormal() + "\n" + drawUpsideDown();
   }
 
   private boolean isEven(int x) {

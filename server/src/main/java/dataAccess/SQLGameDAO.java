@@ -71,7 +71,7 @@ public class SQLGameDAO implements GameDAO{
   }
 
   public GameData getGame(int id) throws DataAccessException {
-    if (id >= this.id || id < 0) {
+    if (id < 0) {
       throw new DataAccessException("Error: Invalid ID.");
     }
     GameData gameData = null;

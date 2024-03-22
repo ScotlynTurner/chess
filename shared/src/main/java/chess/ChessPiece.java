@@ -2,7 +2,6 @@ package chess;
 
 import chess.pieces.*;
 
-import javax.swing.text.Position;
 import java.util.HashSet;
 import java.util.Collection;
 import java.util.Objects;
@@ -117,32 +116,34 @@ public class ChessPiece {
     public String toString() {
         if (this.pieceColor == ChessGame.TeamColor.WHITE) {
             if (this.type == PieceType.KING) {
-                return "K";
+                return "♔";
             } else if (this.type == PieceType.QUEEN) {
-                return "Q";
+                return "♕";
             } else if (this.type == PieceType.BISHOP) {
-                return "B";
+                return "♗";
             } else if (this.type == PieceType.KNIGHT) {
-                return "N";
+                return "♘";
             } else if (this.type == PieceType.ROOK) {
-                return "R";
+                return "♖";
             } else if (this.type == PieceType.PAWN) {
-                return "P";
+                return "♙";
+            }
+        } else if (this.pieceColor == ChessGame.TeamColor.WHITE){
+            if (this.type == PieceType.KING) {
+                return "♚";
+            } else if (this.type == PieceType.QUEEN) {
+                return "♛";
+            } else if (this.type == PieceType.BISHOP) {
+                return "♝";
+            } else if (this.type == PieceType.KNIGHT) {
+                return "♞";
+            } else if (this.type == PieceType.ROOK) {
+                return "♜";
+            } else if (this.type == PieceType.PAWN) {
+                return "♟";
             }
         } else {
-            if (this.type == PieceType.KING) {
-                return "k";
-            } else if (this.type == PieceType.QUEEN) {
-                return "q";
-            } else if (this.type == PieceType.BISHOP) {
-                return "b";
-            } else if (this.type == PieceType.KNIGHT) {
-                return "n";
-            } else if (this.type == PieceType.ROOK) {
-                return "r";
-            } else if (this.type == PieceType.PAWN) {
-                return "p";
-            }
+            return "\u2003";
         }
       return " ";
     }

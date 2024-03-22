@@ -73,7 +73,7 @@ public class ChessClient {
 
   public String joinGame(String... params) throws ResponseException, DataAccessException {
     assertSignedIn();
-    if (params.length == 1) {
+    if (params.length >= 1) {
       var id = Integer.parseInt(params[0]);
       if (params.length >= 2) {
         var playerColor = params[1];

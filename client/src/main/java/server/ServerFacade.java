@@ -1,5 +1,6 @@
 package server;
 
+import ResponseTypes.LoginResponse;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import dataAccess.GameDAO;
@@ -37,14 +38,14 @@ public class ServerFacade {
     }
   }
 
-  public Object login(String username, String password) throws ResponseException {
+  public LoginResponse login(String username, String password) throws ResponseException {
     try {
       var path = "/session";
       var requestBody = Map.of(
               "username", username,
               "password", password
       );
-      return this.makeRequest("POST", path, requestBody, JsonObject.class);
+      return this.makeRequest("POST", path, requestBody, LoginResponse.class);
     } catch (Exception e) {
       throw new ResponseException(500, e.getMessage());
     }

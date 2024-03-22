@@ -54,11 +54,21 @@ public class ServerFacadeTests {
 
 
   @Test
-  @DisplayName("Login")
-  public void login() throws ResponseException {
-    var authData = facade.register(username, password, email);
+  @DisplayName("Login Success")
+  public void goodLogin() throws ResponseException {
+    facade.register(username, password, email);
+    var loginResponse = facade.login(username, password);
+    assertEquals(username, loginResponse.username());
+    assertTrue(loginResponse.authToken().length() > 10);
+  }
 
-    assertTrue(authData.authToken().length() > 10);
+  @Test
+  @DisplayName("Login Fail")
+  public void badLogin() throws ResponseException {
+    facade.register(username, password, email);
+    assertThrows(ResponseException.class, () -> {
+      facade.login(null, null);
+    });
   }
 
 }

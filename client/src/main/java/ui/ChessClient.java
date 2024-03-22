@@ -31,11 +31,17 @@ public class ChessClient {
         case "observe" -> observe(params);
         case "logout" -> logout();
         case "quit" -> "quit";
+        case "clear" -> clear();
         default -> help();
       };
     } catch (Exception ex) {
       return ex.getMessage();
     }
+  }
+
+  private String clear() throws ResponseException {
+    server.clear();
+    return "Cleared database";
   }
 
   public String login(String... params) throws ResponseException {

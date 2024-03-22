@@ -3,19 +3,18 @@ package dataAccessTests;
 import chess.ChessGame;
 import dataAccess.*;
 import model.GameData;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.util.HashSet;
 
 public class GameDAOTests {
   GameDAO gameDAO = new SQLGameDAO();
+  ChessGame game = new ChessGame();
 
-  @AfterEach
+  @BeforeEach
   void setUp() throws DataAccessException {
     gameDAO.clear();
+    game.getBoard().resetBoard();
   }
 
   @Test
@@ -39,9 +38,9 @@ public class GameDAOTests {
     gameDAO.addGame("myGame");
     gameDAO.addGame("yay chess");
     gameDAO.addGame("queens only");
-    expectedList.add(new GameData(1, null, null, "myGame", new ChessGame()));
-    expectedList.add(new GameData(2, null, null, "yay chess", new ChessGame()));
-    expectedList.add(new GameData(3, null, null, "queens only", new ChessGame()));
+    expectedList.add(new GameData(1, null, null, "myGame", game));
+    expectedList.add(new GameData(2, null, null, "yay chess", game));
+    expectedList.add(new GameData(3, null, null, "queens only", game));
     Assertions.assertEquals(expectedList, gameDAO.listGames());
   }
 
@@ -52,9 +51,9 @@ public class GameDAOTests {
     gameDAO.addGame("myGame");
     gameDAO.addGame("yay chess");
     gameDAO.addGame("queens only");
-    expectedList.add(new GameData(1, null, null, "myGame", new ChessGame()));
-    expectedList.add(new GameData(2, null, null, "yay chess", new ChessGame()));
-    expectedList.add(new GameData(3, "hey", null, "queens only", new ChessGame()));
+    expectedList.add(new GameData(1, null, null, "myGame", game));
+    expectedList.add(new GameData(2, null, null, "yay chess", game));
+    expectedList.add(new GameData(3, "hey", null, "queens only", game));
     Assertions.assertNotEquals(expectedList, gameDAO.listGames());
   }
 
@@ -62,7 +61,7 @@ public class GameDAOTests {
   @DisplayName("Get Game Success")
   void goodGetGame() throws DataAccessException {
     gameDAO.addGame("myGame");
-    GameData testGame = new GameData(1, null, null, "myGame", new ChessGame());
+    GameData testGame = new GameData(1, null, null, "myGame", game);
     Assertions.assertEquals(testGame, gameDAO.getGame(1));
   }
 
@@ -71,7 +70,7 @@ public class GameDAOTests {
   void badGetGame() throws DataAccessException {
     gameDAO.addGame("myGame");
     Assertions.assertThrows(DataAccessException.class, () ->{
-      gameDAO.getGame(2);
+      gameDAO.getGame(-2);
     });
   }
 
@@ -82,7 +81,7 @@ public class GameDAOTests {
     GameData game = gameDAO.getGame(1);
     gameDAO.updateGameData(game, "WHITE", "myUsername");
 
-    GameData testGame = new GameData(1, "myUsername", null, "myGame", new ChessGame());
+    GameData testGame = new GameData(1, "myUsername", null, "myGame", game.game());
 
     Assertions.assertEquals(testGame, gameDAO.getGame(1));
   }

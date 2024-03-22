@@ -18,12 +18,14 @@ public class ServiceTests {
   private String existingUsername = "existingUser";
   private String existingPassword = "existingPass";
   private String existingEmail = "myEmail@gmail.com";
+  private ChessGame game = new ChessGame();
 
   public ServiceTests() throws DataAccessException {
   }
   @BeforeEach
   public void clear() throws DataAccessException {
     service.clear();
+    game.getBoard().resetBoard();
   }
 
   @Test
@@ -113,9 +115,9 @@ public class ServiceTests {
     service.addGame("myGame", login.authToken());
     service.addGame("yay chess", login.authToken());
     service.addGame("queens only", login.authToken());
-    expectedList.add(new GameData(1, null, null, "myGame", new ChessGame()));
-    expectedList.add(new GameData(2, null, null, "yay chess", new ChessGame()));
-    expectedList.add(new GameData(3, null, null, "queens only", new ChessGame()));
+    expectedList.add(new GameData(1, null, null, "myGame", game));
+    expectedList.add(new GameData(2, null, null, "yay chess", game));
+    expectedList.add(new GameData(3, null, null, "queens only", game));
     Assertions.assertEquals(expectedList, service.listGames(login.authToken()));
   }
 
@@ -128,9 +130,9 @@ public class ServiceTests {
     service.addGame("myGame", login.authToken());
     service.addGame("yay chess", login.authToken());
     service.addGame("queens only", login.authToken());
-    expectedList.add(new GameData(1, null, null, "myGame", new ChessGame()));
-    expectedList.add(new GameData(2, null, null, "yay chess", new ChessGame()));
-    expectedList.add(new GameData(3, null, null, "queens only", new ChessGame()));
+    expectedList.add(new GameData(1, null, null, "myGame", game));
+    expectedList.add(new GameData(2, null, null, "yay chess", game));
+    expectedList.add(new GameData(3, null, null, "queens only", game));
     Assertions.assertThrows(DataAccessException.class, () -> {
       service.listGames(null);
     });
@@ -153,7 +155,7 @@ public class ServiceTests {
     service.joinGame("WHITE", 1, existingUserLogin.authToken());
     service.joinGame("BLACK", 1, newUserLogin.authToken());
 
-    expectedList.add(new GameData(1, existingUsername, "newUser", "myGame", new ChessGame()));
+    expectedList.add(new GameData(1, existingUsername, "newUser", "myGame", game));
     Assertions.assertEquals(expectedList, service.listGames(existingUserLogin.authToken()));
 
     // join to watch

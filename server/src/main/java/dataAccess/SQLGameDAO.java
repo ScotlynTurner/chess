@@ -33,11 +33,14 @@ public class SQLGameDAO implements GameDAO{
         preparedStatement.setString(4, gameName);
 
         // Serialize ChessGame object to JSON string
-        String game = new Gson().toJson(new ChessGame());
+        ChessGame newGame = new ChessGame();
+        newGame.getBoard().resetBoard();
+        String game = new Gson().toJson(newGame);
         preparedStatement.setString(5, game);
         preparedStatement.executeUpdate();
       }
     } catch (SQLException e) {
+      String exception = e.getMessage();
       throw new DataAccessException("Error creating game: " + e.getMessage());
     }
     id++;

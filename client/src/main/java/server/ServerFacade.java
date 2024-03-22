@@ -2,9 +2,10 @@ package server;
 
 import ResponseTypes.LoginResponse;
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import dataAccess.GameDAO;
 import model.AuthData;
+import model.GameData;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,11 +14,13 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
+import java.util.HashSet;
 import java.util.Map;
 
 public class ServerFacade {
 
   private final String serverUrl;
+  private String authToken;
 
   public ServerFacade(String url) {
     serverUrl = url;
@@ -45,7 +48,9 @@ public class ServerFacade {
               "username", username,
               "password", password
       );
-      return this.makeRequest("POST", path, requestBody, LoginResponse.class);
+      LoginResponse loginResponse = this.makeRequest("POST", path, requestBody, LoginResponse.class);
+      authToken = loginResponse.authToken();
+      return loginResponse;
     } catch (Exception e) {
       throw new ResponseException(500, e.getMessage());
     }
@@ -54,16 +59,20 @@ public class ServerFacade {
   public void logout() throws ResponseException {
     try {
       var path = "/session";
-      this.makeRequest("DELETE", path, null, null);
+      this.makeRequest("DELETE", path, null, Void.class);
     } catch (Exception e) {
+      System.err.println("Logout failed with 500 response: " + e.getMessage());
       throw new ResponseException(500, e.getMessage());
     }
   }
 
-  public Object addGame(String gameName) throws ResponseException {
+  public int addGame(String gameName) throws ResponseException {
     try {
       var path = "/game";
-      return this.makeRequest("POST", path, gameName, JsonObject.class);
+      var requestBody = Map.of(
+              "gameName", gameName
+      );
+      return this.makeRequest("POST", path, requestBody, Integer.class);
     } catch (Exception e) {
       throw new ResponseException(500, e.getMessage());
     }
@@ -78,10 +87,10 @@ public class ServerFacade {
     }
   }
 
-  public GameDAO[] listGames() throws ResponseException {
+  public HashSet<GameData> listGames() throws ResponseException {
     try {
       var path = "/game";
-      record listGamesResponse(GameDAO[] games) {
+      record listGamesResponse(HashSet<GameData> games) {
       }
       var response = this.makeRequest("GET", path, null, listGamesResponse.class);
       return response.games();
@@ -110,10 +119,16 @@ public class ServerFacade {
       http.setRequestMethod(method);
       http.setDoOutput(true);
 
+      http.setRequestProperty("Authorization", authToken);
+
       writeBody(request, http);
       http.connect();
       throwIfNotSuccessful(http);
-      return readBody(http, responseClass);
+      if (responseClass == Void.class) {
+        return null;
+      } else {
+        return readBody(http, responseClass);
+      }
     } catch (Exception ex) {
       throw new ResponseException(500, ex.getMessage());
     }
@@ -139,11 +154,17 @@ public class ServerFacade {
 
   private static <T> T readBody(HttpURLConnection http, Class<T> responseClass) throws IOException {
     T response = null;
-    if (http.getContentLength() < 0) {
-      try (InputStream respBody = http.getInputStream()) {
+    try (InputStream respBody = http.getInputStream()) {
+      if (responseClass != null && respBody.available() > 0) {
         InputStreamReader reader = new InputStreamReader(respBody);
-        if (responseClass != null) {
+        if (responseClass != Integer.class) {
           response = new Gson().fromJson(reader, responseClass);
+        } else {
+          JsonObject object = new Gson().fromJson(reader, JsonObject.class);
+          JsonElement gameID = object.get("gameID");
+          if (gameID != null && !gameID.isJsonNull()) {
+            response = (T) Integer.valueOf(gameID.getAsJsonPrimitive().getAsInt());
+          }
         }
       }
     }
@@ -153,5 +174,9 @@ public class ServerFacade {
 
   private boolean isSuccessful(int status) {
     return status / 100 == 2;
+  }
+
+  public void invalidateAuthToken() {
+    authToken = null;
   }
 }

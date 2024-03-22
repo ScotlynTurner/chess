@@ -1,9 +1,13 @@
 package clientTests;
 
+import chess.ChessGame;
+import model.GameData;
 import org.junit.jupiter.api.*;
 import server.ResponseException;
 import server.Server;
 import server.ServerFacade;
+
+import java.util.HashSet;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -70,5 +74,78 @@ public class ServerFacadeTests {
       facade.login(null, null);
     });
   }
+
+  @Test
+  @DisplayName("Logout Success")
+  public void goodLogout() throws ResponseException {
+    facade.register(username, password, email);
+    facade.login(username, password);
+    assertDoesNotThrow(() -> facade.logout());
+  }
+
+  @Test
+  @DisplayName("Logout Fail")
+  public void badLogout() throws ResponseException {
+    facade.register(username, password, email);
+    // Logout without logging in
+    assertThrows(ResponseException.class, () -> {
+      facade.logout();
+    });
+  }
+
+  @Test
+  @DisplayName("Create Game Success")
+  public void goodCreate() throws ResponseException {
+    facade.register(username, password, email);
+    facade.login(username, password);
+    int gameID = facade.addGame("Test Game");
+    Assertions.assertEquals(1, gameID);
+  }
+
+  @Test
+  @DisplayName("Create Game Fail")
+  public void badCreate() throws ResponseException {
+    facade.register(username, password, email);
+    facade.login(username, password);
+    assertThrows(ResponseException.class, () -> {
+      facade.addGame(null);
+    });
+  }
+
+  @Test
+  @DisplayName("List Games Success")
+  public void goodList() throws ResponseException {
+    HashSet<GameData> expectedList = new HashSet<>();
+    facade.register(username, password, email);
+    facade.login(username, password);
+
+    int game1 = facade.addGame("Test Game");
+    int game2 = facade.addGame("Chessy chess time");
+    int game3 = facade.addGame("it's britney");
+    expectedList.add(new GameData(game1, null, null, "Test Game", new ChessGame()));
+    expectedList.add(new GameData(game2, null, null, "Chessy chess time", new ChessGame()));
+    expectedList.add(new GameData(game3, null, null, "it's britney", new ChessGame()));
+
+    Assertions.assertEquals(expectedList, facade.listGames());
+  }
+
+  @Test
+  @DisplayName("List Games Fail")
+  public void badList() throws ResponseException {
+    HashSet<GameData> expectedList = new HashSet<>();
+    facade.register(username, password, email);
+    facade.login(username, password);
+
+    facade.addGame("Test Game");
+    facade.addGame("Chessy chess time");
+    facade.addGame("it's britney");
+
+    facade.invalidateAuthToken();
+
+    assertThrows(ResponseException.class, () -> {
+      facade.listGames();
+    });
+  }
+
 
 }

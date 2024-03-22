@@ -1,10 +1,10 @@
 package ui;
 
+import model.GameData;
 import server.ResponseException;
 import server.ServerFacade;
 import com.google.gson.Gson;
 import dataAccess.DataAccessException;
-import dataAccess.GameDAO;
 
 import java.util.Arrays;
 
@@ -107,15 +107,15 @@ public class ChessClient {
     assertSignedIn();
     if (params.length >= 1) {
       var gameName = params[0];
-      server.addGame(gameName);
-      return String.format("%s created new game %s", username, gameName);
+      int gameID = server.addGame(gameName);
+      return String.format("%s created new game %s with id %d", username, gameName, gameID);
     }
     throw new ResponseException(400, "Expected: <NAME>");
   }
 
-  private GameDAO getGame(int id) throws ResponseException, DataAccessException {
+  private GameData getGame(int id) throws ResponseException, DataAccessException {
     for (var game : server.listGames()) {
-      if (game.getGame(id).gameID() == id) {
+      if (game.gameID() == id) {
         return game;
       }
     }

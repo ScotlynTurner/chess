@@ -29,16 +29,24 @@ public class DrawBoard {
   }
 
   private String drawUpsideDown() {
+    drawBoard += SET_BG_COLOR_LIGHT_GREY + SET_TEXT_COLOR_WHITE + "    h  g  f  e  d  c  b  a    " + SET_BG_COLOR_WHITE + "\n";
+    for (int i = 1; i < 9; i++) {
+      drawBoard += SET_BG_COLOR_LIGHT_GREY + " " + i + " ";
+      checkerBoard(i);
+      drawBoard += SET_TEXT_COLOR_WHITE + SET_BG_COLOR_LIGHT_GREY + " " + i + " ";
+      drawBoard += SET_BG_COLOR_WHITE + "\n";
+    }
+    drawBoard += SET_BG_COLOR_LIGHT_GREY + SET_TEXT_COLOR_WHITE + "    h  g  f  e  d  c  b  a    " + SET_BG_COLOR_WHITE + "\n";
 
-    return "";
+    return drawBoard;
   }
 
   public String getWhiteDrawings() {
-    return drawUpsideDown() + '\n' + drawNormal();
+    return drawNormal();
   }
 
   public String getBlackDrawings() {
-    return drawNormal() + '\n' + drawUpsideDown();
+    return drawUpsideDown();
   }
 
   private boolean isEven(int x) {

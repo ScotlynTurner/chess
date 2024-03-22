@@ -128,7 +128,7 @@ public class ChessPiece {
             } else if (this.type == PieceType.PAWN) {
                 return "♙";
             }
-        } else if (this.pieceColor == ChessGame.TeamColor.WHITE){
+        } else if (this.pieceColor == ChessGame.TeamColor.BLACK){
             if (this.type == PieceType.KING) {
                 return "♚";
             } else if (this.type == PieceType.QUEEN) {

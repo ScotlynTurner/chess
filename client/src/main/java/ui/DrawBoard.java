@@ -10,7 +10,6 @@ import static ui.EscapeSequences.*;
 public class DrawBoard {
   private ChessBoard board;
   private String drawBoard = "";
-  //private static final Font BOARD_FONT = new Font("Arial", Font.PLAIN, 24);
 
   public DrawBoard(ChessBoard board) {
     this.board = board;
@@ -21,17 +20,17 @@ public class DrawBoard {
     for (int i = 8; i > 0; i--) {
       drawBoard += SET_BG_COLOR_LIGHT_GREY + " " + i + " ";
       checkerBoard(i);
-      drawBoard += SET_BG_COLOR_LIGHT_GREY + " " + i + " ";
+      drawBoard += SET_TEXT_COLOR_WHITE + SET_BG_COLOR_LIGHT_GREY + " " + i + " ";
       drawBoard += SET_BG_COLOR_WHITE + "\n";
     }
-    drawBoard += SET_BG_COLOR_LIGHT_GREY + SET_TEXT_COLOR_WHITE + "    1  2  3  4  5  6  7  8    " + SET_BG_COLOR_WHITE + "\n";
+    drawBoard += SET_BG_COLOR_LIGHT_GREY + SET_TEXT_COLOR_WHITE + "    a  b  c  d  e  f  g  h    " + SET_BG_COLOR_WHITE + "\n";
 
     return drawBoard;
   }
 
   private String drawUpsideDown() {
 
-    return "v";
+    return "";
   }
 
   public String getWhiteDrawings() {
@@ -60,7 +59,7 @@ public class DrawBoard {
       }
       position = new ChessPosition(row, j);
       if (board.getPiece(position) != null) {
-        drawBoard += board.getPiece(position).toString();
+        drawBoard += SET_TEXT_COLOR_BLACK + board.getPiece(position).toString();
       } else {
         drawBoard += " ";
       }

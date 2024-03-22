@@ -14,7 +14,9 @@ public class DrawBoard {
     String drawBoard = "";
     ChessPosition position;
     for (int i = 7; i >= 0; i--) {
+      drawBoard += i + " ";
       for (int j = 0; j < 8; j++) {
+        drawBoard += j + " ";
         position = new ChessPosition(i,j);
         if (board.getPiece(position) == null) {
           drawBoard += "| ";

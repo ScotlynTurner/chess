@@ -1,6 +1,6 @@
 package ui;
 
-import model.GameData;
+import chess.ChessBoard;
 import server.ResponseException;
 import server.ServerFacade;
 import com.google.gson.Gson;
@@ -33,7 +33,7 @@ public class ChessClient {
         case "quit" -> "quit";
         default -> help();
       };
-    } catch (ResponseException ex) {
+    } catch (Exception ex) {
       return ex.getMessage();
     }
   }
@@ -71,26 +71,29 @@ public class ChessClient {
     return result.toString();
   }
 
-  public String joinGame(String... params) throws ResponseException {
+  public String joinGame(String... params) throws ResponseException, DataAccessException {
     assertSignedIn();
     if (params.length == 1) {
       var id = Integer.parseInt(params[0]);
       if (params.length >= 2) {
         var playerColor = params[1];
         server.joinGame(playerColor, id);
+        drawBoards(playerColor, getBoard(id));
         return String.format("%s has joined the game as %s", username, playerColor);
       }
       server.joinGame(null, id);
+      drawBoards(null, getBoard(id));
       return String.format("%s has joined the game as an observer", username);
     }
     throw new ResponseException(400, "Expected: <ID> [WHITE|BLACK|<empty>]");
   }
 
-  public String observe(String... params) throws ResponseException {
+  public String observe(String... params) throws ResponseException, DataAccessException {
     assertSignedIn();
     if (params.length == 1) {
       var id = Integer.parseInt(params[0]);
       server.joinGame(null, id);
+      drawBoards(null, getBoard(id));
       return String.format("%s has joined the game as an observer", username);
     }
     throw new ResponseException(400, "Expected: <ID>");
@@ -113,10 +116,10 @@ public class ChessClient {
     throw new ResponseException(400, "Expected: <NAME>");
   }
 
-  private GameData getGame(int id) throws ResponseException, DataAccessException {
+  private ChessBoard getBoard(int id) throws ResponseException, DataAccessException {
     for (var game : server.listGames()) {
       if (game.gameID() == id) {
-        return game;
+        return game.game().getBoard();
       }
     }
     return null;
@@ -138,6 +141,17 @@ public class ChessClient {
                 - logout
                 - quit
                 """;
+  }
+
+  private void drawBoards(String playerColor, ChessBoard board) {
+    DrawBoard boards = new DrawBoard(board);
+    String boardLayout = "";
+    if (playerColor == "WHITE" || playerColor == null) {
+      boardLayout = boards.getWhiteDrawings();
+    } else {
+      boardLayout = boards.getBlackDrawings();
+    }
+    System.out.println(boardLayout);
   }
 
   private void assertSignedIn() throws ResponseException {

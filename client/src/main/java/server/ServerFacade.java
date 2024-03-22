@@ -119,7 +119,9 @@ public class ServerFacade {
       http.setRequestMethod(method);
       http.setDoOutput(true);
 
-      http.setRequestProperty("Authorization", authToken);
+      if (authToken != null) {
+        http.setRequestProperty("Authorization", authToken);
+      }
 
       writeBody(request, http);
       http.connect();
@@ -176,6 +178,7 @@ public class ServerFacade {
     return status / 100 == 2;
   }
 
+  // Only for testing purposes
   public void invalidateAuthToken() {
     authToken = null;
   }

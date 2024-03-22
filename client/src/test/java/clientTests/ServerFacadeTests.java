@@ -147,5 +147,42 @@ public class ServerFacadeTests {
     });
   }
 
+  @Test
+  @DisplayName("Join Game Success")
+  public void goodJoin() throws ResponseException {
+    HashSet<GameData> expectedList = new HashSet<>();
+    facade.register(username, password, email);
+    facade.login(username, password);
+
+    int gameID = facade.addGame("Test Game");
+    facade.joinGame("WHITE", gameID);
+
+    expectedList.add(new GameData(gameID, username, null, "Test Game", new ChessGame()));
+
+    Assertions.assertEquals(expectedList, facade.listGames());
+  }
+
+  @Test
+  @DisplayName("Join Game Fail")
+  public void badJoin() throws ResponseException {
+    HashSet<GameData> expectedList = new HashSet<>();
+    facade.register(username, password, email);
+    facade.login(username, password);
+
+    int gameID = facade.addGame("Test Game");
+    facade.joinGame("WHITE", gameID);
+
+    assertThrows(ResponseException.class, () -> {
+      facade.joinGame("WHITE", gameID);
+    });
+  }
+
+  @Test
+  @DisplayName("Clear")
+  public void clearTest() {
+    assertDoesNotThrow(() -> {
+      facade.clear();
+    });
+  }
 
 }

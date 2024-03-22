@@ -21,6 +21,8 @@ public class ServerFacadeTests {
   private String password = "testPassword";
   private String email = "p1@gmail.com";
 
+  private ChessGame game = new ChessGame();
+
   @BeforeAll
   public static void init() {
     server = new Server();
@@ -33,6 +35,7 @@ public class ServerFacadeTests {
   @BeforeEach
   public void clear() throws ResponseException {
     facade.clear();
+    game.getBoard().resetBoard();
   }
 
   @AfterAll
@@ -122,9 +125,9 @@ public class ServerFacadeTests {
     int game1 = facade.addGame("Test Game");
     int game2 = facade.addGame("Chessy chess time");
     int game3 = facade.addGame("it's britney");
-    expectedList.add(new GameData(game1, null, null, "Test Game", new ChessGame()));
-    expectedList.add(new GameData(game2, null, null, "Chessy chess time", new ChessGame()));
-    expectedList.add(new GameData(game3, null, null, "it's britney", new ChessGame()));
+    expectedList.add(new GameData(game1, null, null, "Test Game", game));
+    expectedList.add(new GameData(game2, null, null, "Chessy chess time", game));
+    expectedList.add(new GameData(game3, null, null, "it's britney", game));
 
     Assertions.assertEquals(expectedList, facade.listGames());
   }
@@ -157,7 +160,7 @@ public class ServerFacadeTests {
     int gameID = facade.addGame("Test Game");
     facade.joinGame("WHITE", gameID);
 
-    expectedList.add(new GameData(gameID, username, null, "Test Game", new ChessGame()));
+    expectedList.add(new GameData(gameID, username, null, "Test Game", game));
 
     Assertions.assertEquals(expectedList, facade.listGames());
   }

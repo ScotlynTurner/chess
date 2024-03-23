@@ -1,12 +1,15 @@
 package ui;
 
 import chess.ChessBoard;
+import model.GameData;
 import server.ResponseException;
 import server.ServerFacade;
 import com.google.gson.Gson;
 import dataAccess.DataAccessException;
 
 import java.util.Arrays;
+
+import static ui.EscapeSequences.*;
 
 public class ChessClient {
   private String username = null;
@@ -72,9 +75,19 @@ public class ChessClient {
     var result = new StringBuilder();
     var gson = new Gson();
     for (var game : games) {
-      result.append(gson.toJson(game)).append('\n');
+      String formattedGame = formatGame(game);
+      result.append(formattedGame).append('\n');
     }
     return result.toString();
+  }
+
+  private String formatGame(GameData game) {
+    String formattedGame = SET_TEXT_CUSTOM_MAROON + SET_BG_CUSTOM_WHITE;
+    formattedGame += game.gameID() + ": " + game.gameName() + "\nWhite: " + game.whiteUsername() + " | Black: " + game.blackUsername() + "\n";
+    formattedGame += SET_BG_BRIGHT_WHITE;
+    formattedGame += drawBoards("WHITE", game.game().getBoard(), true);
+    formattedGame += "\n";
+    return formattedGame;
   }
 
   public String joinGame(String... params) throws ResponseException, DataAccessException {
@@ -84,11 +97,11 @@ public class ChessClient {
       if (params.length >= 2 && !params[1].equals("empty")) {
         var playerColor = params[1];
         server.joinGame(playerColor, id);
-        drawBoards(playerColor, getBoard(id));
+        System.out.println(drawBoards(playerColor, getBoard(id), false));
         return String.format("%s has joined the game as %s", username, playerColor);
       }
       server.joinGame("empty", id);
-      drawBoards(null, getBoard(id));
+      System.out.println(drawBoards(null, getBoard(id), false));
       return String.format("%s has joined the game as an observer", username);
     }
     throw new ResponseException(400, "Expected: <ID> [WHITE|BLACK|<empty>]");
@@ -99,7 +112,7 @@ public class ChessClient {
     if (params.length == 1) {
       var id = Integer.parseInt(params[0]);
       server.joinGame("empty", id);
-      drawBoards(null, getBoard(id));
+      System.out.println(drawBoards(null, getBoard(id), false));
       return String.format("%s has joined the game as an observer", username);
     }
     throw new ResponseException(400, "Expected: <ID>");
@@ -133,31 +146,37 @@ public class ChessClient {
 
   public String help() {
     if (state == State.SIGNEDOUT) {
-      return """
+      return  SET_TEXT_CUSTOM_MAROON + SET_BG_CUSTOM_WHITE + """
                     - register <USERNAME> <PASSWORD> <EMAIL>
                     - login <USERNAME> <PASSWORD>
                     - quit
+                    - help
                     """;
     }
-    return """
-                - create <NAME>
-                - list
+    return SET_TEXT_CUSTOM_MAROON + SET_BG_CUSTOM_WHITE + """
+                - create <NAME> 
+                - list 
                 - join <ID> [WHITE|BLACK|<empty>]
                 - observe <ID>
                 - logout
-                - quit
+                - quit 
+                - help
                 """;
   }
 
-  private void drawBoards(String playerColor, ChessBoard board) {
+  private String drawBoards(String playerColor, ChessBoard board, boolean list) {
     DrawBoard boards = new DrawBoard(board);
     String boardLayout = "";
-    if (playerColor == "WHITE" || playerColor == "empty") {
-      boardLayout = boards.getWhiteDrawings();
+    if (!list) {
+      if (playerColor == "WHITE" || playerColor == "empty") {
+        boardLayout = boards.getWhiteDrawings();
+      } else {
+        boardLayout = boards.getBlackDrawings();
+      }
     } else {
-      boardLayout = boards.getBlackDrawings();
+      boardLayout = boards.drawNormal();
     }
-    System.out.println(boardLayout);
+    return boardLayout;
   }
 
   private void assertSignedIn() throws ResponseException {

@@ -34,8 +34,9 @@ public class ServerFacade {
               "password", password,
               "email", email
       );
-
-      return this.makeRequest("POST", path, requestBody, AuthData.class);
+      AuthData authData = this.makeRequest("POST", path, requestBody, AuthData.class);
+      authToken = authData.authToken();
+      return authData;
     } catch (Exception e) {
       throw new ResponseException(500, e.getMessage());
     }

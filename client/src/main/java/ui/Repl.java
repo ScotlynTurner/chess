@@ -9,12 +9,10 @@ import static ui.EscapeSequences.*;
 public class Repl {
   private final ChessClient client;
   private String serverURL;
-  private static Server server = new Server();
 
   public Repl(String serverUrl, int port) {
     client = new ChessClient(serverUrl);
     this.serverURL = serverUrl;
-    server.run(port);
   }
 
   public void run() {
@@ -37,10 +35,9 @@ public class Repl {
       }
     }
     System.out.println();
-    server.stop();
   }
 
   private void printPrompt() {
-    System.out.print(SET_BG_BRIGHT_WHITE + "\n" + SET_TEXT_CUSTOM_MAROON + ">>> " + SET_TEXT_CUSTOM_PINK);
+    System.out.print(SET_BG_BRIGHT_WHITE + "\n" + SET_TEXT_CUSTOM_MAROON + ">>> ");
   }
 }

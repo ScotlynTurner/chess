@@ -28,7 +28,7 @@ public class Repl {
 
       try {
         result = client.eval(line);
-        System.out.print(SET_TEXT_CUSTOM_MINT + result);
+        System.out.print(SET_TEXT_CUSTOM_PINK + result);
       } catch (Throwable e) {
         var msg = e.toString();
         System.out.print(msg);

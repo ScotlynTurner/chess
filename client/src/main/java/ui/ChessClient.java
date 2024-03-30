@@ -15,6 +15,7 @@ public class ChessClient {
   private String username = null;
   private final ServerFacade server;
   private State state = State.SIGNEDOUT;
+  private Status status = Status.LOBBY;
 
   public ChessClient(String serverUrl) {
     server = new ServerFacade(serverUrl);
@@ -35,6 +36,11 @@ public class ChessClient {
         case "logout" -> logout();
         case "quit" -> "quit";
         case "clear" -> clear();
+        case "redraw" -> redraw();
+        case "move" -> move();
+        case "leave" -> leave();
+        case "resign" -> resign();
+        case "show" -> showMoves();
         default -> help();
       };
     } catch (Exception ex) {
@@ -98,10 +104,12 @@ public class ChessClient {
         var playerColor = params[1];
         server.joinGame(playerColor, id);
         System.out.println(drawBoards(playerColor, getBoard(id), false));
+        status = Status.PLAYING;
         return String.format("%s has joined the game as %s", username, playerColor);
       }
       server.joinGame("empty", id);
       System.out.println(drawBoards(null, getBoard(id), false));
+      status = Status.OBSERVING;
       return String.format("%s has joined the game as an observer", username);
     }
     throw new ResponseException(400, "Expected: <ID> [WHITE|BLACK|<empty>]");
@@ -113,6 +121,7 @@ public class ChessClient {
       var id = Integer.parseInt(params[0]);
       server.joinGame("empty", id);
       System.out.println(drawBoards(null, getBoard(id), false));
+      status = Status.OBSERVING;
       return String.format("%s has joined the game as an observer", username);
     }
     throw new ResponseException(400, "Expected: <ID>");
@@ -144,15 +153,52 @@ public class ChessClient {
     return null;
   }
 
+  public String move() {
+    return null;
+  }
+
+  public String redraw() {
+    return null;
+  }
+
+  public String resign() {
+    return null;
+  }
+
+  public String showMoves() {
+    return null;
+  }
+
+  public String leave() {
+    return null;
+  }
+
   public String help() {
     if (state == State.SIGNEDOUT) {
+      status = Status.LOBBY;
       return  SET_TEXT_CUSTOM_MAROON + SET_BG_CUSTOM_WHITE + """
                     - register <USERNAME> <PASSWORD> <EMAIL>
                     - login <USERNAME> <PASSWORD>
                     - quit
                     - help
                     """;
+    } else if (status == Status.PLAYING) {
+      return SET_TEXT_CUSTOM_MAROON + SET_BG_CUSTOM_WHITE + """
+              - redraw
+              - move <NUMBER> <LETTER> to <NUMBER> <LETTER>
+              - resign
+              - show moves
+              - leave
+              - help
+              """;
+    } else if (status == status.OBSERVING) {
+      return SET_TEXT_CUSTOM_MAROON + SET_BG_CUSTOM_WHITE + """
+              - redraw
+              - leave
+              - help
+              """;
     }
+    status = Status.LOBBY;
     return SET_TEXT_CUSTOM_MAROON + SET_BG_CUSTOM_WHITE + """
                 - create <NAME> 
                 - list 

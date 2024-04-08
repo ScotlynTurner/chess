@@ -1,39 +1,46 @@
 
 ‰
-java:S1192u"FDefine a constant instead of duplicating this literal "empty" 4 times.(õêò8ïÀïúë1J$46a87f39-51c5-4f8c-a589-ee89c8df75b8
+java:S1192s"FDefine a constant instead of duplicating this literal "empty" 4 times.(õêò8¢”¾ÿë1J$fd6de3e6-fb35-4ee9-ae3c-42e15ad9abef
 
-java:S1192l"FDefine a constant instead of duplicating this literal "WHITE" 4 times.(‰ÏÊ»ûÿÿÿÿ8ğÀïúë1J$f9bf207f-d440-4a8e-8c27-2c2cb381182e
+java:S1192j"FDefine a constant instead of duplicating this literal "WHITE" 4 times.(‰ÏÊ»ûÿÿÿÿ8¢”¾ÿë1J$30e8b42e-8a08-44ce-9cef-e612102aa242
 …
-java:S4973"<Strings and Boxed types should be compared using "equals()".(Â“øÿÿÿÿ8ôÀïúë1J$5c464bd1-3541-41e1-9bc9-df632a5805dd
+java:S4973œ"<Strings and Boxed types should be compared using "equals()".(Â“øÿÿÿÿ8¥”¾ÿë1J$b678ddc1-4e4d-43a9-b214-59c70aa0c552
 …
-java:S4973"<Strings and Boxed types should be compared using "equals()".(Â“øÿÿÿÿ8ôÀïúë1J$f6eefabf-a919-4ffa-9205-7ac9acc470c4
+java:S4973œ"<Strings and Boxed types should be compared using "equals()".(Â“øÿÿÿÿ8¥”¾ÿë1J$0a680ec9-a33e-4940-8621-6221f80e1e37
+Š
+java:S2259½"FA "NullPointerException" could be thrown; "getGame()" can return null.(“ ´8£©Éÿë1J$79e80af4-b2af-4c88-8cb3-82dfac306b82
+Š
+java:S2259Œ"FA "NullPointerException" could be thrown; "getGame()" can return null.(î¹¯”8Ò”¾ÿë1J$cb6037a7-5cbe-4572-b242-cda84aab798e
 
-java:S2259"FA "NullPointerException" could be thrown; "getGame()" can return null.(›È¤úøÿÿÿÿ8ºÁïúë1J$ac84134a-48f5-4fd1-826c-fc68baea7d59
+java:S2259v"FA "NullPointerException" could be thrown; "getGame()" can return null.(œÓéµÿÿÿÿÿ8Ò”¾ÿë1J$1cf7aa6f-6499-4a7f-85ca-1ef31dbe03ca
+
+java:S2259æ"FA "NullPointerException" could be thrown; "getGame()" can return null.(³»¼îúÿÿÿÿ8Ò”¾ÿë1J$908021e6-cadf-48ed-9437-b8e88835e1bc
 Š
-java:S2259Œ"FA "NullPointerException" could be thrown; "getGame()" can return null.(î¹¯”8ºÁïúë1J$bf07c082-ef8c-4e08-ad7d-dbdf4cacbf38
-Š
-java:S2259Ì"FA "NullPointerException" could be thrown; "getGame()" can return null.(“ ´8ºÁïúë1J$dcdbbe3f-43f9-43a6-a18a-fbf8ddf85a55
-Š
-java:S2259¼"FA "NullPointerException" could be thrown; "getGame()" can return null.(“ ´8ºÁïúë1J$cf2b64e1-6c5e-4661-aabc-5cfa79d01ac3
+java:S2259Í"FA "NullPointerException" could be thrown; "getGame()" can return null.(“ ´8˜ïÁÿë1J$5f58e57c-0abe-4766-9a73-78f856bd6d35
 
-java:S2259x"FA "NullPointerException" could be thrown; "getGame()" can return null.(œÓéµÿÿÿÿÿ8ºÁïúë1J$4b29c883-17b7-40d3-9925-fcc3ebcc518a
-™
-java:S1450"QRemove the "ws" field and declare it as a local variable in the relevant methods.(™ËñÚüÿÿÿÿ8½Áïúë1J$57fed970-8713-40bc-a409-e3a5162d13c8
+java:S2259~"FA "NullPointerException" could be thrown; "getGame()" can return null.(›È¤úøÿÿÿÿ8Ò”¾ÿë1J$432ae10a-8001-4117-be71-4d7f3ad97a4c
 {
-java:S1854`"8Remove this useless assignment to local variable "gson".(èˆµë8ÊÁïúë1J$9587cb05-50a9-48d6-a988-eb22be71b64e
+java:S1854^"8Remove this useless assignment to local variable "gson".(èˆµë8Û”¾ÿë1J$e4844927-d530-4077-9608-19e7ee817786
 l
-java:S1481`")Remove this unused "gson" local variable.(èˆµë8ÑÁïúë1J$16301f94-c2bf-47bf-b283-11d801855048
+java:S1481^")Remove this unused "gson" local variable.(èˆµë8à”¾ÿë1J$e5851de8-2a36-4f9f-acd1-9f1c1de67766
 €
-java:S1117a"8Rename "game" which hides the field declared at line 26.(Ù‰¤¶ûÿÿÿÿ8ÑÁïúë1J$6a12e024-4625-457e-884a-c0d66ac13a2a
-r	java:S106x"+Replace this use of System.out by a logger.(œÓéµÿÿÿÿÿ8ÕÁïúë1J$4be70099-b910-4bd7-a93e-ccef73292bf3
-r	java:S106"+Replace this use of System.out by a logger.(›È¤úøÿÿÿÿ8ÖÁïúë1J$5573a24a-eb1f-44b5-a6cb-c0e56cc50851
-n	java:S106Œ"+Replace this use of System.out by a logger.(î¹¯”8ÙÁïúë1J$d6e34824-950a-4761-96a5-4b10f5046ca6
+java:S1117_"8Rename "game" which hides the field declared at line 26.(Ù‰¤¶ûÿÿÿÿ8à”¾ÿë1J$39c51311-73b9-4dd4-9c2c-b96723c16998
+r	java:S106v"+Replace this use of System.out by a logger.(œÓéµÿÿÿÿÿ8ã”¾ÿë1J$ac6b504f-f00f-414c-bc3f-acc6a3c5da3c
+r	java:S106~"+Replace this use of System.out by a logger.(›È¤úøÿÿÿÿ8ä”¾ÿë1J$7eb02958-d5ca-4692-ba08-eb0ac0cbb472
+n	java:S106Œ"+Replace this use of System.out by a logger.(î¹¯”8ç”¾ÿë1J$de3f1501-085c-40b3-8099-1bc3b163d82a
 »
-java:S1130¥"wRemove the declaration of thrown exception 'dataAccess.DataAccessException', as it cannot be thrown from method's body.(¹´ŒÈ8İÁïúë1J$d1a76295-9754-4ce3-ab41-3b59546e2806
+java:S1130¦"wRemove the declaration of thrown exception 'dataAccess.DataAccessException', as it cannot be thrown from method's body.(¹´ŒÈ8ê”¾ÿë1J$5571fd58-9cdc-4b3f-a2c2-32180309ae06
 
-java:S1117¦"8Rename "game" which hides the field declared at line 26.(‹êÀÿÿÿÿÿ8İÁïúë1J$14506043-498f-46b6-b276-13073b0feecc
-n	java:S106¼"+Replace this use of System.out by a logger.(“ ´8âÁïúë1J$fd4cc4a7-8437-483d-97ff-731d925b90c1
-n	java:S106Ì"+Replace this use of System.out by a logger.(“ ´8åÁïúë1J$4254060d-912e-44f5-8ce1-3cbec1517c4f
-s	java:S106Ô"+Replace this use of System.out by a logger.(ßø¼”úÿÿÿÿ8éÁïúë1J$4846d974-1e28-48b1-a32e-5f24e2235c06
+java:S1117§"8Rename "game" which hides the field declared at line 26.(‹êÀÿÿÿÿÿ8ê”¾ÿë1J$9f0e6584-56e1-4394-9c3c-001d0cfceed2
+n	java:S106½"+Replace this use of System.out by a logger.(“ ´8ì”¾ÿë1J$28ade8c4-22a4-4ce4-9431-92038c12fd4b
+n	java:S106Í"+Replace this use of System.out by a logger.(“ ´8í”¾ÿë1J$85ca759f-e363-4db1-bcc5-c932fa4488da
+s	java:S106Õ"+Replace this use of System.out by a logger.(ßø¼”úÿÿÿÿ8ğ”¾ÿë1J$db829d13-15c5-4aaa-b287-dac45e249d10
+¼
+java:S1130ß"sRemove the declaration of thrown exception 'chess.InvalidMoveException', as it cannot be thrown from method's body.(š¿Í’ùÿÿÿÿ8½½Æÿë1J$59691bb3-b093-43ea-a9bc-721e3018bbb6
+s	java:S106æ"+Replace this use of System.out by a logger.(³»¼îúÿÿÿÿ8ñ”¾ÿë1J$ce522d0c-f805-4cd0-bce0-9f55b04282fc
 ~
-java:S2209ø"5Change this instance-reference to a static reference.(¶œ±üÿÿÿÿ8ëÁïúë1J$e2e595bd-cd4f-41dd-8ca9-232e8091ebdb
+java:S2209„"5Change this instance-reference to a static reference.(¶œ±üÿÿÿÿ8ó”¾ÿë1J$a1ec7029-9eab-4aa9-b52e-c8759c1a1dab
+p
+java:S1068"-Remove this unused "serverUrl" private field.(°èµ¬8ö”¾ÿë1J$bc8d2e1a-e362-41a2-ba39-f1a8ecfcf5dc
+z
+java:S1068"7Remove this unused "notificationHandler" private field.(î˜Óİ8÷”¾ÿë1J$aff5e0e1-b016-4e88-b647-eaf8b565c087

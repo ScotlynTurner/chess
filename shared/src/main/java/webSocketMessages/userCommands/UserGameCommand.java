@@ -24,7 +24,7 @@ public class UserGameCommand {
 
   protected CommandType commandType;
 
-  private final String authToken;
+  private String authToken;
 
   public String getAuthString() {
     return authToken;

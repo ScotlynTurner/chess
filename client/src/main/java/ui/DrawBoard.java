@@ -94,7 +94,9 @@ public class DrawBoard {
     ChessPosition coordinate;
     coordinate = new ChessPosition(row, j);
 
-    if ((isEven(row) && isEven(j)) || (!isEven(row) && !isEven(j))) {
+    if (position.equals(coordinate)) {
+      drawBoard+=SET_BG_CUSTOM_WHITE + " ";
+    } else if ((isEven(row) && isEven(j)) || (!isEven(row) && !isEven(j))) {
       if (endPositions.contains(coordinate)) {
         drawBoard+=SET_BG_CUSTOM_MAROON_FADED + " ";
       } else {

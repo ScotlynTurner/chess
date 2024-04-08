@@ -1,7 +1,6 @@
 package ui;
 
 import chess.*;
-import model.AuthData;
 import model.GameData;
 import server.ResponseException;
 import server.ServerFacade;
@@ -18,6 +17,7 @@ import static ui.EscapeSequences.*;
 public class ChessClient {
   private String serverUrl;
   private String username = null;
+  private String authToken = null;
   private final ServerFacade server;
   private State state = State.SIGNEDOUT;
   private Status status = Status.LOBBY;
@@ -70,9 +70,7 @@ public class ChessClient {
       state = State.SIGNEDIN;
       username = params[0];
       var password = params[1];
-      String authToken = server.login(username, password).authToken();
-      ws = new WebSocketFacade(serverUrl, notificationHandler);
-      ws.login(authToken);
+      authToken = server.login(username, password).authToken();
       return String.format("Logged in as %s", username);
     }
     throw new ResponseException(400, "Expected: <USERNAME> <PASSWORD>");
@@ -118,6 +116,7 @@ public class ChessClient {
         var playerColor = params[1];
         server.joinGame(playerColor, id);
         System.out.println(drawBoards(playerColor, getGame(id).getBoard(), false, false, null));
+        ws.joinPlayer(authToken);
         status = Status.PLAYING;
         currentGameID = id;
         game = getGame(id);
@@ -125,6 +124,7 @@ public class ChessClient {
       }
       server.joinGame("empty", id);
       System.out.println(drawBoards(null, getGame(id).getBoard(), false, false, null));
+      ws.joinObserver(authToken);
       status = Status.OBSERVING;
       currentGameID = id;
       return String.format("%s has joined the game as an observer", username);
@@ -138,6 +138,7 @@ public class ChessClient {
       var id = Integer.parseInt(params[0]);
       server.joinGame("empty", id);
       System.out.println(drawBoards("WHITE", getGame(id).getBoard(), false, false, null));
+      ws.joinObserver(authToken);
       status = Status.OBSERVING;
       currentGameID = id;
       return String.format("%s has joined the game as an observer", username);
@@ -219,12 +220,23 @@ public class ChessClient {
     }
   }
 
-  public String showMoves() {
-    return null;
+  public String showMoves(String... params) throws ResponseException, InvalidMoveException, DataAccessException {
+    assertSignedIn();
+    if (params.length >= 2) {
+      var startCoordNum = Integer.parseInt(params[0]);
+      var startCoordLetter = convertLetter(params[1]);
+      ChessPosition position = new ChessPosition(startCoordNum, startCoordLetter);
+
+      System.out.println(drawBoards(currentColor, getGame(currentGameID).getBoard(), false, true, position));
+      return "";
+    }
+    throw new ResponseException(400, "Expected: <NUMBER> <LETTER>");
   }
 
   public String leave() {
-    return null;
+    ws = null;
+    status = Status.LOBBY;
+    return String.format("%s left the game", username);
   }
 
   public String help() {
@@ -248,6 +260,7 @@ public class ChessClient {
     } else if (status == status.OBSERVING) {
       return SET_TEXT_CUSTOM_MAROON + SET_BG_CUSTOM_WHITE + """
               - redraw
+              - show moves <NUMBER> <LETTER>
               - leave
               - help
               """;

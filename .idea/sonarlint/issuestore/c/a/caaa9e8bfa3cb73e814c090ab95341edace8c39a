@@ -1,26 +1,26 @@
 
 _
-java:S1643"Use a StringBuilder instead.(éËÀÏ8¨å†øë1J$c8d209b2-ea2b-422d-a8ad-60d1847bcf82
+java:S1643"Use a StringBuilder instead.(éËÀÏ8ÒöÎşë1J$217070d9-882b-4898-be9b-5b5536b024a0
 d
-java:S1643"Use a StringBuilder instead.(ù¼° ıÿÿÿÿ8©å†øë1J$7e15d6af-0990-45c6-a95c-21ebb40c36e7
+java:S1643"Use a StringBuilder instead.(ù¼° ıÿÿÿÿ8ÓöÎşë1J$702dfcd1-ca2f-4ab4-a620-8e1a9c05117a
 ^
-java:S1643 "Use a StringBuilder instead.(«±ï8©å†øë1J$dc1676c7-d9d0-4af3-9ecf-705454f511a1
+java:S1643 "Use a StringBuilder instead.(«±ï8ÓöÎşë1J$22180202-307c-4d4b-9073-fa74a84c52f3
 _
-java:S1643+"Use a StringBuilder instead.(éËÀÏ8©å†øë1J$48cd1794-a5db-472c-aaaa-12cefb1526b6
+java:S1643+"Use a StringBuilder instead.(éËÀÏ8ÓöÎşë1J$05b8d3d7-a283-441b-91f8-f63cf9c1b9e7
 d
-java:S1643-"Use a StringBuilder instead.(ù¼° ıÿÿÿÿ8©å†øë1J$4128e1c4-9ac4-41ef-b55d-8e66f2f7612a
+java:S1643-"Use a StringBuilder instead.(ù¼° ıÿÿÿÿ8ÓöÎşë1J$13fcd36e-669a-4210-9469-c0fd6eb8c11a
 ^
-java:S1643."Use a StringBuilder instead.(«±ï8ªå†øë1J$013af387-9ed8-4b16-b203-cc865277cc7e
+java:S1643."Use a StringBuilder instead.(«±ï8ÓöÎşë1J$9d4b3acb-9b60-4195-95dd-f6d2081837f7
 `
-java:S1700"Rename field "drawBoard"(Ï¿ğ¯ÿÿÿÿÿ8«å†øë1J$2cc5b9fe-eec4-4f68-ab6c-8737529e85ac
+java:S1700"Rename field "drawBoard"(Ï¿ğ¯ÿÿÿÿÿ8ÔöÎşë1J$e2d5a2fd-4ae3-459e-80a3-a96028a541c2
 x
-java:S1172;"0Remove this unused method parameter "highlight".(İéâúÿÿÿÿ8óå†øë1J$dca572d4-45b8-49d5-a486-ef3bd050e290
+java:S1172;"0Remove this unused method parameter "highlight".(İéâúÿÿÿÿ8çöÎşë1J$6c1f916d-8e4e-4a72-b815-7f5b7059e239
 ‰
-java:S1126C"AReplace this if-then-else statement by a single return statement.(†©æ¶ÿÿÿÿÿ8÷å†øë1J$d1d4d5c9-b2ba-4d6e-83bb-00f7bca10364
+java:S1126C"AReplace this if-then-else statement by a single return statement.(†©æ¶ÿÿÿÿÿ8èöÎşë1J$24acef3f-5d50-4cba-b0b9-c08b0707f539
 h
-java:S1128"%Remove this unused import 'java.awt'.(ï´µ©8€æ†øë1J$e707f20e-28ef-41b9-a59f-c9fcbf98ee86
+java:S1128"%Remove this unused import 'java.awt'.(ï´µ©8ı²Ïşë1J$718755fe-64bf-4852-8b32-fec364747a6a
 s
-java:S1128	"0Remove this unused import 'java.util.ArrayList'.(÷‰îƒ8€æ†øë1J$59442e7c-a1da-4550-9ec9-7bbc878db760
+java:S1128	"0Remove this unused import 'java.util.ArrayList'.(÷‰îƒ8ı²Ïşë1J$c7101a44-ec49-416c-9f86-6bc8498b391b
 y
 java:S1128
-"1Remove this unused import 'java.util.Collection'.(¹ÉĞšùÿÿÿÿ8æ†øë1J$d7274a3d-b9c5-4c05-9f50-6a8e7b1ef128
+"1Remove this unused import 'java.util.Collection'.(¹ÉĞšùÿÿÿÿ8ı²Ïşë1J$adb5154f-9432-43ec-867d-9cb3440afe56

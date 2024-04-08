@@ -13,7 +13,7 @@ public class Repl implements NotificationHandler {
   private String serverURL;
 
   public Repl(String serverUrl, int port) {
-    client = new ChessClient(serverUrl);
+    client = new ChessClient(serverUrl, this);
     this.serverURL = serverUrl;
   }
 

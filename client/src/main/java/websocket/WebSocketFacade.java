@@ -42,7 +42,7 @@ public class WebSocketFacade extends Endpoint {
   public void onOpen(Session session, EndpointConfig endpointConfig) {
   }
 
-  public void login(String authToken) throws ResponseException {
+  public void joinPlayer(String authToken) throws ResponseException {
     try {
       var command = new UserGameCommand(authToken);
       this.session.getBasicRemote().sendText(new Gson().toJson(command));
@@ -51,7 +51,7 @@ public class WebSocketFacade extends Endpoint {
     }
   }
 
-  public void logout(String authToken) throws ResponseException {
+  public void joinObserver(String authToken) throws ResponseException {
     try {
       var command = new UserGameCommand(authToken);
       this.session.getBasicRemote().sendText(new Gson().toJson(command));

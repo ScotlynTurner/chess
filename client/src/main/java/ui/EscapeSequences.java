@@ -70,8 +70,8 @@ public class EscapeSequences {
   public static final String SET_BG_CUSTOM_MINT = "\u001B[48;2;163;201;170m";
   public static final String SET_BG_CUSTOM_WHITE = "\u001B[48;2;238;238;238m";
 
-  public static final String SET_BG_CUSTOM_MAROON_FADED = "\u001B[48;2;160;147;129m";
-  public static final String SET_BG_CUSTOM_PINK_FADED = "\u001B[48;2;183;162;148m";
+  public static final String SET_BG_CUSTOM_MAROON_FADED = "\u001B[48;2;205;169;169m";
+  public static final String SET_BG_CUSTOM_PINK_FADED = "\u001B[48;2;222;195;195m";
 
   public static final String SET_TEXT_CUSTOM_MAROON = "\u001B[38;2;155;68;68m";
   public static final String SET_TEXT_CUSTOM_PINK = "\u001B[38;2;198;132;132m";

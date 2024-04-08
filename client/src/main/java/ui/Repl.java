@@ -2,11 +2,13 @@ package ui;
 
 import server.ResponseException;
 import server.Server;
+import webSocketMessages.serverMessages.ServerMessage;
+import websocket.NotificationHandler;
 
 import java.util.Scanner;
 import static ui.EscapeSequences.*;
 
-public class Repl {
+public class Repl implements NotificationHandler {
   private final ChessClient client;
   private String serverURL;
 
@@ -39,5 +41,10 @@ public class Repl {
 
   private void printPrompt() {
     System.out.print(SET_BG_BRIGHT_WHITE + "\n" + SET_TEXT_CUSTOM_MAROON + ">>> ");
+  }
+
+  public void notify(ServerMessage notification) {
+    System.out.println(SET_BG_COLOR_BLUE + notification.getServerMessageType());
+    printPrompt();
   }
 }

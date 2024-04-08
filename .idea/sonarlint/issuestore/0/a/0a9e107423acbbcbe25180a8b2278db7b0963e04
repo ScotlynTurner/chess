@@ -1,0 +1,29 @@
+
+a
+java:S1192H"FDefine a constant instead of duplicating this literal "/game" 3 times.(ê´ã£şÿÿÿÿ
+ƒ
+java:S1319["mThe return type of this method should be an interface such as "Set" rather than the implementation "HashSet".(ïÁˆä
+c	java:S101^"NRename this record name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(çäáé
+a
+java:S22595"KA "NullPointerException" could be thrown; "loginResponse" is nullable here.(ÆÕÑ–
+a
+java:S2259&"FA "NullPointerException" could be thrown; "authData" is nullable here.(É›¯Ëùÿÿÿÿ
+_
+java:S2259L"IA "NullPointerException" could be thrown; "makeRequest" is nullable here.(´ØĞ¦
+a
+java:S2259a"FA "NullPointerException" could be thrown; "response" is nullable here.(ñæÈ´øÿÿÿÿ
+\
+java:S1075"ARefactor your code to get this URI from a customizable parameter.(”É÷ùÿÿÿÿ
+V
+java:S1075/"ARefactor your code to get this URI from a customizable parameter.(ÛÌJ
+V
+java:S1075>"ARefactor your code to get this URI from a customizable parameter.(ÛÌJ
+E	java:S106A"+Replace this use of System.err by a logger.(÷Šêûÿÿÿÿ
+\
+java:S1075H"ARefactor your code to get this URI from a customizable parameter.(ê´ã£şÿÿÿÿ
+\
+java:S1075T"ARefactor your code to get this URI from a customizable parameter.(¥íËÎÿÿÿÿÿ
+\
+java:S1075]"ARefactor your code to get this URI from a customizable parameter.(ê´ã£şÿÿÿÿ
+\
+java:S1075i"ARefactor your code to get this URI from a customizable parameter.(ê´ã£şÿÿÿÿ

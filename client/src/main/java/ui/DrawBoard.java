@@ -1,15 +1,22 @@
 package ui;
 
 import chess.ChessBoard;
+import chess.ChessGame;
+import chess.ChessMove;
 import chess.ChessPosition;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 
 import static ui.EscapeSequences.*;
 
 public class DrawBoard {
   private ChessBoard board;
   private String drawBoard = "";
+  private ChessGame game;
+  private ChessPosition position;
 
   public DrawBoard(ChessBoard board) {
     this.board = board;
@@ -43,13 +50,18 @@ public class DrawBoard {
     return drawBoard;
   }
 
-  public String getWhiteDrawings() {
+  public String getWhiteDrawings(ChessGame game, ChessPosition position) {
+    this.game = game;
+    this.position = position;
     return drawUpsideDown() + SET_BG_BRIGHT_WHITE + "\n" + drawNormal();
   }
 
-  public String getBlackDrawings() {
+  public String getBlackDrawings(boolean highlight, ChessGame game, ChessPosition position) {
+    this.game = game;
+    this.position = position;
     return drawNormal() + SET_BG_BRIGHT_WHITE + "\n" + drawUpsideDown();
   }
+
 
   private boolean isEven(int x) {
     if ((x % 2) == 0) {
@@ -60,38 +72,47 @@ public class DrawBoard {
   }
 
   private void checkerBoardNormal(int row) {
-    ChessPosition position;
     for (int j = 1; j < 9; j++) {
-      if ((isEven(row) && isEven(j)) || (!isEven(row) && !isEven(j))) {
-        drawBoard += SET_BG_CUSTOM_MAROON + " ";
-      } else {
-        drawBoard += SET_BG_CUSTOM_PINK + " ";
-      }
-      position = new ChessPosition(row, j);
-      if (board.getPiece(position) != null) {
-        drawBoard += SET_TEXT_COLOR_BLACK + board.getPiece(position).toString();
-      } else {
-        drawBoard += " ";
-      }
-      drawBoard += " ";
+      checkerboardHelper(row, j);
     }
   }
 
   private void checkerBoardUpsideDown(int row) {
-    ChessPosition position;
     for (int j = 8; j > 0; j--) {
-      if ((isEven(row) && isEven(j)) || (!isEven(row) && !isEven(j))) {
-        drawBoard += SET_BG_CUSTOM_MAROON + " ";
+      checkerboardHelper(row, j);
+    }
+  }
+
+  private void checkerboardHelper(int row, int j) {
+    HashSet<ChessMove> validMoves = (HashSet<ChessMove>) game.validMoves(position);
+    HashSet<ChessPosition> endPositions = new HashSet<>();
+
+    for (ChessMove move : validMoves) {
+      endPositions.add(move.getEndPosition());
+    }
+
+    ChessPosition coordinate;
+    coordinate = new ChessPosition(row, j);
+
+    if ((isEven(row) && isEven(j)) || (!isEven(row) && !isEven(j))) {
+      if (endPositions.contains(coordinate)) {
+        drawBoard+=SET_BG_CUSTOM_MAROON_FADED + " ";
       } else {
-        drawBoard += SET_BG_CUSTOM_PINK + " ";
+        drawBoard+=SET_BG_CUSTOM_MAROON + " ";
       }
-      position = new ChessPosition(row, j);
-      if (board.getPiece(position) != null) {
-        drawBoard += SET_TEXT_COLOR_BLACK + board.getPiece(position).toString();
+    } else {
+      if (endPositions.contains(coordinate)) {
+        drawBoard+=SET_BG_CUSTOM_PINK_FADED + " ";
       } else {
-        drawBoard += " ";
+        drawBoard+=SET_BG_CUSTOM_PINK + " ";
       }
+    }
+
+    if (board.getPiece(coordinate) != null) {
+      drawBoard += SET_TEXT_COLOR_BLACK + board.getPiece(coordinate).toString();
+    } else {
       drawBoard += " ";
     }
+    drawBoard += " ";
   }
 }

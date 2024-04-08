@@ -1,0 +1,39 @@
+
+‰
+java:S1192u"FDefine a constant instead of duplicating this literal "empty" 4 times.(õêò8ïÀïúë1J$46a87f39-51c5-4f8c-a589-ee89c8df75b8
+
+java:S1192l"FDefine a constant instead of duplicating this literal "WHITE" 4 times.(‰ÏÊ»ûÿÿÿÿ8ğÀïúë1J$f9bf207f-d440-4a8e-8c27-2c2cb381182e
+…
+java:S4973"<Strings and Boxed types should be compared using "equals()".(Â“øÿÿÿÿ8ôÀïúë1J$5c464bd1-3541-41e1-9bc9-df632a5805dd
+…
+java:S4973"<Strings and Boxed types should be compared using "equals()".(Â“øÿÿÿÿ8ôÀïúë1J$f6eefabf-a919-4ffa-9205-7ac9acc470c4
+
+java:S2259"FA "NullPointerException" could be thrown; "getGame()" can return null.(›È¤úøÿÿÿÿ8ºÁïúë1J$ac84134a-48f5-4fd1-826c-fc68baea7d59
+Š
+java:S2259Œ"FA "NullPointerException" could be thrown; "getGame()" can return null.(î¹¯”8ºÁïúë1J$bf07c082-ef8c-4e08-ad7d-dbdf4cacbf38
+Š
+java:S2259Ì"FA "NullPointerException" could be thrown; "getGame()" can return null.(“ ´8ºÁïúë1J$dcdbbe3f-43f9-43a6-a18a-fbf8ddf85a55
+Š
+java:S2259¼"FA "NullPointerException" could be thrown; "getGame()" can return null.(“ ´8ºÁïúë1J$cf2b64e1-6c5e-4661-aabc-5cfa79d01ac3
+
+java:S2259x"FA "NullPointerException" could be thrown; "getGame()" can return null.(œÓéµÿÿÿÿÿ8ºÁïúë1J$4b29c883-17b7-40d3-9925-fcc3ebcc518a
+™
+java:S1450"QRemove the "ws" field and declare it as a local variable in the relevant methods.(™ËñÚüÿÿÿÿ8½Áïúë1J$57fed970-8713-40bc-a409-e3a5162d13c8
+{
+java:S1854`"8Remove this useless assignment to local variable "gson".(èˆµë8ÊÁïúë1J$9587cb05-50a9-48d6-a988-eb22be71b64e
+l
+java:S1481`")Remove this unused "gson" local variable.(èˆµë8ÑÁïúë1J$16301f94-c2bf-47bf-b283-11d801855048
+€
+java:S1117a"8Rename "game" which hides the field declared at line 26.(Ù‰¤¶ûÿÿÿÿ8ÑÁïúë1J$6a12e024-4625-457e-884a-c0d66ac13a2a
+r	java:S106x"+Replace this use of System.out by a logger.(œÓéµÿÿÿÿÿ8ÕÁïúë1J$4be70099-b910-4bd7-a93e-ccef73292bf3
+r	java:S106"+Replace this use of System.out by a logger.(›È¤úøÿÿÿÿ8ÖÁïúë1J$5573a24a-eb1f-44b5-a6cb-c0e56cc50851
+n	java:S106Œ"+Replace this use of System.out by a logger.(î¹¯”8ÙÁïúë1J$d6e34824-950a-4761-96a5-4b10f5046ca6
+»
+java:S1130¥"wRemove the declaration of thrown exception 'dataAccess.DataAccessException', as it cannot be thrown from method's body.(¹´ŒÈ8İÁïúë1J$d1a76295-9754-4ce3-ab41-3b59546e2806
+
+java:S1117¦"8Rename "game" which hides the field declared at line 26.(‹êÀÿÿÿÿÿ8İÁïúë1J$14506043-498f-46b6-b276-13073b0feecc
+n	java:S106¼"+Replace this use of System.out by a logger.(“ ´8âÁïúë1J$fd4cc4a7-8437-483d-97ff-731d925b90c1
+n	java:S106Ì"+Replace this use of System.out by a logger.(“ ´8åÁïúë1J$4254060d-912e-44f5-8ce1-3cbec1517c4f
+s	java:S106Ô"+Replace this use of System.out by a logger.(ßø¼”úÿÿÿÿ8éÁïúë1J$4846d974-1e28-48b1-a32e-5f24e2235c06
+~
+java:S2209ø"5Change this instance-reference to a static reference.(¶œ±üÿÿÿÿ8ëÁïúë1J$e2e595bd-cd4f-41dd-8ca9-232e8091ebdb

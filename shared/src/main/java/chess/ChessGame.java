@@ -198,7 +198,6 @@ public class ChessGame {
      * @return True if the specified team is in checkmate
      */
     public boolean isInCheckmate(TeamColor teamColor) {
-        ChessPosition position;
         HashSet<ChessMove> kingMoves = new HashSet<>();
         HashSet<ChessPosition> oppositionEndPositions = new HashSet<>();
         if (!isInCheck(teamColor)) {

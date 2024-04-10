@@ -1,0 +1,13 @@
+
+p
+java:S11928"UDefine a constant instead of duplicating this literal "Error: already taken" 3 times.(¥ûşşÿÿÿÿ
+i
+java:S1192+"TDefine a constant instead of duplicating this literal "Error: unauthorized" 3 times.(©ªìb
+J
+java:S1066;"/Merge this if statement with the enclosing one.(îÎ¿şşÿÿÿÿ
+ƒ
+java:S1319!"mThe return type of this method should be an interface such as "Set" rather than the implementation "HashSet".(Š‚ıü
+t
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "gameID".(€Ë¶İ
+—
+java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ø‡ë¯

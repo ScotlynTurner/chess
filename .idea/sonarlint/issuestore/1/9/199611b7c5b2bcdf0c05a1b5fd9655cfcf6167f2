@@ -1,4 +1,6 @@
 
-š	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(şõûÍûÿÿÿÿJ$c57d65ef-fa38-4e59-ad90-5ea366a7ad1d
-P
-java:S1172"3Remove this unused method parameter "errorMessage".(ê˜è8ç´Ãşë1
+š	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(şõûÍûÿÿÿÿJ$549a0eb7-1c7e-41ba-94a7-05ad9d723416
+s
+java:S2160"+Override the "equals" method in this class.(ª•‹Êúÿÿÿÿ8±ÇÂ­ì1J$40ce7fc8-9d29-4acb-9dbe-23dbe5810c6e
+x
+java:S1068"0Remove this unused "errorMessage" private field.(¥åˆüÿÿÿÿ8µÇÂ­ì1J$191ffd82-c9a0-4dd0-8c90-05c20f9f96ab

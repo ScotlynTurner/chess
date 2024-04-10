@@ -1,3 +1,5 @@
 
-¿
-java:S1319"|The type of "connections" should be an interface such as "ConcurrentMap" rather than the implementation "ConcurrentHashMap".(×ãô8…µ™ûë1J$7f252f6b-58f8-4357-b8d6-3e00f02da4b7
+L
+java:S1066,"/Merge this if statement with the enclosing one.(Ë©³­8Ñ³Æì1
+™
+java:S1319"|The type of "connections" should be an interface such as "ConcurrentMap" rather than the implementation "ConcurrentHashMap".(×ãô8Ó³Æì1

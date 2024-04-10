@@ -7,18 +7,18 @@ java:S1192j"FDefine a constant instead of duplicating this literal "WHITE" 4 ti
 java:S4973œ"<Strings and Boxed types should be compared using "equals()".(Â“Žøÿÿÿÿ8¥”¾ÿë1J$b678ddc1-4e4d-43a9-b214-59c70aa0c552
 …
 java:S4973œ"<Strings and Boxed types should be compared using "equals()".(Â“Žøÿÿÿÿ8¥”¾ÿë1J$0a680ec9-a33e-4940-8621-6221f80e1e37
-Š
-java:S2259½"FA "NullPointerException" could be thrown; "getGame()" can return null.(“ ´ž8£©Éÿë1J$79e80af4-b2af-4c88-8cb3-82dfac306b82
-Š
-java:S2259Œ"FA "NullPointerException" could be thrown; "getGame()" can return null.(î¹¯”8Ò”¾ÿë1J$cb6037a7-5cbe-4572-b242-cda84aab798e
-Ž
-java:S2259v"FA "NullPointerException" could be thrown; "getGame()" can return null.(œÓéµÿÿÿÿÿ8Ò”¾ÿë1J$1cf7aa6f-6499-4a7f-85ca-1ef31dbe03ca
 
 java:S2259æ"FA "NullPointerException" could be thrown; "getGame()" can return null.(³»¼îúÿÿÿÿ8Ò”¾ÿë1J$908021e6-cadf-48ed-9437-b8e88835e1bc
+Ž
+java:S2259v"FA "NullPointerException" could be thrown; "getGame()" can return null.(œÓéµÿÿÿÿÿ8Ò”¾ÿë1J$1cf7aa6f-6499-4a7f-85ca-1ef31dbe03ca
 Š
 java:S2259Í"FA "NullPointerException" could be thrown; "getGame()" can return null.(“ ´ž8˜ïÁÿë1J$5f58e57c-0abe-4766-9a73-78f856bd6d35
+Š
+java:S2259½"FA "NullPointerException" could be thrown; "getGame()" can return null.(“ ´ž8£©Éÿë1J$79e80af4-b2af-4c88-8cb3-82dfac306b82
 Ž
 java:S2259~"FA "NullPointerException" could be thrown; "getGame()" can return null.(›È¤úøÿÿÿÿ8Ò”¾ÿë1J$432ae10a-8001-4117-be71-4d7f3ad97a4c
+Š
+java:S2259Œ"FA "NullPointerException" could be thrown; "getGame()" can return null.(î¹¯”8Ò”¾ÿë1J$cb6037a7-5cbe-4572-b242-cda84aab798e
 {
 java:S1854^"8Remove this useless assignment to local variable "gson".(èˆµë8Û”¾ÿë1J$e4844927-d530-4077-9608-19e7ee817786
 l

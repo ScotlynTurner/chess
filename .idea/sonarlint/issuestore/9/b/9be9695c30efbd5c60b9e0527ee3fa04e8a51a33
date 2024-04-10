@@ -1,6 +1,10 @@
 
-{	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ˆñëûÿÿÿÿ8ÇŠ³şë1
-H
-java:S2160"+Override the "equals" method in this class.(™‰æ8ÊŠ³şë1
-L
-java:S1068"*Remove this unused "gameID" private field.(µ—ÒÙùÿÿÿÿ8ÍŠ³şë1
+¡	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ˆñëûÿÿÿÿ8á¿º®ì1J$aa8823f4-9f10-4bf8-a66c-234ed6bd890e
+\
+java:S2387":"commandType" is the name of a field in "UserGameCommand".(Èñ¼¦şÿÿÿÿ8¡¹Ä®ì1
+n
+java:S2160"+Override the "equals" method in this class.(™‰æ8ë¿º®ì1J$26caf107-7f8d-4535-a1a3-75dd15d5925e
+r
+java:S1068"*Remove this unused "gameID" private field.(µ—ÒÙùÿÿÿÿ8ğ¿º®ì1J$2e1176a6-1ac9-41d6-9a3e-66cab6518216
+Q
+java:S1068"/Remove this unused "commandType" private field.(Èñ¼¦şÿÿÿÿ8©¹Ä®ì1

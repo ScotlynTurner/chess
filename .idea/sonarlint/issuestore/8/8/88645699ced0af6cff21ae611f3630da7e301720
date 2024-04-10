@@ -2,7 +2,5 @@
 š	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ˆŽñëûÿÿÿÿJ$546f2c63-ca49-4f2a-a3d7-0754e7111159
 s
 java:S2160"+Override the "equals" method in this class.(éÀ¢”ýÿÿÿÿ8Œè¹þë1J$0e7d4da8-a018-4614-8927-20def02dd816
-u
-java:S1172"-Remove this unused method parameter "gameID".(”„–¤þÿÿÿÿ8çÿ¸þë1J$21c44872-6345-4834-a27e-45c0808c3270
 r
 java:S1068"*Remove this unused "gameID" private field.(µ—ÒÙùÿÿÿÿ8Žè¹þë1J$76af07c6-cfef-42f5-a845-8e66e18bedd2

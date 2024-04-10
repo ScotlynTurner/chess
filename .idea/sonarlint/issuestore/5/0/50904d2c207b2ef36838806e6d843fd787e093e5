@@ -1,9 +1,5 @@
 
-h
-java:S1301"KReplace this "switch" statement by "if" statements to increase readability.(ÏÊÆ8—¼µûë1
-u	java:S131"YComplete cases by adding the missing enum constants or add a default case to this switch.(ÏÊÆ8¥¼µûë1
-]	java:S125"<This block of commented-out lines of code should be removed.(­ üøÿÿÿÿ8§¼µûë1
-]
-java:S1854$";Remove this useless assignment to local variable "message".(ğÙŒ²úÿÿÿÿ8¨¼µûë1
-N
-java:S1481$",Remove this unused "message" local variable.(ğÙŒ²úÿÿÿÿ8©¼µûë1
+q
+java:S1172,".Remove this unused method parameter "session".(ë¿–Ó8£ÊòÈì1J$e49e9a59-8692-4827-81a9-feb6190bbcbf
+v
+java:S11722".Remove this unused method parameter "session".(µÍùÿÿÿÿÿ8÷ÒƒÉì1J$79001fa3-6d6f-43dc-99d9-35098f33ff57

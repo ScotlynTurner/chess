@@ -1,6 +1,6 @@
 
-š	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(þõûÍûÿÿÿÿJ$f12f5878-cb64-4c52-a7dc-9f73be5af0f8
-M
-java:S2160"+Override the "equals" method in this class.(éÆÚšùÿÿÿÿ8–ÈÇþë1
-M
-java:S1068"+Remove this unused "message" private field.(ù„è¿ûÿÿÿÿ8˜ÈÇþë1
+š	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(þõûÍûÿÿÿÿJ$fbf09d70-d9ea-4447-bc45-dd68584cd56c
+s
+java:S2160"+Override the "equals" method in this class.(éÆÚšùÿÿÿÿ8–ÈÇþë1J$bcf5205a-f3ed-418d-a9cd-86e26b77a577
+s
+java:S1068"+Remove this unused "message" private field.(ù„è¿ûÿÿÿÿ8˜ÈÇþë1J$e6577b21-28bc-444e-a392-d83cf0f9463c

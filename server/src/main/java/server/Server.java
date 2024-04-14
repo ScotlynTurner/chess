@@ -1,18 +1,23 @@
 package server;
 
 import dataAccess.DataAccessException;
+import server.websocket.WebSocketHandler;
 import spark.*;
 
 public class Server {
   private Handler handler = new Handler();
+  private WebSocketHandler webSocketHandler;
 
   public Server() {
+    webSocketHandler = new WebSocketHandler();
   }
 
   public int run(int desiredPort) {
     Spark.port(desiredPort);
 
     Spark.staticFiles.location("web");
+
+    Spark.webSocket("/connect", webSocketHandler);
 
     Spark.post("/user", this::registration);
     Spark.post("/session", this::login);

@@ -1,0 +1,13 @@
+
+
+java:S11929"NDefine a constant instead of duplicating this literal "authorization" 4 times.(‘ô×ÇøÿÿÿÿJ$4d1250da-f3db-4fcc-8b6b-eb5980f96a68
+”
+java:S1192"SDefine a constant instead of duplicating this literal "Error: bad request" 4 times.(«ˆºµúÿÿÿÿJ$a815dcc1-aa27-40c2-a1ab-8242f26ad3be
+½
+java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(çî—J$d83b1235-11e3-4238-abf5-8fbde649d394
+™
+java:S2159k"VRemove this call to "equals"; comparisons between unrelated types always return false.(ÈÑ´ß8ª±–¦í1J$e67fba00-4523-45be-9e15-017331810608
+¹
+java:S1130…"wRemove the declaration of thrown exception 'dataAccess.DataAccessException', as it cannot be thrown from method's body.(Àé’·ıÿÿÿÿJ$02feccb3-9147-4c00-bbf0-5dccb7e628da
+l
+java:S1172…"*Remove this unused method parameter "req".(Àé’·ıÿÿÿÿJ$b31d7eab-5b6c-4dcd-be50-f24ff6c82165

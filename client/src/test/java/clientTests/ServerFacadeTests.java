@@ -24,7 +24,7 @@ public class ServerFacadeTests {
   private ChessGame game = new ChessGame();
 
   @BeforeAll
-  public static void init() {
+  public static void init() throws ResponseException {
     server = new Server();
     var port = server.run(0);
     System.out.println("Started test HTTP server on " + port);
@@ -89,7 +89,6 @@ public class ServerFacadeTests {
   @Test
   @DisplayName("Logout Fail")
   public void badLogout() throws ResponseException {
-    facade.register(username, password, email);
     // Logout without logging in
     assertThrows(ResponseException.class, () -> {
       facade.logout();
@@ -158,7 +157,7 @@ public class ServerFacadeTests {
     facade.login(username, password);
 
     int gameID = facade.addGame("Test Game");
-    facade.joinGame("WHITE", gameID);
+    facade.joinGame(ChessGame.TeamColor.WHITE, gameID);
 
     expectedList.add(new GameData(gameID, username, null, "Test Game", game));
 
@@ -173,10 +172,10 @@ public class ServerFacadeTests {
     facade.login(username, password);
 
     int gameID = facade.addGame("Test Game");
-    facade.joinGame("WHITE", gameID);
+    facade.joinGame(ChessGame.TeamColor.WHITE, gameID);
 
     assertThrows(ResponseException.class, () -> {
-      facade.joinGame("WHITE", gameID);
+      facade.joinGame(ChessGame.TeamColor.WHITE, gameID);
     });
   }
 

@@ -1,11 +1,15 @@
 package server;
 
 import ResponseTypes.LoginResponse;
+import chess.ChessGame;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import model.AuthData;
 import model.GameData;
+import org.eclipse.jetty.websocket.api.Session;
+import websocket.ServerMessageObserver;
+import websocket.WebSocketCommunicator;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,7 +26,7 @@ public class ServerFacade {
   private final String serverUrl;
   private String authToken;
 
-  public ServerFacade(String url) {
+  public ServerFacade(String url) throws ResponseException {
     serverUrl = url;
   }
 
@@ -100,7 +104,13 @@ public class ServerFacade {
     }
   }
 
-  public void joinGame(String playerColor, int gameID) throws ResponseException {
+  public void joinGame(ChessGame.TeamColor clientColor, int gameID) throws ResponseException {
+    String playerColor;
+    if (clientColor == null) {
+      playerColor = "empty";
+    } else {
+      playerColor = String.valueOf(clientColor);
+    }
     try {
       var path = "/game";
       var requestBody = Map.of(
@@ -144,6 +154,8 @@ public class ServerFacade {
       String reqData = new Gson().toJson(request);
       try (OutputStream reqBody = http.getOutputStream()) {
         reqBody.write(reqData.getBytes());
+      } catch ( Exception e) {
+        System.out.println("ohr nohr");
       }
     }
   }

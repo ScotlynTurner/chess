@@ -1,8 +1,8 @@
 
-š	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ˆŽñëûÿÿÿÿJ$6150f23c-d63d-4e68-adeb-07707f481261
+š	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ˆŽñëûÿÿÿÿJ$51dc0778-0b34-4e62-a5b6-818cdac65921
 n
-java:S2160"+Override the "equals" method in this class.(Ô´—×8»¢¶þë1J$4ff8462e-87ed-4723-9ce3-3f3f226073b1
+java:S2160"+Override the "equals" method in this class.(Ô´—×8»¢¶þë1J$d86f3b44-ccee-4e34-93fb-99a5c8faff66
 r
-java:S1068"*Remove this unused "gameID" private field.(µ—ÒÙùÿÿÿÿ8½¢¶þë1J$2509217e-0520-43a6-afea-d1042ca87a45
+java:S1068"*Remove this unused "gameID" private field.(µ—ÒÙùÿÿÿÿ8½¢¶þë1J$efe74987-70e5-4058-a16d-00552f8606f5
 k
-java:S1068"(Remove this unused "move" private field.(ç÷ÙÙ8½¢¶þë1J$876fa539-e3bb-4a33-9a61-0a0b5f1e2dca
+java:S1068"(Remove this unused "move" private field.(ç÷ÙÙ8½¢¶þë1J$f13a72a2-8c51-4af2-9458-8b98accbf9e6

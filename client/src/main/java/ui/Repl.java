@@ -1,18 +1,17 @@
 package ui;
 
 import server.ResponseException;
-import server.Server;
 import webSocketMessages.serverMessages.ServerMessage;
-import websocket.NotificationHandler;
+import websocket.ServerMessageObserver;
 
 import java.util.Scanner;
 import static ui.EscapeSequences.*;
 
-public class Repl implements NotificationHandler {
+public class Repl implements ServerMessageObserver {
   private final ChessClient client;
   private String serverURL;
 
-  public Repl(String serverUrl, int port) {
+  public Repl(String serverUrl, int port) throws ResponseException {
     client = new ChessClient(serverUrl, this);
     this.serverURL = serverUrl;
   }
@@ -44,7 +43,12 @@ public class Repl implements NotificationHandler {
   }
 
   public void notify(ServerMessage notification) {
-    System.out.println(SET_BG_COLOR_BLUE + notification.getServerMessageType());
-    printPrompt();
+    if (notification.getServerMessageType().equals(ServerMessage.ServerMessageType.LOAD_GAME)) {
+      System.out.println("game loading...");
+    } else if (notification.getServerMessageType().equals(ServerMessage.ServerMessageType.NOTIFICATION)) {
+      System.out.println(SET_BG_COLOR_YELLOW + SET_TEXT_COLOR_BLACK + notification.getServerMessageType() + SET_BG_BRIGHT_WHITE);
+    } else {
+      System.out.println(SET_BG_CUSTOM_MAROON + SET_TEXT_CUSTOM_WHITE + notification.getServerMessageType() + SET_BG_BRIGHT_WHITE);
+    }
   }
 }

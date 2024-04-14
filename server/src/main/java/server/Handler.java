@@ -102,10 +102,12 @@ public class Handler {
         throw new DataAccessException("Error: bad request");
       }
 
-      if (clientColor != null) {
-        service.joinGame(clientColor.getAsString(), gameID.getAsInt(), authToken);
-      } else {
+      if (clientColor == null) {
         service.joinGame(null, gameID.getAsInt(), authToken);
+      } else if (clientColor.equals("WHITE")){
+        service.joinGame("WHITE", gameID.getAsInt(), authToken);
+      } else {
+        service.joinGame("BLACK", gameID.getAsInt(), authToken);
       }
       return "{}";
 

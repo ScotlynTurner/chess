@@ -1,29 +1,39 @@
 
-a
-java:S1192H"FDefine a constant instead of duplicating this literal "/game" 3 times.(ê´ã£şÿÿÿÿ
+
+java:S1192L"FDefine a constant instead of duplicating this literal "/game" 3 times.(ê´ã£şÿÿÿÿ8ò”¦§í1J$fa3e196c-d347-4dae-843d-62faedd0a3a6
+°
+java:S1319_"mThe return type of this method should be an interface such as "Set" rather than the implementation "HashSet".(ïÁˆä8ô”¦§í1J$127d03c8-bc4e-4560-8a50-46671c0efe36
+	java:S101b"NRename this record name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(çäáé8õ”¦§í1J$e0d794d4-b6da-446b-80b1-9cd80335806e
+
+java:S2259e"FA "NullPointerException" could be thrown; "response" is nullable here.(ñæÈ´øÿÿÿÿ8¦•¦§í1J$d6aa6caf-a0e8-404a-aa8b-bb045d13ff7f
+
+java:S22599"KA "NullPointerException" could be thrown; "loginResponse" is nullable here.(ÆÕÑ–8¦•¦§í1J$d7311830-edf8-4d52-982c-a5f4da8e63bd
+
+java:S2259*"FA "NullPointerException" could be thrown; "authData" is nullable here.(É›¯Ëùÿÿÿÿ8¦•¦§í1J$1c8e7bdf-6f9a-4752-a51a-8db32f2a65d7
+Œ
+java:S2259P"IA "NullPointerException" could be thrown; "makeRequest" is nullable here.(´ØĞ¦8¦•¦§í1J$0cc882af-2f71-47d3-879f-d017ad62aa87
+¾
+java:S1130"vRemove the declaration of thrown exception 'server.ResponseException', as it cannot be thrown from constructor's body.(öËñËøÿÿÿÿ8«•¦§í1J$78bea92f-3c9e-4215-baed-bb7ec3e74b0e
+‰
+java:S1075#"ARefactor your code to get this URI from a customizable parameter.(”É÷ùÿÿÿÿ8¬•¦§í1J$1b21796e-aabd-41c2-817a-1a70f326c509
 ƒ
-java:S1319["mThe return type of this method should be an interface such as "Set" rather than the implementation "HashSet".(ïÁˆä
-c	java:S101^"NRename this record name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(çäáé
+java:S10753"ARefactor your code to get this URI from a customizable parameter.(ÛÌJ8¯•¦§í1J$63a39f8a-eb20-4bcb-b731-30fcd8277b6c
+ƒ
+java:S1075B"ARefactor your code to get this URI from a customizable parameter.(ÛÌJ8±•¦§í1J$f9abe8fa-aebf-4f1c-be03-374c45771cf4
+r	java:S106E"+Replace this use of System.err by a logger.(÷Šêûÿÿÿÿ8²•¦§í1J$45759846-fb9d-4223-8bb1-a5152c0a4ea3
+‰
+java:S1075L"ARefactor your code to get this URI from a customizable parameter.(ê´ã£şÿÿÿÿ8³•¦§í1J$ae5e1d08-967a-4434-b167-cf3d2fb1f023
+‰
+java:S1075X"ARefactor your code to get this URI from a customizable parameter.(¥íËÎÿÿÿÿÿ8µ•¦§í1J$92d7f7e9-0fa9-4800-8784-e167d98145a6
+‰
+java:S1075a"ARefactor your code to get this URI from a customizable parameter.(ê´ã£şÿÿÿÿ8·•¦§í1J$7181d67e-0820-40de-ae87-6ebeadbafac8
+‰
+java:S1075s"ARefactor your code to get this URI from a customizable parameter.(ê´ã£şÿÿÿÿ8¹•¦§í1J$e4aea6ea-d763-4512-9f4b-73070e45bd1d
+n	java:S106"+Replace this use of System.out by a logger.(‚š‹­8Â•¦§í1J$80c5f4f2-17c7-493e-995e-1155ab558c21
 a
-java:S22595"KA "NullPointerException" could be thrown; "loginResponse" is nullable here.(ÆÕÑ–
-a
-java:S2259&"FA "NullPointerException" could be thrown; "authData" is nullable here.(É›¯Ëùÿÿÿÿ
-_
-java:S2259L"IA "NullPointerException" could be thrown; "makeRequest" is nullable here.(´ØĞ¦
-a
-java:S2259a"FA "NullPointerException" could be thrown; "response" is nullable here.(ñæÈ´øÿÿÿÿ
-\
-java:S1075"ARefactor your code to get this URI from a customizable parameter.(”É÷ùÿÿÿÿ
-V
-java:S1075/"ARefactor your code to get this URI from a customizable parameter.(ÛÌJ
-V
-java:S1075>"ARefactor your code to get this URI from a customizable parameter.(ÛÌJ
-E	java:S106A"+Replace this use of System.err by a logger.(÷Šêûÿÿÿÿ
-\
-java:S1075H"ARefactor your code to get this URI from a customizable parameter.(ê´ã£şÿÿÿÿ
-\
-java:S1075T"ARefactor your code to get this URI from a customizable parameter.(¥íËÎÿÿÿÿÿ
-\
-java:S1075]"ARefactor your code to get this URI from a customizable parameter.(ê´ã£şÿÿÿÿ
-\
-java:S1075i"ARefactor your code to get this URI from a customizable parameter.(ê´ã£şÿÿÿÿ
+java:S1128
+"DRemove this unused import 'org.eclipse.jetty.websocket.api.Session'.(Ãô¼«8çæ¦§í1
+X
+java:S1128"<Remove this unused import 'websocket.ServerMessageObserver'.(´Øw8çæ¦§í1
+Y
+java:S1128"<Remove this unused import 'websocket.WebSocketCommunicator'.(Ÿœ¦§8çæ¦§í1

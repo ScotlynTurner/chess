@@ -42,7 +42,6 @@ public class EscapeSequences {
   public static final String SET_BG_COLOR_GREEN = SET_BG_COLOR + "46m";
   public static final String SET_BG_COLOR_DARK_GREEN = SET_BG_COLOR + "22m";
   public static final String SET_BG_COLOR_YELLOW = SET_BG_COLOR + "226m";
-  public static final String SET_BG_COLOR_BLUE = SET_BG_COLOR + "12m";
   public static final String SET_BG_COLOR_MAGENTA = SET_BG_COLOR + "5m";
   public static final String SET_BG_COLOR_WHITE = SET_BG_COLOR + "15m";
   public static final String RESET_BG_COLOR = SET_BG_COLOR + "0m";
@@ -69,6 +68,8 @@ public class EscapeSequences {
   public static final String SET_BG_CUSTOM_PINK = "\u001B[48;2;198;132;132m";
   public static final String SET_BG_CUSTOM_MINT = "\u001B[48;2;163;201;170m";
   public static final String SET_BG_CUSTOM_WHITE = "\u001B[48;2;238;238;238m";
+
+  public static final String SET_BG_COLOR_BLUE = SET_BG_COLOR + "12m";
 
   public static final String SET_BG_CUSTOM_MAROON_FADED = "\u001B[48;2;205;169;169m";
   public static final String SET_BG_CUSTOM_PINK_FADED = "\u001B[48;2;222;195;195m";

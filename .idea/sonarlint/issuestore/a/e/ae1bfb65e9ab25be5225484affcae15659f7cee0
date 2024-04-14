@@ -1,5 +1,3 @@
 
-L
-java:S1066,"/Merge this if statement with the enclosing one.(Ë©³­8Ñ³Æì1
-™
-java:S1319"|The type of "connections" should be an interface such as "ConcurrentMap" rather than the implementation "ConcurrentHashMap".(×ãô8Ó³Æì1
+¿
+java:S1319"|The type of "connections" should be an interface such as "ConcurrentMap" rather than the implementation "ConcurrentHashMap".(×ãô8¸Œªí1J$078c3c2b-bdb5-4495-90d4-1e89e535322d

@@ -19,11 +19,11 @@ public class ConnectionManager {
     connections.remove(username);
   }
 
-  public void broadcastExcludeUser(String excludeUsername, ServerMessage notification) throws IOException {
+  public void broadcastExcludeUser(String excludeAuthToken, ServerMessage notification) throws IOException {
     var removeList = new ArrayList<Connection>();
     for (var c : connections.values()) {
       if (c.session.isOpen()) {
-        if (!c.username.equals(excludeUsername)) {
+        if (!c.authToken.equals(excludeAuthToken)) {
           c.send(notification.toString());
         }
       } else {
@@ -34,19 +34,20 @@ public class ConnectionManager {
 
     // Clean up any connections that were left open.
     for (var c : removeList) {
-      connections.remove(c.username);
+      connections.remove(c.authToken);
     }
   }
 
-  public void broadcastRoot(String username, ServerMessage notification) throws IOException {
+  public void broadcastRoot(String authToken, ServerMessage notification) throws IOException {
     for (var c : connections.values()) {
       if (c.session.isOpen()) {
-        if (c.username.equals(username)) {
+        if (c.authToken.equals(authToken)) {
           c.send(notification.toString());
-          break;
+          return;  // Exit the loop after sending the notification to the specified user
         }
+      } else {
+        connections.remove(c.authToken);  // Remove closed connections
       }
-      connections.remove(c.username);
     }
   }
 
@@ -59,7 +60,7 @@ public class ConnectionManager {
 
     // Clean up any connections that were left open.
     for (var c : connections.values()) {
-      connections.remove(c.username);
+      connections.remove(c.authToken);
     }
   }
 }

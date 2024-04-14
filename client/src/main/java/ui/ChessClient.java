@@ -6,8 +6,8 @@ import server.ResponseException;
 import server.ServerFacade;
 import com.google.gson.Gson;
 import dataAccess.DataAccessException;
-import websocket.NotificationHandler;
-import websocket.WebSocketFacade;
+import websocket.ServerMessageObserver;
+import websocket.WebSocketCommunicator;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -22,12 +22,12 @@ public class ChessClient {
   private State state = State.SIGNEDOUT;
   private Status status = Status.LOBBY;
   private int currentGameID = 0;
-  private String currentColor;
   private ChessGame game;
-  private NotificationHandler notificationHandler;
-  private WebSocketFacade ws;
+  private ChessGame.TeamColor currentColor;
+  private WebSocketCommunicator wsc;
+  ServerMessageObserver notificationHandler;
 
-  public ChessClient(String serverUrl, NotificationHandler notificationHandler) {
+  public ChessClient(String serverUrl, ServerMessageObserver notificationHandler) throws ResponseException {
     server = new ServerFacade(serverUrl);
     this.serverUrl = serverUrl;
     this.notificationHandler = notificationHandler;
@@ -52,7 +52,7 @@ public class ChessClient {
         case "move" -> move(params);
         case "leave" -> leave();
         case "resign" -> resign();
-        case "show" -> showMoves();
+        case "show" -> showMoves(params);
         default -> help();
       };
     } catch (Exception ex) {
@@ -100,33 +100,41 @@ public class ChessClient {
   }
 
   private String formatGame(GameData game) {
+    DrawBoard boards = new DrawBoard(game.game().getBoard());
     String formattedGame = SET_TEXT_CUSTOM_MAROON + SET_BG_CUSTOM_WHITE;
     formattedGame += game.gameID() + ": " + game.gameName() + "\nWhite: " + game.whiteUsername() + " | Black: " + game.blackUsername() + "\n";
     formattedGame += SET_BG_BRIGHT_WHITE;
-    formattedGame += drawBoards("WHITE", game.game().getBoard(), true, false, null);
+    formattedGame += boards.getListVersion(game.game());
     formattedGame += "\n";
     return formattedGame;
   }
 
   public String joinGame(String... params) throws ResponseException, DataAccessException {
     assertSignedIn();
+    ChessGame.TeamColor playerColor;
     if (params.length >= 1) {
       var id = Integer.parseInt(params[0]);
-      if (params.length >= 2 && !params[1].equals("empty")) {
-        var playerColor = params[1];
-        server.joinGame(playerColor, id);
-        System.out.println(drawBoards(playerColor, getGame(id).getBoard(), false, false, null));
-        ws.joinPlayer(authToken);
+      currentGameID = id;
+      if (params.length >= 2 && !params[1].equalsIgnoreCase("empty")) {
+        if (params[1].equalsIgnoreCase("white")) {
+          playerColor = ChessGame.TeamColor.WHITE;
+        } else {
+          playerColor = ChessGame.TeamColor.BLACK;
+        }
+        wsc = new WebSocketCommunicator(serverUrl, notificationHandler);
+        wsc.joinPlayer(authToken, id, playerColor);
+        System.out.println(drawBoards(playerColor, getGame(id), false, null));
         status = Status.PLAYING;
-        currentGameID = id;
+        server.joinGame(playerColor, id);
+        currentColor = playerColor;
         game = getGame(id);
         return String.format("%s has joined the game as %s", username, playerColor);
       }
-      server.joinGame("empty", id);
-      System.out.println(drawBoards(null, getGame(id).getBoard(), false, false, null));
-      ws.joinObserver(authToken);
+      wsc = new WebSocketCommunicator(serverUrl, notificationHandler);
+      wsc.joinObserver(authToken, id);
+      server.joinGame(null, id);
+      System.out.println(drawBoards(null, getGame(id), false, null));
       status = Status.OBSERVING;
-      currentGameID = id;
       return String.format("%s has joined the game as an observer", username);
     }
     throw new ResponseException(400, "Expected: <ID> [WHITE|BLACK|<empty>]");
@@ -136,11 +144,12 @@ public class ChessClient {
     assertSignedIn();
     if (params.length == 1) {
       var id = Integer.parseInt(params[0]);
-      server.joinGame("empty", id);
-      System.out.println(drawBoards("WHITE", getGame(id).getBoard(), false, false, null));
-      ws.joinObserver(authToken);
-      status = Status.OBSERVING;
       currentGameID = id;
+      wsc = new WebSocketCommunicator(serverUrl, notificationHandler);
+      wsc.joinObserver(authToken, id);
+      server.joinGame(null, id);
+      System.out.println(drawBoards(ChessGame.TeamColor.WHITE, getGame(id), false, null));
+      status = Status.OBSERVING;
       return String.format("%s has joined the game as an observer", username);
     }
     throw new ResponseException(400, "Expected: <ID>");
@@ -163,7 +172,7 @@ public class ChessClient {
     throw new ResponseException(400, "Expected: <NAME>");
   }
 
-  private ChessGame getGame(int id) throws ResponseException, DataAccessException {
+  private ChessGame getGame(int id) throws ResponseException {
     for (var game : server.listGames()) {
       if (game.gameID() == id) {
         return game.game();
@@ -172,7 +181,7 @@ public class ChessClient {
     return null;
   }
 
-  public String move(String... params) throws ResponseException, DataAccessException, InvalidMoveException {
+  public String move(String... params) throws ResponseException, InvalidMoveException {
     assertSignedIn();
     assertPlaying();
     if (params.length >= 5) {
@@ -186,23 +195,16 @@ public class ChessClient {
 
       ChessMove move = new ChessMove(startPosition, endPosition, null);
       game.makeMove(move);
-      System.out.println(drawBoards(currentColor, getGame(currentGameID).getBoard(), false, false, null));
+      wsc.makeMove(authToken, currentGameID, move);
+      System.out.println(drawBoards(currentColor, getGame(currentGameID), false, null));
       return String.format("%s moved (%s, %s) to (%s, %s)", username, startCoordNum, startCoordLetter, endCoordNum, endCoordLetter);
     }
     throw new ResponseException(400, "Expected: <NUMBER> <LETTER> to <NUMBER> <LETTER>");
   }
 
-  private int convertLetter(String letter) {
-    char c = letter.charAt(0);
-    if (c >= 'a' && c <= 'h') {
-      return c - 'a' + 1;
-    }
-    return 0;
-  }
-
-  public String redraw() throws ResponseException, DataAccessException {
+  public String redraw() throws ResponseException {
     assertSignedIn();
-    System.out.println(drawBoards(currentColor, getGame(currentGameID).getBoard(), false, false, null));
+    System.out.println(drawBoards(currentColor, getGame(currentGameID), false, null));
     return "";
   }
 
@@ -212,30 +214,45 @@ public class ChessClient {
     Scanner scanner = new Scanner(System.in);
     System.out.println("Are you sure you want to resign? <yes|no>");
     String line = scanner.nextLine();
-    if (line.equalsIgnoreCase("no")) {
+    if (!line.equalsIgnoreCase("yes")) {
       return "Continuing game...";
     } else {
       status = Status.OBSERVING;
+      wsc.resign(authToken, currentGameID);
       return String.format("%s resigned", username);
     }
   }
 
-  public String showMoves(String... params) throws ResponseException, InvalidMoveException, DataAccessException {
+  public String showMoves(String... params) throws ResponseException {
     assertSignedIn();
     if (params.length >= 2) {
       var startCoordNum = Integer.parseInt(params[0]);
       var startCoordLetter = convertLetter(params[1]);
       ChessPosition position = new ChessPosition(startCoordNum, startCoordLetter);
-
-      System.out.println(drawBoards(currentColor, getGame(currentGameID).getBoard(), false, true, position));
+      System.out.println(drawBoards(currentColor, getGame(currentGameID), false, position));
       return "";
     }
     throw new ResponseException(400, "Expected: <NUMBER> <LETTER>");
   }
 
-  public String leave() {
-    ws = null;
+  private int convertLetter(String letter) {
+    switch (letter) {
+      case "a": return 1;
+      case "b": return 2;
+      case "c": return 3;
+      case "d": return 4;
+      case "e": return 5;
+      case "f": return 6;
+      case "g": return 7;
+      case "h": return 8;
+      default: return 0;
+    }
+  }
+
+  public String leave() throws ResponseException {
+    wsc.leave(authToken, currentGameID);
     status = Status.LOBBY;
+    wsc = null;
     return String.format("%s left the game", username);
   }
 
@@ -253,14 +270,14 @@ public class ChessClient {
               - redraw
               - move <NUMBER> <LETTER> to <NUMBER> <LETTER>
               - resign
-              - show moves <NUMBER> <LETTER>
+              - show <NUMBER> <LETTER>
               - leave
               - help
               """;
     } else if (status == status.OBSERVING) {
       return SET_TEXT_CUSTOM_MAROON + SET_BG_CUSTOM_WHITE + """
               - redraw
-              - show moves <NUMBER> <LETTER>
+              - show <NUMBER> <LETTER>
               - leave
               - help
               """;
@@ -277,19 +294,13 @@ public class ChessClient {
                 """;
   }
 
-  private String drawBoards(String playerColor, ChessBoard board, boolean list, boolean highlight, ChessPosition position) {
-    DrawBoard boards = new DrawBoard(board);
+  private String drawBoards(ChessGame.TeamColor playerColor, ChessGame game, boolean highlight, ChessPosition position) {
+    DrawBoard boards = new DrawBoard(game.getBoard());
     String boardLayout = "";
-    if (!list) {
-      if (playerColor == "WHITE" || playerColor == "empty") {
-        boardLayout = boards.getWhiteDrawings(game, position);
-        currentColor = "WHITE";
-      } else {
-        boardLayout = boards.getBlackDrawings(highlight, game, position);
-        currentColor = "BLACK";
-      }
+    if (playerColor == ChessGame.TeamColor.WHITE || playerColor == null) {
+      boardLayout = boards.getWhiteDrawings(game, position);
     } else {
-      boardLayout = boards.drawNormal();
+      boardLayout = boards.getBlackDrawings(highlight, game, position);
     }
     return boardLayout;
   }

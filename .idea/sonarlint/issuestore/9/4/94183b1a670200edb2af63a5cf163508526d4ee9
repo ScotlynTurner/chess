@@ -1,5 +1,5 @@
 
-q
-java:S1104"TMake username a static final constant or non-public and provide accessors if needed.(Ü±›Ô8µä—ûë1
+
+java:S1104"UMake authToken a static final constant or non-public and provide accessors if needed.(Éú¡ñûÿÿÿÿ8ü¨Ìí1J$479cc618-39c7-43af-8aaf-9c0488ac27bc
 ›
-java:S1104	"SMake session a static final constant or non-public and provide accessors if needed.(áÿ“ƒıÿÿÿÿ8«Î–ûë1J$94681486-250b-423e-81bf-b3e622ab9330
+java:S1104	"SMake session a static final constant or non-public and provide accessors if needed.(áÿ“ƒıÿÿÿÿ8«Î–ûë1J$b6b94c69-d402-4a1a-99b8-0da8395e6da5

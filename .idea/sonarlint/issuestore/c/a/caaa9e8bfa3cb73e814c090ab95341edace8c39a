@@ -1,26 +1,32 @@
 
 _
-java:S1643"Use a StringBuilder instead.(éËÀÏ8ÒöÎşë1J$217070d9-882b-4898-be9b-5b5536b024a0
+java:S1643"Use a StringBuilder instead.(éËÀÏ8ÁÓÀ˜í1J$1e9a332a-5bc6-41c1-80c6-f1360bafd041
 d
-java:S1643"Use a StringBuilder instead.(ù¼° ıÿÿÿÿ8ÓöÎşë1J$702dfcd1-ca2f-4ab4-a620-8e1a9c05117a
+java:S1643"Use a StringBuilder instead.(ù¼° ıÿÿÿÿ8ÇÓÀ˜í1J$10c552cc-892c-4bc0-bf8e-797546d8c239
 ^
-java:S1643 "Use a StringBuilder instead.(«±ï8ÓöÎşë1J$22180202-307c-4d4b-9073-fa74a84c52f3
+java:S1643 "Use a StringBuilder instead.(«±ï8ÈÓÀ˜í1J$35d1ced8-48b1-488f-8e72-a2f12e0c7799
 _
-java:S1643+"Use a StringBuilder instead.(éËÀÏ8ÓöÎşë1J$05b8d3d7-a283-441b-91f8-f63cf9c1b9e7
+java:S1643+"Use a StringBuilder instead.(éËÀÏ8ÉÓÀ˜í1J$e375eecd-7077-4c71-986d-fb4c0507ed9f
 d
-java:S1643-"Use a StringBuilder instead.(ù¼° ıÿÿÿÿ8ÓöÎşë1J$13fcd36e-669a-4210-9469-c0fd6eb8c11a
+java:S1643-"Use a StringBuilder instead.(ù¼° ıÿÿÿÿ8ÉÓÀ˜í1J$f3b8d713-0aeb-4447-a736-af552f6939db
 ^
-java:S1643."Use a StringBuilder instead.(«±ï8ÓöÎşë1J$9d4b3acb-9b60-4195-95dd-f6d2081837f7
+java:S1643."Use a StringBuilder instead.(«±ï8ÉÓÀ˜í1J$6141584e-7046-447c-8ee8-0dd1351dabb7
 `
-java:S1700"Rename field "drawBoard"(Ï¿ğ¯ÿÿÿÿÿ8ÔöÎşë1J$e2d5a2fd-4ae3-459e-80a3-a96028a541c2
+java:S1700"Rename field "drawBoard"(Ï¿ğ¯ÿÿÿÿÿ8ÏÓÀ˜í1J$46436293-2b0f-45bf-8a77-d1ab28b76015
+
+java:S2589q"7Remove this expression which always evaluates to "true"(«½âÑşÿÿÿÿ8¤øÖ˜í1J$aa4cc024-745e-4f81-9cf7-1ad2e9ae0671
+
+java:S2589k"7Remove this expression which always evaluates to "true"(«½âÑşÿÿÿÿ8î·Ø˜í1J$0949ec34-78d6-42fc-8b38-244aa440adf6
 x
-java:S1172;"0Remove this unused method parameter "highlight".(İéâúÿÿÿÿ8çöÎşë1J$6c1f916d-8e4e-4a72-b815-7f5b7059e239
+java:S1172;"0Remove this unused method parameter "highlight".(İéâúÿÿÿÿ8”ÔÀ˜í1J$c01e8df8-f9a0-4190-9ac7-3978b55f2828
 ‰
-java:S1126C"AReplace this if-then-else statement by a single return statement.(†©æ¶ÿÿÿÿÿ8èöÎşë1J$24acef3f-5d50-4cba-b0b9-c08b0707f539
+java:S1126H"AReplace this if-then-else statement by a single return statement.(†©æ¶ÿÿÿÿÿ8—ÔÀ˜í1J$5cb72d9c-48fb-40eb-a41e-a7064d9727be
+•
+java:S3776["RRefactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.(øºµ½8šÔÀ˜í1J$def179b9-7a1a-4cd4-8e51-169843f8fb22
 h
-java:S1128"%Remove this unused import 'java.awt'.(ï´µ©8ı²Ïşë1J$718755fe-64bf-4852-8b32-fec364747a6a
+java:S1128"%Remove this unused import 'java.awt'.(ï´µ©8®ÔÀ˜í1J$579e2e78-3880-4287-9173-f1468a96603f
 s
-java:S1128	"0Remove this unused import 'java.util.ArrayList'.(÷‰îƒ8ı²Ïşë1J$c7101a44-ec49-416c-9f86-6bc8498b391b
+java:S1128	"0Remove this unused import 'java.util.ArrayList'.(÷‰îƒ8®ÔÀ˜í1J$dc90fee2-570f-4d2e-8a51-f7f66d2f25a2
 y
 java:S1128
-"1Remove this unused import 'java.util.Collection'.(¹ÉĞšùÿÿÿÿ8ı²Ïşë1J$adb5154f-9432-43ec-867d-9cb3440afe56
+"1Remove this unused import 'java.util.Collection'.(¹ÉĞšùÿÿÿÿ8®ÔÀ˜í1J$36ef1d63-4f82-482c-9d79-627bc5946a17

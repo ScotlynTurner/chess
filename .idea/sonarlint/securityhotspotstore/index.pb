@@ -91,3 +91,17 @@ _
 /server/src/main/java/dataAccess/SQLUserDAO.java,2/4/2499a4063d884c5c0a3607a0afb428f1db486bfa
 \
 ,server/src/main/java/dataAccess/GameDAO.java,9/9/9972356c2123657992e806d5a813697939ac7d20
+r
+Bshared/src/main/java/webSocketMessages/userCommands/UserError.java,5/6/56a891c0bfd0db23da4151d411bc97243c636665
+Z
+*shared/src/main/java/chess/GameStatus.java,7/1/716c90ebbc80b23358349d74cf2a9b98cd23397d
+b
+2shared/src/test/java/passoffTests/TestFactory.java,e/9/e9394cf4f23ef8e3e7f7d6cf9f7b3605ba345448
+b
+2server/src/main/java/dataAccess/MemoryGameDAO.java,f/5/f5bab9e0cdd315970301eb97f206a0cf2cdd84ea
+f
+6server/src/test/java/dataAccessTests/GameDAOTests.java,7/2/724ff0496030b6bf9d19072749b833d7030b1f96
+f
+6server/src/test/java/dataAccessTests/UserDAOTests.java,1/1/1116ea8ce12b96a7de1e72b3fd4cd95a0cdf2457
+X
+(server/src/main/java/model/GameData.java,5/b/5b87409e0f8639b8494cb364d63a671c886dd8dc

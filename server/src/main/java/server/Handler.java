@@ -106,7 +106,7 @@ public class Handler {
         service.joinGame(null, gameID.getAsInt(), authToken);
       } else if (clientColor.equals("WHITE")){
         service.joinGame("WHITE", gameID.getAsInt(), authToken);
-      } else {
+      } else if (clientColor.equals("BLACK")){
         service.joinGame("BLACK", gameID.getAsInt(), authToken);
       }
       return "{}";

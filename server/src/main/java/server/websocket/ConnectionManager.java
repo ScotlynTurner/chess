@@ -1,5 +1,6 @@
 package server.websocket;
 
+import com.google.gson.Gson;
 import org.eclipse.jetty.websocket.api.Session;
 import webSocketMessages.serverMessages.ServerMessage;
 
@@ -31,7 +32,6 @@ public class ConnectionManager {
       }
     }
 
-
     // Clean up any connections that were left open.
     for (var c : removeList) {
       connections.remove(c.authToken);
@@ -39,6 +39,7 @@ public class ConnectionManager {
   }
 
   public void broadcastRoot(String authToken, ServerMessage notification) throws IOException {
+    var removeList = new ArrayList<Connection>();
     for (var c : connections.values()) {
       if (c.session.isOpen()) {
         if (c.authToken.equals(authToken)) {
@@ -46,20 +47,28 @@ public class ConnectionManager {
           return;  // Exit the loop after sending the notification to the specified user
         }
       } else {
-        connections.remove(c.authToken);  // Remove closed connections
-      }
-    }
-  }
-
-  public void broadcastAll(ServerMessage notification) throws IOException {
-    for (var c : connections.values()) {
-      if (c.session.isOpen()) {
-        c.send(notification.toString());
+        removeList.add(c);
       }
     }
 
     // Clean up any connections that were left open.
+    for (var c : removeList) {
+      connections.remove(c.authToken);
+    }
+  }
+
+  public void broadcastAll(ServerMessage notification) throws IOException {
+    var removeList = new ArrayList<Connection>();
     for (var c : connections.values()) {
+      if (c.session.isOpen()) {
+        c.send(new Gson().toJson(notification));
+      } else {
+        removeList.add(c);
+      }
+    }
+
+    // Clean up any connections that were left open.
+    for (var c : removeList) {
       connections.remove(c.authToken);
     }
   }

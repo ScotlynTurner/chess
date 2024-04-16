@@ -105,11 +105,13 @@ public class ServerFacade {
   }
 
   public void joinGame(ChessGame.TeamColor clientColor, int gameID) throws ResponseException {
-    String playerColor;
+    String playerColor = "";
     if (clientColor == null) {
       playerColor = "empty";
-    } else {
-      playerColor = String.valueOf(clientColor);
+    } else if (clientColor == ChessGame.TeamColor.WHITE){
+      playerColor = "WHITE";
+    } else if (clientColor == ChessGame.TeamColor.BLACK) {
+      playerColor = "BLACK";
     }
     try {
       var path = "/game";

@@ -1,17 +1,17 @@
 
+x
+java:S1066³"/Merge this if statement with the enclosing one.(÷š¯æùÿÿÿÿ8¨ûöœî1J$ff492e60-2417-49fc-be5c-8f7ae0c8e6d4
+k
+java:S5411W"(Use a primitive boolean expression here.(ÍŞ…æ8«ûöœî1J$c184f6f2-dd8c-4569-843c-435bd2977150
+k
+java:S5411~"(Use a primitive boolean expression here.(ÍŞ…æ8«ûöœî1J$9b922b82-4a3a-48b4-8edb-218a92cf20eb
+£
+java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ÚïÖÆûÿÿÿÿ8˜›üœî1
+…
+java:S1126–"AReplace this if-then-else statement by a single return statement.(Şå—û8ÿşöœî1J$77213818-865e-47e4-acd7-634f21839be9
+–
+java:S3776¦"RRefactor this method to reduce its Cognitive Complexity from 21 to the 15 allowed.(„İÊ8‚ÿöœî1J$b04bce03-4175-4b71-9ac9-fbff18d201a5
 q
-java:S1066³"/Merge this if statement with the enclosing one.(÷š¯æùÿÿÿÿJ$1339ea45-10d3-43dc-ba73-bee4308d7c48
-d
-java:S5411W"(Use a primitive boolean expression here.(ÍŞ…æJ$afa70a2e-31f7-4d69-b12d-d71452a5262d
-d
-java:S5411~"(Use a primitive boolean expression here.(ÍŞ…æJ$45225076-3edb-45d9-a1c1-aff9052a05d1
-Â
-java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ÚïÖÆûÿÿÿÿJ$39f3fc93-a863-45fa-9029-e4c3afc5c189
-~
-java:S1126–"AReplace this if-then-else statement by a single return statement.(Şå—ûJ$f69354a5-6410-452d-b399-5546f3dfd250
-
-java:S3776¦"RRefactor this method to reduce its Cognitive Complexity from 21 to the 15 allowed.(„İÊJ$f2731aeb-f4d7-4009-9a6e-e02fd1f15a20
-j
-java:S1481Ù"-Remove this unused "position" local variable.(´¤†‘J$cc96ce77-b8fc-4c52-9ea1-c7227b023dcc
-”
-java:S3776â"RRefactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.(Ú™°šÿÿÿÿÿJ$155e61e8-f5e8-4426-a7c9-d5b7aa64c4cb
+java:S1481Ù"-Remove this unused "position" local variable.(´¤†‘8‰ÿöœî1J$3fffa1e8-50b0-4c61-8e50-8e3885bce891
+›
+java:S3776â"RRefactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.(Ú™°šÿÿÿÿÿ8Šÿöœî1J$b31082be-90e6-46d9-9d85-9239b7c906bc

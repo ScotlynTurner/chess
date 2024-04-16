@@ -1,9 +1,9 @@
 
-`	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òιόÿÿÿÿ
-o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(δεσ
-`
-java:S1124"EReorder the modifiers to comply with the Java Language Specification.(ύ«΅—ύÿÿÿÿ
-I
-java:S1481+".Remove this unused "exception" local variable.(™Ζιϊÿÿÿÿ
-D
-java:S1068")Remove this unused "games" private field.(ύ«΅—ύÿÿÿÿ
+	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òιόÿÿÿÿ8µΆΆξ1J$d89df71b-e2d7-4edc-b259-da7d5200c42c
+	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(δεσ8»ΆΆξ1J$7f752ae6-0c7f-43f3-8ca6-8cd0762fe2be
+
+java:S1124"EReorder the modifiers to comply with the Java Language Specification.(ύ«΅—ύÿÿÿÿ8ΟΆΆξ1J$fb9e2887-1b06-4696-901e-f7b01429d2f2
+v
+java:S1481+".Remove this unused "exception" local variable.(™Ζιϊÿÿÿÿ8ΪΆΆξ1J$587f9aec-de15-4cb6-beb8-e8936ded8ede
+q
+java:S1068")Remove this unused "games" private field.(ύ«΅—ύÿÿÿÿ8ζΆΆξ1J$49a9b0d4-8411-40e3-9bad-b7004685d59b

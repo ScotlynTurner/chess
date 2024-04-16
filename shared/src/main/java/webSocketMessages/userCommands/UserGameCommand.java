@@ -1,7 +1,5 @@
 package webSocketMessages.userCommands;
 
-import chess.ChessGame;
-
 import java.util.Objects;
 
 /**
@@ -22,7 +20,8 @@ public class UserGameCommand {
     JOIN_OBSERVER,
     MAKE_MOVE,
     LEAVE,
-    RESIGN
+    RESIGN,
+    USER_ERROR
   }
 
   protected CommandType commandType;

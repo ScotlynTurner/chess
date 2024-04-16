@@ -1,7 +1,9 @@
 
-v
-java:S1172^".Remove this unused method parameter "session".(ûÜ¼¾şÿÿÿÿ8Ø–ñÌí1J$4b6b8992-295e-4b33-a4c5-c294d02e6108
-q
-java:S1172i".Remove this unused method parameter "session".(Å°Ú8Ú–ñÌí1J$a051bce5-5c97-4042-92f4-be48bcac662e
-¿
-java:S1130u"wRemove the declaration of thrown exception 'dataAccess.DataAccessException', as it cannot be thrown from method's body.(¿¤çÀûÿÿÿÿ8Å”¤Íí1J$faa3182b-e95a-4135-a7a8-385400a51cac
+w
+java:S1066P"/Merge this if statement with the enclosing one.(îÎ¿şşÿÿÿÿ8•†ô¡î1J$698a337d-1e64-4d85-a1a7-bba2acae2680
+À
+java:S1130š"wRemove the declaration of thrown exception 'dataAccess.DataAccessException', as it cannot be thrown from method's body.(½ê©òÿÿÿÿÿ8ø†ô¡î1J$11cdf6bf-bd9a-4629-9080-de97e62cd4fd
+p
+java:S1068".Remove this unused "userAccess" private field.(Î¾İh8ù†ô¡î1J$ccfb57ad-3772-4064-a9f9-7db7f00dad7c
+k
+java:S1068!"(Remove this unused "move" private field.(ç÷ÙÙ8ú†ô¡î1J$61544345-b1f7-4d0c-a688-011679eb9b12

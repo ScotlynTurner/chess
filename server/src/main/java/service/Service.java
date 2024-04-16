@@ -51,12 +51,12 @@ public class Service {
     if (clientColor == null || clientColor.equals("empty")) {
       return;
     }
-    if (clientColor.equals("BLACK")) {
-      if (gameData.blackUsername() != null) {
+    if (clientColor.equals("WHITE")) {
+      if (gameData.whiteUsername() != null) {
         throw new DataAccessException("Error: already taken");
       }
-    } else if (clientColor.equals("WHITE")) {
-      if (gameData.whiteUsername() != null) {
+    } else if (clientColor.equals("BLACK")) {
+      if (gameData.blackUsername() != null) {
         throw new DataAccessException("Error: already taken");
       }
     }

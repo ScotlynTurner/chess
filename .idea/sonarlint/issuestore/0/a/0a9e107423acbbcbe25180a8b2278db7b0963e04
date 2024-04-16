@@ -1,39 +1,39 @@
 
 
-java:S1192L"FDefine a constant instead of duplicating this literal "/game" 3 times.(ê´ã£şÿÿÿÿ8ò”¦§í1J$fa3e196c-d347-4dae-843d-62faedd0a3a6
+java:S1192L"FDefine a constant instead of duplicating this literal "/game" 3 times.(ê´ã£şÿÿÿÿ8ò”¦§í1J$a56b44a8-a7e8-45b1-a2ca-84e2e412dc36
 °
-java:S1319_"mThe return type of this method should be an interface such as "Set" rather than the implementation "HashSet".(ïÁˆä8ô”¦§í1J$127d03c8-bc4e-4560-8a50-46671c0efe36
-	java:S101b"NRename this record name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(çäáé8õ”¦§í1J$e0d794d4-b6da-446b-80b1-9cd80335806e
-
-java:S2259e"FA "NullPointerException" could be thrown; "response" is nullable here.(ñæÈ´øÿÿÿÿ8¦•¦§í1J$d6aa6caf-a0e8-404a-aa8b-bb045d13ff7f
-
-java:S22599"KA "NullPointerException" could be thrown; "loginResponse" is nullable here.(ÆÕÑ–8¦•¦§í1J$d7311830-edf8-4d52-982c-a5f4da8e63bd
-
-java:S2259*"FA "NullPointerException" could be thrown; "authData" is nullable here.(É›¯Ëùÿÿÿÿ8¦•¦§í1J$1c8e7bdf-6f9a-4752-a51a-8db32f2a65d7
+java:S1319_"mThe return type of this method should be an interface such as "Set" rather than the implementation "HashSet".(ïÁˆä8ô”¦§í1J$60f14e7c-ad1b-4e43-a8fa-2a22202ddc91
+	java:S101b"NRename this record name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(çäáé8õ”¦§í1J$b36f69dd-38b8-43b1-bc56-b730cc6ba92a
 Œ
-java:S2259P"IA "NullPointerException" could be thrown; "makeRequest" is nullable here.(´ØĞ¦8¦•¦§í1J$0cc882af-2f71-47d3-879f-d017ad62aa87
+java:S2259P"IA "NullPointerException" could be thrown; "makeRequest" is nullable here.(´ØĞ¦8¦•¦§í1J$360cb8fd-2e8c-47a7-91b8-8b7d2d2bd784
+
+java:S22599"KA "NullPointerException" could be thrown; "loginResponse" is nullable here.(ÆÕÑ–8¦•¦§í1J$5a934bab-39d2-4d0c-b0f0-39ae35115676
+
+java:S2259e"FA "NullPointerException" could be thrown; "response" is nullable here.(ñæÈ´øÿÿÿÿ8¦•¦§í1J$3b4540f9-9828-405c-8878-818d047bdaa1
+
+java:S2259*"FA "NullPointerException" could be thrown; "authData" is nullable here.(É›¯Ëùÿÿÿÿ8¦•¦§í1J$ab501a71-6ca2-4453-b24d-23d20250778d
 ¾
-java:S1130"vRemove the declaration of thrown exception 'server.ResponseException', as it cannot be thrown from constructor's body.(öËñËøÿÿÿÿ8«•¦§í1J$78bea92f-3c9e-4215-baed-bb7ec3e74b0e
+java:S1130"vRemove the declaration of thrown exception 'server.ResponseException', as it cannot be thrown from constructor's body.(öËñËøÿÿÿÿ8«•¦§í1J$4848741d-4bae-4d9f-8c94-0d09bf6dc5a5
 ‰
-java:S1075#"ARefactor your code to get this URI from a customizable parameter.(”É÷ùÿÿÿÿ8¬•¦§í1J$1b21796e-aabd-41c2-817a-1a70f326c509
+java:S1075#"ARefactor your code to get this URI from a customizable parameter.(”É÷ùÿÿÿÿ8¬•¦§í1J$54baae86-9407-4bbe-9a0f-67cccd6a3871
 ƒ
-java:S10753"ARefactor your code to get this URI from a customizable parameter.(ÛÌJ8¯•¦§í1J$63a39f8a-eb20-4bcb-b731-30fcd8277b6c
+java:S10753"ARefactor your code to get this URI from a customizable parameter.(ÛÌJ8¯•¦§í1J$6788a6b6-b844-44b7-93ca-7af0cd3804bc
 ƒ
-java:S1075B"ARefactor your code to get this URI from a customizable parameter.(ÛÌJ8±•¦§í1J$f9abe8fa-aebf-4f1c-be03-374c45771cf4
-r	java:S106E"+Replace this use of System.err by a logger.(÷Šêûÿÿÿÿ8²•¦§í1J$45759846-fb9d-4223-8bb1-a5152c0a4ea3
+java:S1075B"ARefactor your code to get this URI from a customizable parameter.(ÛÌJ8±•¦§í1J$8d4f3c9d-6673-421c-b30b-8f03df395e2f
+r	java:S106E"+Replace this use of System.err by a logger.(÷Šêûÿÿÿÿ8²•¦§í1J$9cc404a9-4698-4528-9732-e59953a7513f
 ‰
-java:S1075L"ARefactor your code to get this URI from a customizable parameter.(ê´ã£şÿÿÿÿ8³•¦§í1J$ae5e1d08-967a-4434-b167-cf3d2fb1f023
+java:S1075L"ARefactor your code to get this URI from a customizable parameter.(ê´ã£şÿÿÿÿ8³•¦§í1J$4eea9e33-74ae-4970-bdb9-cc7779bbc1fb
 ‰
-java:S1075X"ARefactor your code to get this URI from a customizable parameter.(¥íËÎÿÿÿÿÿ8µ•¦§í1J$92d7f7e9-0fa9-4800-8784-e167d98145a6
+java:S1075X"ARefactor your code to get this URI from a customizable parameter.(¥íËÎÿÿÿÿÿ8µ•¦§í1J$f56e5397-f77c-4526-bce7-977216fadea8
 ‰
-java:S1075a"ARefactor your code to get this URI from a customizable parameter.(ê´ã£şÿÿÿÿ8·•¦§í1J$7181d67e-0820-40de-ae87-6ebeadbafac8
+java:S1075a"ARefactor your code to get this URI from a customizable parameter.(ê´ã£şÿÿÿÿ8·•¦§í1J$c3dde812-3b31-49d0-bcd8-2b906f6b08bf
 ‰
-java:S1075s"ARefactor your code to get this URI from a customizable parameter.(ê´ã£şÿÿÿÿ8¹•¦§í1J$e4aea6ea-d763-4512-9f4b-73070e45bd1d
-n	java:S106"+Replace this use of System.out by a logger.(‚š‹­8Â•¦§í1J$80c5f4f2-17c7-493e-995e-1155ab558c21
-a
+java:S1075u"ARefactor your code to get this URI from a customizable parameter.(ê´ã£şÿÿÿÿ8ùâß›î1J$55f5226a-1757-4f31-ae14-919099107218
+n	java:S106 "+Replace this use of System.out by a logger.(‚š‹­8Â•¦§í1J$168891f6-6896-460e-8247-a2bb584f5a28
+‡
 java:S1128
-"DRemove this unused import 'org.eclipse.jetty.websocket.api.Session'.(Ãô¼«8çæ¦§í1
-X
-java:S1128"<Remove this unused import 'websocket.ServerMessageObserver'.(´Øw8çæ¦§í1
-Y
-java:S1128"<Remove this unused import 'websocket.WebSocketCommunicator'.(Ÿœ¦§8çæ¦§í1
+"DRemove this unused import 'org.eclipse.jetty.websocket.api.Session'.(Ãô¼«8ë»¡î1J$d175fecc-06de-4e3e-a89e-35ec12ccad2f
+~
+java:S1128"<Remove this unused import 'websocket.ServerMessageObserver'.(´Øw8ë»¡î1J$1ff91b90-68a3-408f-8a81-09f3e1d21ecb
+
+java:S1128"<Remove this unused import 'websocket.WebSocketCommunicator'.(Ÿœ¦§8ë»¡î1J$ca72076e-bc1c-450c-87d8-05b0c084721a

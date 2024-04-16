@@ -1,34 +1,36 @@
 
-h
-java:S2259Ç"J"NullPointerException" will be thrown when invoking method "drawBoards()".(ĞÔÛ8üş½Ñí1
+
+java:S2259ß"J"NullPointerException" will be thrown when invoking method "drawBoards()".(ĞÔÛ8‹ä¯¡î1J$81f7fdf8-418c-4df1-84c0-92416d02013a
+
+java:S2259ø"J"NullPointerException" will be thrown when invoking method "drawBoards()".(‘¥¼8‹ä¯¡î1J$8b49e1c2-c719-474d-92fa-df501b60edcd
+“
+java:S2259Œ"J"NullPointerException" will be thrown when invoking method "drawBoards()".(êà«úÿÿÿÿ8‹ä¯¡î1J$4edcc128-dbac-4618-ad54-e1eeca852d45
+“
+java:S2259›"J"NullPointerException" will be thrown when invoking method "drawBoards()".(Ùè ¯ûÿÿÿÿ8‹ä¯¡î1J$1ef06c6e-7b66-4173-a2bd-17fa07d29f88
+±
+java:S4165x"iRemove this useless assignment; "playerColor" already holds the assigned value along all execution paths.(Ñ¼ÖÛøÿÿÿÿ8º‘±¡î1J$0f353e3f-472e-4016-95f1-19c672e2d6bc
+{
+java:S1854^"8Remove this useless assignment to local variable "gson".(èˆµë8™ä¯¡î1J$71068fa1-f370-48a0-906e-af61297ab57b
 l
-java:S2259~"J"NullPointerException" will be thrown when invoking method "drawBoards()".(÷ß˜÷ÿÿÿÿÿ8ış½Ñí1
-h
-java:S2259è"J"NullPointerException" will be thrown when invoking method "drawBoards()".(‘¥¼8ış½Ñí1
-m
-java:S2259—"J"NullPointerException" will be thrown when invoking method "drawBoards()".(Ùè ¯ûÿÿÿÿ8ış½Ñí1
-m
-java:S2259ˆ"J"NullPointerException" will be thrown when invoking method "drawBoards()".(êà«úÿÿÿÿ8şş½Ñí1
-h
-java:S2259Ï"J"NullPointerException" will be thrown when invoking method "drawBoards()".(ĞÔÛ8şş½Ñí1
-U
-java:S1854^"8Remove this useless assignment to local variable "gson".(èˆµë8‘ÿ½Ñí1
-F
-java:S1481^")Remove this unused "gson" local variable.(èˆµë8›ÿ½Ñí1
-Z
-java:S1117_"8Rename "game" which hides the field declared at line 25.(Ù‰¤¶ûÿÿÿÿ8ÿ½Ñí1
-™
-java:S1130p"wRemove the declaration of thrown exception 'dataAccess.DataAccessException', as it cannot be thrown from method's body.(¾í‘÷ûÿÿÿÿ8¢ÿ½Ñí1
-L	java:S106~"+Replace this use of System.out by a logger.(÷ß˜÷ÿÿÿÿÿ8¤ÿ½Ñí1
-M	java:S106ˆ"+Replace this use of System.out by a logger.(êà«úÿÿÿÿ8§ÿ½Ñí1
-š
-java:S1130"wRemove the declaration of thrown exception 'dataAccess.DataAccessException', as it cannot be thrown from method's body.(Å’ öûÿÿÿÿ8©ÿ½Ñí1
-M	java:S106—"+Replace this use of System.out by a logger.(Ùè ¯ûÿÿÿÿ8ªÿ½Ñí1
-[
-java:S1117°"8Rename "game" which hides the field declared at line 25.(‹êÀÿÿÿÿÿ8®ÿ½Ñí1
-H	java:S106Ç"+Replace this use of System.out by a logger.(ĞÔÛ8µÿ½Ñí1
-H	java:S106Ï"+Replace this use of System.out by a logger.(ĞÔÛ8·ÿ½Ñí1
-M	java:S106×"+Replace this use of System.out by a logger.(ßø¼”úÿÿÿÿ8¼ÿ½Ñí1
-H	java:S106è"+Replace this use of System.out by a logger.(‘¥¼8¿ÿ½Ñí1
-X
-java:S2209•"5Change this instance-reference to a static reference.(¶œ±üÿÿÿÿ8Äÿ½Ñí1
+java:S1481^")Remove this unused "gson" local variable.(èˆµë8ä¯¡î1J$5042b6eb-36a1-4a35-8fbb-580430353f0c
+€
+java:S1117_"8Rename "game" which hides the field declared at line 25.(Ù‰¤¶ûÿÿÿÿ8ä¯¡î1J$04a11b17-523c-431b-9943-11ae42ff179a
+¿
+java:S1130p"wRemove the declaration of thrown exception 'dataAccess.DataAccessException', as it cannot be thrown from method's body.(¾í‘÷ûÿÿÿÿ8 ä¯¡î1J$c8d3c4e7-9e20-4755-8f96-da73e1365340
+s	java:S106"+Replace this use of System.out by a logger.(÷ß˜÷ÿÿÿÿÿ8¢ä¯¡î1J$aa041c9b-d5f2-49e9-99c5-03aacb3bb423
+i
+java:S3457‡"%String contains no format specifiers.(šÙ¡8£ä¯¡î1J$326c39b7-ba77-4a75-89fb-412cd0d37638
+s	java:S106Œ"+Replace this use of System.out by a logger.(êà«úÿÿÿÿ8£ä¯¡î1J$18348c2f-6e87-4bec-b822-363c20a4d054
+À
+java:S1130“"wRemove the declaration of thrown exception 'dataAccess.DataAccessException', as it cannot be thrown from method's body.(Å’ öûÿÿÿÿ8¤ä¯¡î1J$e2309c53-57d1-461f-9ed4-4721c2c1df3b
+s	java:S106›"+Replace this use of System.out by a logger.(Ùè ¯ûÿÿÿÿ8¥ä¯¡î1J$809ef7b4-5b73-4ca5-8f92-88ae47fdd56e
+
+java:S1117´"8Rename "game" which hides the field declared at line 25.(‹êÀÿÿÿÿÿ8§ä¯¡î1J$2f3e9242-1176-4f3f-8a45-a5aaea8ee0b6
+n	java:S106Ó"+Replace this use of System.out by a logger.(ĞÔÛ8ªä¯¡î1J$aabaff50-4fd0-41e0-a3aa-3c5c5767705d
+i
+java:S3457×"%String contains no format specifiers.(šÙ¡8ªä¯¡î1J$ad799c79-c5de-4b8d-9a1c-bff991569534
+n	java:S106ß"+Replace this use of System.out by a logger.(ĞÔÛ8«ä¯¡î1J$13507aab-01a8-462e-9571-47304f9de4f1
+s	java:S106ç"+Replace this use of System.out by a logger.(ßø¼”úÿÿÿÿ8®ä¯¡î1J$70a1365b-e813-48f7-81a7-de25f04013fa
+n	java:S106ø"+Replace this use of System.out by a logger.(‘¥¼8°ä¯¡î1J$7d1c7927-98f7-4056-9bbd-a3aadbcc8f9f
+~
+java:S2209¥"5Change this instance-reference to a static reference.(¶œ±üÿÿÿÿ8³ä¯¡î1J$fb9acc1d-b811-4798-a655-26f9f425e3e3

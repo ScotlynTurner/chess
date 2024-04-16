@@ -111,28 +111,32 @@ public class ChessClient {
 
   public String joinGame(String... params) throws ResponseException, DataAccessException {
     assertSignedIn();
-    ChessGame.TeamColor playerColor;
+    ChessGame.TeamColor playerColor = ChessGame.TeamColor.WHITE;
     if (params.length >= 1) {
       var id = Integer.parseInt(params[0]);
       currentGameID = id;
       if (params.length >= 2 && !params[1].equalsIgnoreCase("empty")) {
         if (params[1].equalsIgnoreCase("white")) {
           playerColor = ChessGame.TeamColor.WHITE;
-        } else {
+        } else if (params[1].equalsIgnoreCase("black")){
           playerColor = ChessGame.TeamColor.BLACK;
         }
-        wsc = new WebSocketCommunicator(serverUrl, notificationHandler);
-        wsc.joinPlayer(authToken, id, playerColor);
-        System.out.println(drawBoards(playerColor, getGame(id), false, null));
-        status = Status.PLAYING;
-        server.joinGame(playerColor, id);
-        currentColor = playerColor;
-        game = getGame(id);
-        return String.format("%s has joined the game as %s", username, playerColor);
+        try {
+          wsc = new WebSocketCommunicator(serverUrl, notificationHandler, server);
+          server.joinGame(playerColor, id);
+          wsc.joinPlayer(authToken, id, playerColor);
+          status = Status.PLAYING;
+          System.out.println(drawBoards(playerColor, getGame(id), false, null));
+          currentColor = playerColor;
+          game = getGame(id);
+          return String.format("%s has joined the game as %s", username, playerColor);
+        } catch (Exception e) {
+          wsc.sendError(authToken, id, e.getMessage());
+          return String.format("An error has occurred");
+        }
       }
-      wsc = new WebSocketCommunicator(serverUrl, notificationHandler);
+      wsc = new WebSocketCommunicator(serverUrl, notificationHandler, server);
       wsc.joinObserver(authToken, id);
-      server.joinGame(null, id);
       System.out.println(drawBoards(null, getGame(id), false, null));
       status = Status.OBSERVING;
       return String.format("%s has joined the game as an observer", username);
@@ -145,7 +149,7 @@ public class ChessClient {
     if (params.length == 1) {
       var id = Integer.parseInt(params[0]);
       currentGameID = id;
-      wsc = new WebSocketCommunicator(serverUrl, notificationHandler);
+      wsc = new WebSocketCommunicator(serverUrl, notificationHandler, server);
       wsc.joinObserver(authToken, id);
       server.joinGame(null, id);
       System.out.println(drawBoards(ChessGame.TeamColor.WHITE, getGame(id), false, null));
@@ -184,6 +188,7 @@ public class ChessClient {
   public String move(String... params) throws ResponseException, InvalidMoveException {
     assertSignedIn();
     assertPlaying();
+
     if (params.length >= 5) {
       var startCoordNum = Integer.parseInt(params[0]);
       var startCoordLetter = convertLetter(params[1]);
@@ -194,10 +199,21 @@ public class ChessClient {
       ChessPosition endPosition = new ChessPosition(endCoordNum, endCoordLetter);
 
       ChessMove move = new ChessMove(startPosition, endPosition, null);
-      game.makeMove(move);
-      wsc.makeMove(authToken, currentGameID, move);
-      System.out.println(drawBoards(currentColor, getGame(currentGameID), false, null));
-      return String.format("%s moved (%s, %s) to (%s, %s)", username, startCoordNum, startCoordLetter, endCoordNum, endCoordLetter);
+      try {
+        game.makeMove(move);
+        if (game.isInCheckmate(currentColor)) {
+          wsc.makeMove(authToken, currentGameID, move, "checkmate");
+        } else if (game.isInCheck(currentColor)) {
+          wsc.makeMove(authToken, currentGameID, move, "check");
+        } else {
+          wsc.makeMove(authToken, currentGameID, move, "normal");
+        }
+        System.out.println(drawBoards(currentColor, getGame(currentGameID), false, null));
+        return String.format("%s moved (%s, %s) to (%s, %s)", username, startCoordNum, startCoordLetter, endCoordNum, endCoordLetter);
+      } catch (Exception e) {
+        wsc.sendError(authToken, currentGameID, e.getMessage());
+        return String.format("An error has occurred");
+      }
     }
     throw new ResponseException(400, "Expected: <NUMBER> <LETTER> to <NUMBER> <LETTER>");
   }

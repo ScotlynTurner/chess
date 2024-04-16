@@ -1,6 +1,7 @@
 package ui;
 
 import server.ResponseException;
+import webSocketMessages.serverMessages.Error;
 import webSocketMessages.serverMessages.ServerMessage;
 import websocket.ServerMessageObserver;
 
@@ -31,8 +32,7 @@ public class Repl implements ServerMessageObserver {
         result = client.eval(line);
         System.out.print(SET_TEXT_CUSTOM_PINK + result);
       } catch (Throwable e) {
-        var msg = e.toString();
-        System.out.print(msg);
+        notify(new Error(ServerMessage.ServerMessageType.ERROR, e.getMessage()));
       }
     }
     System.out.println();
@@ -44,7 +44,7 @@ public class Repl implements ServerMessageObserver {
 
   public void notify(ServerMessage notification) {
     if (notification.getServerMessageType().equals(ServerMessage.ServerMessageType.LOAD_GAME)) {
-      System.out.println("game loading...");
+      System.out.println(SET_BG_COLOR_YELLOW + SET_TEXT_COLOR_BLACK + "game loading...");
     } else if (notification.getServerMessageType().equals(ServerMessage.ServerMessageType.NOTIFICATION)) {
       System.out.println(SET_BG_COLOR_YELLOW + SET_TEXT_COLOR_BLACK + notification.getServerMessageType() + SET_BG_BRIGHT_WHITE);
     } else {

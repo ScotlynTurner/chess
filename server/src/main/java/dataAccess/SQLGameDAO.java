@@ -124,12 +124,14 @@ public class SQLGameDAO implements GameDAO{
           preparedStatement.setInt(2, game.gameID());
           preparedStatement.executeUpdate();
         }
-      } else {
+      } else if (clientColorChange.equals("BLACK")){
         try (var preparedStatement=conn.prepareStatement("UPDATE games SET blackUsername = ? WHERE gameID = ?")) {
           preparedStatement.setString(1, username);
           preparedStatement.setInt(2, game.gameID());
           preparedStatement.executeUpdate();
         }
+      } else {
+        throw new DataAccessException("Error: Invalid clientColorChange value.");
       }
     } catch (SQLException e) {
       throw new DataAccessException("Error updating game: " + e.getMessage());

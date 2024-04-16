@@ -1,13 +1,13 @@
 
 
-java:S11928"UDefine a constant instead of duplicating this literal "Error: already taken" 3 times.(¥ûşşÿÿÿÿ8¡ÅÍí1J$28601e4e-3ef0-42f6-baf2-d1e87f29ed70
+java:S11928"UDefine a constant instead of duplicating this literal "Error: already taken" 3 times.(¥ûşşÿÿÿÿ8Â•Ÿî1J$b012deee-2cda-4bca-8908-021c877be46d
 –
-java:S1192+"TDefine a constant instead of duplicating this literal "Error: unauthorized" 3 times.(©ªìb8¢ÅÍí1J$6ba6322d-1775-4378-a7fb-982928c5ea40
+java:S1192+"TDefine a constant instead of duplicating this literal "Error: unauthorized" 3 times.(©ªìb8Ä•Ÿî1J$af72d18f-4f34-42bc-b026-a56e099f4ca0
 w
-java:S1066;"/Merge this if statement with the enclosing one.(îÎ¿şşÿÿÿÿ8¥ÅÍí1J$b2223178-1f2f-4f6d-9f21-3b25bc057648
+java:S1066;"/Merge this if statement with the enclosing one.(›ÀçÄüÿÿÿÿ8Å•Ÿî1J$f90dcddd-f884-4e40-a7fa-56b5256e20d2
 °
-java:S1319!"mThe return type of this method should be an interface such as "Set" rather than the implementation "HashSet".(Š‚ıü8¨ÅÍí1J$f06154c2-3fa1-4da1-a1e7-d1c172fda914
+java:S1319!"mThe return type of this method should be an interface such as "Set" rather than the implementation "HashSet".(Š‚ıü8Å•Ÿî1J$6d7cc9d8-6b68-466f-a636-8088d79f951b
 ¡
-java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "gameID".(€Ë¶İ8©ÅÍí1J$91246a31-aa58-482e-a967-00c7b9bbb079
+java:S1488"^Immediately return this expression instead of assigning it to the temporary variable "gameID".(€Ë¶İ8Æ•Ÿî1J$f8eac528-0da9-43cc-93b0-fbafa4fc76d4
 Ä
-java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ø‡ë¯8ÊÅÍí1J$ddf29cff-cea6-4cb0-97d4-f08fb8a2211a
+java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ø‡ë¯8Ú•Ÿî1J$4048bbd2-e1fe-436e-952f-fe978e2c4a40
